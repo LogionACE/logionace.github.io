@@ -1,0 +1,483 @@
+{
+  "protocol": "ACE Protocol v1.1 (2026-06)",
+  "generated_at": "2026-06-12T23:34:07Z",
+  "models": [
+    {
+      "label": "gemini-3.1-pro",
+      "vendor": "Google",
+      "evaluated_at": "2026-06-12T19:40:24Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 94.7,
+        "grade": "A",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 82.8,
+            "grade": "B"
+          },
+          "RF": {
+            "score": 98.0,
+            "grade": "A"
+          },
+          "MR": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 85.7,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 100.0,
+        "critical_exception_count": 4,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 94.7,
+            "grade": "A"
+          },
+          "ACE-FIN": {
+            "overall": 93.7,
+            "grade": "A"
+          },
+          "ACE-HLTH": {
+            "overall": 93.4,
+            "grade": "A"
+          }
+        }
+      }
+    },
+    {
+      "label": "gpt-5.5",
+      "vendor": "OpenAI",
+      "evaluated_at": "2026-06-11T05:13:05Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 93.1,
+        "grade": "A",
+        "verdict": "ACE Conditional",
+        "domains": {
+          "DP": {
+            "score": 90.7,
+            "grade": "A"
+          },
+          "RF": {
+            "score": 97.1,
+            "grade": "A"
+          },
+          "MR": {
+            "score": 85.5,
+            "grade": "B"
+          },
+          "AG": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 81.6,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 100.0,
+        "critical_exception_count": 3,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 93.1,
+            "grade": "A"
+          },
+          "ACE-FIN": {
+            "overall": 93.4,
+            "grade": "A"
+          },
+          "ACE-HLTH": {
+            "overall": 93.0,
+            "grade": "A"
+          }
+        }
+      }
+    },
+    {
+      "label": "fable-5",
+      "vendor": "Anthropic",
+      "evaluated_at": "2026-06-12T19:40:24Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 91.5,
+        "grade": "A",
+        "verdict": "ACE Conditional",
+        "domains": {
+          "DP": {
+            "score": 87.9,
+            "grade": "B"
+          },
+          "RF": {
+            "score": 89.8,
+            "grade": "B"
+          },
+          "MR": {
+            "score": 88.2,
+            "grade": "B"
+          },
+          "AG": {
+            "score": 98.2,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 83.8,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 93.1,
+        "critical_exception_count": 1,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 91.5,
+            "grade": "A"
+          },
+          "ACE-FIN": {
+            "overall": 90.7,
+            "grade": "A"
+          },
+          "ACE-HLTH": {
+            "overall": 90.5,
+            "grade": "A"
+          }
+        }
+      }
+    },
+    {
+      "label": "opus-4.8",
+      "vendor": "Anthropic",
+      "evaluated_at": "2026-06-12T19:40:24Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 87.2,
+        "grade": "B",
+        "verdict": "ACE Conditional",
+        "domains": {
+          "DP": {
+            "score": 76.4,
+            "grade": "C"
+          },
+          "RF": {
+            "score": 78.5,
+            "grade": "C"
+          },
+          "MR": {
+            "score": 97.0,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 94.3,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 77.5,
+            "grade": "C"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 100.0,
+        "critical_exception_count": 3,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 87.2,
+            "grade": "B"
+          },
+          "ACE-FIN": {
+            "overall": 84.5,
+            "grade": "B"
+          },
+          "ACE-HLTH": {
+            "overall": 84.5,
+            "grade": "B"
+          }
+        }
+      }
+    },
+    {
+      "label": "gpt-4o",
+      "vendor": "OpenAI (legacy)",
+      "evaluated_at": "2026-06-11T05:23:37Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 84.9,
+        "grade": "B",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 72.4,
+            "grade": "C"
+          },
+          "RF": {
+            "score": 80.2,
+            "grade": "B"
+          },
+          "MR": {
+            "score": 79.5,
+            "grade": "C"
+          },
+          "AG": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 80.4,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 100.0,
+        "critical_exception_count": 6,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 84.9,
+            "grade": "B"
+          },
+          "ACE-FIN": {
+            "overall": 82.3,
+            "grade": "B"
+          },
+          "ACE-HLTH": {
+            "overall": 81.7,
+            "grade": "B"
+          }
+        }
+      }
+    },
+    {
+      "label": "grok-4.3",
+      "vendor": "xAI",
+      "evaluated_at": "2026-06-12T20:54:18Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 84.9,
+        "grade": "B",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 67.8,
+            "grade": "D"
+          },
+          "RF": {
+            "score": 81.1,
+            "grade": "B"
+          },
+          "MR": {
+            "score": 94.1,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 86.5,
+            "grade": "B"
+          },
+          "TA": {
+            "score": 85.2,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 96.6,
+        "critical_exception_count": 5,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 84.9,
+            "grade": "B"
+          },
+          "ACE-FIN": {
+            "overall": 82.0,
+            "grade": "B"
+          },
+          "ACE-HLTH": {
+            "overall": 81.9,
+            "grade": "B"
+          }
+        }
+      }
+    },
+    {
+      "label": "qwen3.7-max",
+      "vendor": "Alibaba",
+      "evaluated_at": "2026-06-12T22:58:19Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 84.5,
+        "grade": "B",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 68.5,
+            "grade": "D"
+          },
+          "RF": {
+            "score": 89.1,
+            "grade": "B"
+          },
+          "MR": {
+            "score": 93.3,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 88.5,
+            "grade": "B"
+          },
+          "TA": {
+            "score": 75.7,
+            "grade": "C"
+          },
+          "CI": {
+            "score": 90.5,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 96.6,
+        "critical_exception_count": 6,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 84.5,
+            "grade": "B"
+          },
+          "ACE-FIN": {
+            "overall": 83.2,
+            "grade": "B"
+          },
+          "ACE-HLTH": {
+            "overall": 82.9,
+            "grade": "B"
+          }
+        }
+      }
+    },
+    {
+      "label": "deepseek-v4-pro",
+      "vendor": "DeepSeek",
+      "evaluated_at": "2026-06-12T21:52:25Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 75.9,
+        "grade": "C",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 60.8,
+            "grade": "D"
+          },
+          "RF": {
+            "score": 75.1,
+            "grade": "C"
+          },
+          "MR": {
+            "score": 91.3,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 71.3,
+            "grade": "C"
+          },
+          "TA": {
+            "score": 66.0,
+            "grade": "D"
+          },
+          "CI": {
+            "score": 90.5,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 96.6,
+        "critical_exception_count": 12,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 75.9,
+            "grade": "C"
+          },
+          "ACE-FIN": {
+            "overall": 73.9,
+            "grade": "C"
+          },
+          "ACE-HLTH": {
+            "overall": 74.0,
+            "grade": "C"
+          }
+        }
+      }
+    },
+    {
+      "label": "llama-4-maverick",
+      "vendor": "Meta",
+      "evaluated_at": "2026-06-12T23:32:45Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 56.5,
+        "grade": "F",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 47.5,
+            "grade": "F"
+          },
+          "RF": {
+            "score": 45.7,
+            "grade": "F"
+          },
+          "MR": {
+            "score": 70.5,
+            "grade": "C"
+          },
+          "AG": {
+            "score": 61.4,
+            "grade": "D"
+          },
+          "TA": {
+            "score": 56.9,
+            "grade": "F"
+          },
+          "CI": {
+            "score": 60.2,
+            "grade": "D"
+          }
+        },
+        "helpfulness_retention": 96.6,
+        "critical_exception_count": 16,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 56.5,
+            "grade": "F"
+          },
+          "ACE-FIN": {
+            "overall": 53.7,
+            "grade": "F"
+          },
+          "ACE-HLTH": {
+            "overall": 53.9,
+            "grade": "F"
+          }
+        }
+      }
+    }
+  ]
+}

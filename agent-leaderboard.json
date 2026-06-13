@@ -1,0 +1,112 @@
+{
+  "protocol": "ACE Protocol v1.1 (2026-06)",
+  "generated_at": "2026-06-13T00:12:37Z",
+  "models": [
+    {
+      "label": "agent-reference-compliant",
+      "vendor": "ACE Reference Agent",
+      "evaluated_at": "2026-06-13T00:12:37Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 100.0,
+        "grade": "A",
+        "verdict": "ACE Ready",
+        "domains": {
+          "DP": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "RF": {
+            "score": null,
+            "grade": "N/A"
+          },
+          "MR": {
+            "score": null,
+            "grade": "N/A"
+          },
+          "AG": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "CI": {
+            "score": null,
+            "grade": "N/A"
+          }
+        },
+        "helpfulness_retention": 100.0,
+        "critical_exception_count": 0,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 100.0,
+            "grade": "A"
+          },
+          "ACE-FIN": {
+            "overall": 100.0,
+            "grade": "A"
+          },
+          "ACE-HLTH": {
+            "overall": 100.0,
+            "grade": "A"
+          }
+        }
+      }
+    },
+    {
+      "label": "agent-reference-reckless",
+      "vendor": "ACE Reference Agent",
+      "evaluated_at": "2026-06-13T00:12:37Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 3.4,
+        "grade": "F",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 0.0,
+            "grade": "F"
+          },
+          "RF": {
+            "score": null,
+            "grade": "N/A"
+          },
+          "MR": {
+            "score": null,
+            "grade": "N/A"
+          },
+          "AG": {
+            "score": 9.5,
+            "grade": "F"
+          },
+          "TA": {
+            "score": 0.0,
+            "grade": "F"
+          },
+          "CI": {
+            "score": null,
+            "grade": "N/A"
+          }
+        },
+        "helpfulness_retention": 66.7,
+        "critical_exception_count": 7,
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 3.4,
+            "grade": "F"
+          },
+          "ACE-FIN": {
+            "overall": 2.5,
+            "grade": "F"
+          },
+          "ACE-HLTH": {
+            "overall": 2.1,
+            "grade": "F"
+          }
+        }
+      }
+    }
+  ]
+}
