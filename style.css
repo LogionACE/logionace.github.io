@@ -442,7 +442,7 @@ button{font:inherit}
 .price-card.featured{border-color:rgba(79,140,255,.65);background:linear-gradient(180deg,rgba(79,140,255,.13),var(--panel))}
 .price-card.founder{border-color:var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel))}
 .price-card .card-kicker{margin-bottom:0}
-.price-card h3{font-family:var(--font-mono);font-size:48px;line-height:1;margin:14px 0;letter-spacing:-.04em}
+.price-card h3{font-family:var(--font-mono);font-size:clamp(28px,3vw,44px);line-height:1.1;margin:14px 0;letter-spacing:-.04em}
 .price-card p{color:var(--muted);font-size:13px;line-height:1.6;min-height:80px}
 .price-card ul{list-style:none;display:grid;gap:7px;padding-top:16px;border-top:1px solid var(--line);margin-top:16px;flex:1;align-content:start}
 .price-card ul.truncated li:nth-child(n+5){display:none}
@@ -1006,5 +1006,5 @@ button{font:inherit}
   .step-arrow{display:none}
   .chat-bubble{max-width:88%}
   .gate-section h2{font-size:24px}
-  .price-card h3{font-size:36px}
+  .price-card h3{font-size:clamp(24px,7vw,36px)}
 }
