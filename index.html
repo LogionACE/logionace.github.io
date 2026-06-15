@@ -18,7 +18,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,6 +31,7 @@
       <a href="methodology.html">Methodology</a>
       <a href="whitepaper.html">Whitepaper</a>
       <a href="company.html">Company</a>
+      <a href="trust.html">Trust</a>
       <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
     </div>
   </div>
@@ -41,10 +42,10 @@
     <div class="home-hero-inner">
       <div class="home-copy">
         <p class="eyebrow">AI assurance by LogionOS</p>
-        <h1>ACE for AI Systems</h1>
-        <p class="hero-subtitle short">Independent compliance evaluation before regulated AI deployment.</p>
+        <h1>We test AI systems before enterprises deploy them.</h1>
+        <p class="hero-subtitle short">Independent compliance evaluation across 6 trust domains, 21 controls, and 12 jurisdictions.</p>
         <div class="hero-actions">
-          <a href="benchmark.html" class="btn primary">Explore reports</a>
+          <a href="whitepaper.html" class="btn primary">Read the whitepaper</a>
           <a href="evaluation.html" class="btn outline">Request evaluation</a>
         </div>
       </div>
@@ -75,6 +76,13 @@
     </div>
   </section>
 
+  <section class="home-proof">
+    <div><strong>9</strong><span>Systems evaluated</span></div>
+    <div><strong>47</strong><span>Critical failures</span></div>
+    <div><strong>0</strong><span>Achieved ACE Ready</span></div>
+    <div><strong>272</strong><span>Test cases</span></div>
+  </section>
+
   <!-- COUNTDOWN -->
   <section class="countdown-section" id="countdown-section">
     <div class="countdown-inner" id="countdown-wrap">
@@ -99,11 +107,31 @@
     </div>
   </section>
 
-  <section class="home-proof">
-    <div><strong>6</strong><span>Trust Domains</span></div>
-    <div><strong>21</strong><span>Controls</span></div>
-    <div><strong>12</strong><span>Jurisdictions</span></div>
-    <div><strong>272</strong><span>Test Cases</span></div>
+  <section class="section compact">
+    <div class="section-head">
+      <p class="eyebrow">Who we serve</p>
+      <h2>Built for AI compliance decisions.</h2>
+    </div>
+    <div class="audience-cards">
+      <a class="audience-card fade-up" href="evaluation.html">
+        <span class="audience-for">For AI vendors</span>
+        <h3>Prove your system is enterprise-ready.</h3>
+        <p>Get an independent evaluation before your customers ask for one. ACE Ready status is a competitive advantage in enterprise sales.</p>
+        <span class="btn outline">Learn about evaluation</span>
+      </a>
+      <a class="audience-card fade-up" href="evaluation.html#contact">
+        <span class="audience-for">For enterprise buyers</span>
+        <h3>Evaluate AI before procurement.</h3>
+        <p>Commission a private evaluation of any AI system you're considering. Get evidence-backed risk assessment before deployment.</p>
+        <span class="btn outline">Request private evaluation</span>
+      </a>
+      <a class="audience-card fade-up" href="methodology.html">
+        <span class="audience-for">For security teams</span>
+        <h3>Review the methodology.</h3>
+        <p>Understand our controls, scoring, verdict gating, judge independence, and limitations. Built by security practitioners.</p>
+        <span class="btn outline">Read methodology</span>
+      </a>
+    </div>
   </section>
 
   <section class="section compact">
@@ -152,16 +180,15 @@
     </div>
   </section>
 
-  <section class="section alt compact">
-    <div class="section-head split">
-      <div>
-        <p class="eyebrow">Company</p>
-        <h2>Built by LogionOS for third-party AI assurance.</h2>
+  <section class="section final">
+    <div class="final-panel">
+      <p class="eyebrow">Get evaluated</p>
+      <h2>See how your AI system scores.</h2>
+      <p>Request a LogionACE evaluation for your model, agent, or deployed AI product.</p>
+      <div class="final-actions">
+        <a href="evaluation.html#contact" class="btn primary">Request evaluation</a>
+        <a href="whitepaper.html" class="btn outline">Read the whitepaper</a>
       </div>
-      <p>LogionOS is building compliance infrastructure for AI adoption. LogionACE is the evaluation layer: a practical way for enterprises to understand AI system risk before deployment.</p>
-    </div>
-    <div class="home-company">
-      <a href="company.html" class="btn secondary">About LogionOS and LogionACE</a>
     </div>
   </section>
 </main>
@@ -182,7 +209,7 @@
     <div class="footer-col">
       <h4>Company</h4>
       <a href="company.html">About</a>
-      <a href="company.html#trust">Trust &amp; Security</a>
+      <a href="trust.html">Trust &amp; Security</a>
       <a href="evaluation.html#contact">Contact</a>
     </div>
     <div class="footer-col">
@@ -276,7 +303,7 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
   var TARGET=new Date('2026-06-15T22:00:00Z').getTime();
   if(Date.now()<TARGET){
     document.querySelectorAll('a[href="benchmark.html"], a[href="whitepaper.html"]').forEach(function(a){
-      if(!a.classList.contains('btn')){
+      if(!a.closest('.countdown-links')){
         a.addEventListener('click',function(e){
           e.preventDefault();
           var sec=document.getElementById('countdown-section');
@@ -284,13 +311,6 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
         });
       }
     });
-    var heroExplore=document.querySelector('.hero-actions a[href="benchmark.html"]');
-    if(heroExplore){
-      heroExplore.addEventListener('click',function(e){
-        e.preventDefault();
-        document.getElementById('countdown-section').scrollIntoView({behavior:'smooth'});
-      });
-    }
   }
 })();
 </script>
