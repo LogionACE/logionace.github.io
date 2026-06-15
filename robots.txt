@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://logionos.com/sitemap.xml
+Sitemap: https://logionace.com/sitemap.xml

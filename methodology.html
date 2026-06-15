@@ -14,7 +14,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-shell">
-    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
     <div class="nav-links">
       <a href="benchmark.html">Reports</a>
       <a href="evaluation.html">Evaluation</a>
@@ -57,7 +57,7 @@
     <div class="section-head">
       <p class="eyebrow">Scoring rules</p>
       <h2>Verdict Determination</h2>
-      <p>Every evaluation produces one of three verdicts. Critical exceptions &mdash; deployment-blocking failures &mdash; gate readiness regardless of overall score.</p>
+      <p>Every evaluation produces one of three verdicts. Critical exceptions &mdash; deployment-blocking failures &mdash; gate the ACE Ready verdict. ACE Conditional allows limited critical exceptions with documented remediation.</p>
     </div>
     <div class="cards three">
       <article class="card fade-up" style="border-color:rgba(49,209,139,.35)">
@@ -106,6 +106,8 @@
           <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>MR (Misuse Resistance) maps to NIST &ldquo;Safe&rdquo; and &ldquo;Secure&rdquo; characteristics</li>
           <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>TA (Transparency) maps to NIST &ldquo;Explainable&rdquo; and &ldquo;Accountable&rdquo; characteristics</li>
           <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>AG (Agentic Governance) maps to NIST autonomous system governance requirements</li>
+          <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>RF (Regulatory Fitness) maps to NIST &ldquo;Valid and Reliable&rdquo; and &ldquo;Fair&rdquo; characteristics</li>
+          <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>CI (Content Integrity) maps to NIST &ldquo;Secure&rdquo; and intellectual property governance</li>
           <li style="color:var(--muted);font-size:14px;padding-left:16px;position:relative"><span style="position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)"></span>ACE provides Measure-layer evidence that feeds into NIST Govern and Manage functions</li>
         </ul>
       </article>
@@ -168,7 +170,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
       <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
     </div>
     <div class="footer-col">
@@ -191,7 +193,7 @@
       <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
-  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 <script>
 const obs=new IntersectionObserver(es=>{

@@ -8,6 +8,13 @@
   <meta property="og:title" content="LogionACE - AI Compliance Evaluation for Enterprise">
   <meta property="og:description" content="ACE for AI Systems. Enterprise-ready compliance evaluation by LogionOS.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://logionace.com/">
+  <meta property="og:image" content="https://logionace.com/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LogionACE - AI Compliance Evaluation for Enterprise">
+  <meta name="twitter:description" content="Independent compliance evaluation for AI systems. 9 tested. 0 passed.">
+  <meta name="twitter:image" content="https://logionace.com/og-preview.png">
+  <link rel="canonical" href="https://logionace.com/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +24,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-shell">
-    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
     <div class="nav-links">
       <a href="benchmark.html">Reports</a>
       <a href="evaluation.html">Evaluation</a>
@@ -73,6 +80,8 @@
     <div class="countdown-inner" id="countdown-wrap">
       <p class="eyebrow">ACE Benchmark v1.1</p>
       <div class="countdown-clock" id="countdown-clock">
+        <div class="cd-unit"><span class="cd-num" id="cd-d">00</span><span class="cd-label">Days</span></div>
+        <div class="cd-sep">:</div>
         <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Hours</span></div>
         <div class="cd-sep">:</div>
         <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Minutes</span></div>
@@ -106,7 +115,7 @@
       <div class="step fade-up">
         <div class="step-num">01</div>
         <h3>Submit</h3>
-        <p>Connect via API, MCP sandbox, or custom test environment -- we adapt to your deployment.</p>
+        <p>Connect via API, MCP sandbox, or custom test environment &mdash; we adapt to your deployment.</p>
       </div>
       <div class="step-arrow">&rarr;</div>
       <div class="step fade-up">
@@ -118,7 +127,7 @@
       <div class="step fade-up">
         <div class="step-num">03</div>
         <h3>Report</h3>
-        <p>Receive your evaluation report with score, verdict, exceptions, evidence, and remediation path. Delivered within 5-7 business days.</p>
+        <p>Receive your evaluation report with score, verdict, exceptions, evidence, and remediation path. Delivered within 2-3 weeks from API access.</p>
       </div>
     </div>
   </section>
@@ -160,7 +169,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
       <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
     </div>
     <div class="footer-col">
@@ -183,7 +192,7 @@
       <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
-  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 
 <script>
@@ -212,10 +221,12 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
       return;
     }
     var s=Math.floor(diff/1000);
+    var d=Math.floor(s/86400);s%=86400;
     var h=Math.floor(s/3600);
     s%=3600;
     var m=Math.floor(s/60);
     s%=60;
+    document.getElementById('cd-d').textContent=pad(d);
     hEl.textContent=pad(h);
     mEl.textContent=pad(m);
     sEl.textContent=pad(s);
@@ -259,6 +270,28 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
     show(idx);
   },10000);
 
+})();
+
+(function(){
+  var TARGET=new Date('2026-06-15T22:00:00Z').getTime();
+  if(Date.now()<TARGET){
+    document.querySelectorAll('a[href="benchmark.html"], a[href="whitepaper.html"]').forEach(function(a){
+      if(!a.classList.contains('btn')){
+        a.addEventListener('click',function(e){
+          e.preventDefault();
+          var sec=document.getElementById('countdown-section');
+          if(sec) sec.scrollIntoView({behavior:'smooth'});
+        });
+      }
+    });
+    var heroExplore=document.querySelector('.hero-actions a[href="benchmark.html"]');
+    if(heroExplore){
+      heroExplore.addEventListener('click',function(e){
+        e.preventDefault();
+        document.getElementById('countdown-section').scrollIntoView({behavior:'smooth'});
+      });
+    }
+  }
 })();
 </script>
 </body>

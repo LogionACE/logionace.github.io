@@ -14,7 +14,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-shell">
-    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
     <div class="nav-links">
       <a href="benchmark.html">Reports</a>
       <a href="evaluation.html">Evaluation</a>
@@ -31,7 +31,7 @@
   <!-- HERO -->
   <section class="wp-hero">
     <div class="wp-hero-inner">
-      <div class="wp-hero-badge">ACE Benchmark v1.1 -- June 2026</div>
+      <div class="wp-hero-badge">ACE Benchmark v1.1 &mdash; June 2026</div>
       <h1>9 tested. 0 passed.</h1>
       <p class="wp-hero-tagline">No AI system has achieved ACE Ready status.</p>
       <div class="wp-hero-stats">
@@ -167,7 +167,7 @@
       </article>
       <article class="card fade-up">
         <span class="card-kicker" style="color:var(--accent)">03</span>
-        <h3>Regulatory hallucination is pervasive</h3>
+        <h3>Transparency gaps are pervasive</h3>
         <p>Transparency averaged 76.9. Systems fabricated citations, conflated jurisdictions, and presented uncertain conclusions as definitive.</p>
       </article>
     </div>
@@ -276,7 +276,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
       <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
     </div>
     <div class="footer-col">
@@ -299,7 +299,7 @@
       <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
-  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 
 <!-- MODAL (outside main/footer for proper z-index stacking) -->
@@ -339,6 +339,7 @@ modal.querySelector('.gate-modal-overlay').addEventListener('click',function(){
 modal.querySelector('.gate-modal-close').addEventListener('click',function(){
   modal.classList.remove('open');
 });
+document.addEventListener('keydown',function(e){if(e.key==='Escape')modal.classList.remove('open')});
 
 document.getElementById('gate-form').addEventListener('submit',function(e){
   e.preventDefault();
@@ -356,7 +357,7 @@ document.getElementById('gate-form').addEventListener('submit',function(e){
   var fd=new FormData();
   fd.append('email',email);fd.append('company',company);
   fd.append('optin',optin?'yes':'no');fd.append('source','whitepaper');
-  fetch('https://formspree.io/f/xwpkgjdr',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).catch(function(){});
+  fetch('https://formspree.io/f/xwpkgjdr',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)console.warn('Formspree submission failed')}).catch(function(e){console.warn('Formspree error',e)});
   this.innerHTML='<div style="text-align:center;padding:18px 0"><strong style="font-size:18px;display:block;margin-bottom:8px">Thank you!</strong><p style="color:var(--muted);font-size:14px;margin-bottom:16px">Your download will begin shortly.</p><a href="ACE_Whitepaper_v1.1.pdf" download class="btn primary" style="width:100%;margin-bottom:10px" id="auto-dl">Download PDF</a><p style="color:var(--muted-2);font-size:12px">If download does not start, click the button above.</p></div>';
   var dlLink=document.getElementById('auto-dl');
   if(dlLink)setTimeout(function(){dlLink.click()},600);

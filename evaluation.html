@@ -14,7 +14,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-shell">
-    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
     <div class="nav-links">
       <a href="benchmark.html">Reports</a>
       <a href="evaluation.html">Evaluation</a>
@@ -65,11 +65,12 @@
           <li>Publication approval workflow</li>
           <li>Evaluated by LogionACE mark, if eligible</li>
         </ul>
+        <a href="#contact" class="btn outline" style="margin-top:auto;width:100%">Request public evaluation</a>
       </article>
       <article class="price-card featured fade-up">
         <span class="card-kicker">Private evaluation</span>
         <h3>$40K-$50K</h3>
-        <p>For enterprises evaluating third-party AI products before procurement or deployment. Results delivered exclusively to you -- never published.</p>
+        <p>For enterprises evaluating third-party AI products before procurement or deployment. Results delivered exclusively to you &mdash; never published.</p>
         <ul>
           <li>Standard ACE battery + extended depth</li>
           <li>Detailed private findings report</li>
@@ -79,6 +80,7 @@
           <li>Stakeholder debrief session</li>
           <li>Evaluated by LogionACE mark, if eligible</li>
         </ul>
+        <a href="#contact" class="btn primary" style="margin-top:auto;width:100%">Request private evaluation</a>
       </article>
       <article class="price-card fade-up">
         <span class="card-kicker">Custom environment</span>
@@ -91,6 +93,7 @@
           <li>Custom deployment profile</li>
           <li>Custom quote after discovery</li>
         </ul>
+        <a href="#contact" class="btn outline" style="margin-top:auto;width:100%">Start discovery</a>
       </article>
       <article class="price-card founder fade-up">
         <span class="card-kicker">AI Founder Program</span>
@@ -102,10 +105,11 @@
           <li>Credits applied to eligible work</li>
           <li>Subject to acceptance and eligibility</li>
         </ul>
+        <a href="#contact" class="btn outline" style="margin-top:auto;width:100%">Apply to program</a>
       </article>
     </div>
     <p class="pricing-note">Evaluated by LogionACE marks may be displayed only when the evaluated system reaches an eligible LogionACE result. Not Ready results do not receive a mark. Evaluation marks indicate completion under the applicable ACE protocol and do not represent certification, legal approval, or regulatory compliance approval. Public evaluations include a publication approval workflow.</p>
-    <p class="pricing-note">All evaluations are conducted under NDA. We do not share evaluation data with third parties. For enterprise procurement requirements, contact us for our vendor security questionnaire and data processing addendum.</p>
+    <p class="pricing-note">Evaluations are conducted under NDA upon request. We do not share evaluation data with third parties. For enterprise procurement requirements, contact us for our vendor security questionnaire and data processing addendum.</p>
   </section>
   <section class="section compact">
     <div class="section-head">
@@ -114,11 +118,11 @@
     </div>
     <div class="cards three">
       <article class="card fade-up">
-        <span class="card-kicker">Timeline</span>
+        <span class="card-kicker">Schedule</span>
         <h3>Timeline</h3>
         <ul>
-          <li><strong>Public:</strong> 2ù3 weeks from API access</li>
-          <li><strong>Private:</strong> 3ù5 weeks, includes stakeholder debrief</li>
+          <li><strong>Public:</strong> 2&ndash;3 weeks from API access</li>
+          <li><strong>Private:</strong> 3&ndash;5 weeks, includes stakeholder debrief</li>
           <li><strong>Custom:</strong> Scoped during discovery phase</li>
         </ul>
       </article>
@@ -161,10 +165,15 @@
             <option value="Public">Public</option>
             <option value="Private">Private</option>
             <option value="Custom">Custom</option>
+            <option value="Founder Program">Founder Program</option>
             <option value="Not sure">Not sure</option>
           </select>
         </div>
         <textarea name="description" placeholder="Brief description of your AI system" rows="4" required></textarea>
+        <label class="gate-checkbox" style="margin-top:8px">
+          <input type="checkbox" required>
+          <span>I agree to the <a href="privacy.html" style="color:var(--accent)">Privacy Policy</a> and <a href="terms.html" style="color:var(--accent)">Terms of Service</a></span>
+        </label>
         <button type="submit" class="btn primary">Submit request</button>
       </form>
       <div id="eval-form-thanks" class="eval-form-thanks" style="display:none;">
@@ -178,7 +187,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
       <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
     </div>
     <div class="footer-col">
@@ -201,7 +210,7 @@
       <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
-  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 <script>
 const obs=new IntersectionObserver(es=>{
@@ -212,24 +221,31 @@ document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 document.getElementById('eval-lead-form').addEventListener('submit', function(e) {
   e.preventDefault();
   var form = this;
+  var btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
   var fd = new FormData(form);
   var entry = { timestamp: new Date().toISOString() };
   fd.forEach(function(v, k) { entry[k] = v; });
-
   try {
     var leads = JSON.parse(localStorage.getItem('eval_leads') || '[]');
     leads.push(entry);
     localStorage.setItem('eval_leads', JSON.stringify(leads));
   } catch(ex) {}
-
+  fd.append('_subject', 'New evaluation request from ' + (fd.get('company') || 'Unknown'));
   fetch('https://formspree.io/f/xwpkgjdr', {
     method: 'POST',
     body: fd,
     headers: { 'Accept': 'application/json' }
-  }).catch(function(){});
-
-  form.style.display = 'none';
-  document.getElementById('eval-form-thanks').style.display = 'block';
+  }).then(function(r) {
+    if (!r.ok) throw new Error('Network');
+    form.style.display = 'none';
+    document.getElementById('eval-form-thanks').style.display = 'block';
+  }).catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Submit request';
+    alert('Submission failed. Please try again or email us directly at hello@logionace.com');
+  });
 });
 </script>
 </body>

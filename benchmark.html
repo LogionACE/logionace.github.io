@@ -14,7 +14,7 @@
 <body>
 <nav class="site-nav">
   <div class="nav-shell">
-    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
     <div class="nav-links">
       <a href="benchmark.html">Reports</a>
       <a href="evaluation.html">Evaluation</a>
@@ -66,7 +66,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
       <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
     </div>
     <div class="footer-col">
@@ -89,7 +89,7 @@
       <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
-  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 
 <script>
@@ -115,6 +115,17 @@ const REPORT_FILE = {
   "deepseek-v4-pro":"ACE_Evaluation_Report_DeepSeek-V4-Pro.pdf",
   "llama-4-maverick":"ACE_Evaluation_Report_Llama-4-Maverick.pdf"
 };
+const DISPLAY_NAME = {
+  "gpt-5.5":"GPT-5.5",
+  "gpt-4o":"GPT-4o",
+  "gemini-3.1-pro":"Gemini 3.1 Pro",
+  "opus-4.8":"Opus 4.8",
+  "fable-5":"Fable 5",
+  "grok-4.3":"Grok 4.3",
+  "qwen3.7-max":"Qwen 3.7 Max",
+  "deepseek-v4-pro":"DeepSeek V4 Pro",
+  "llama-4-maverick":"Llama 4 Maverick"
+};
 const DOMAIN_DETAIL = {
   DP:{name:"Data Protection", desc:"Measures whether the system leaks or mishandles personal data, identifiers, sensitive records, or transfer obligations.", controls:["DP-1 PII leakage","DP-2 minimization and lawful handling","DP-3 cross-border transfer guidance"]},
   RF:{name:"Regulatory Fitness", desc:"Measures whether responses stay current and jurisdiction-specific under real regulatory obligations.", controls:["RF-1 obligation accuracy","RF-2 regulatory currency","RF-3 cross-jurisdiction consistency"]},
@@ -128,7 +139,7 @@ let state = {category:"llm", models:[], vendor:null, selected:null, query:""};
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function gradeClass(g){return "grade-"+String(g||"").toLowerCase();}
 function verdictClass(v){return String(v||"").includes("Conditional")?"verdict-conditional":String(v||"").includes("Ready")&&!String(v||"").includes("Not")?"verdict-ready":"verdict-notready";}
-function displayLabel(m){return state.category==="agent" ? (AGENT_LABEL[m.label]||m.label) : m.label;}
+function displayLabel(m){return state.category==="agent" ? (AGENT_LABEL[m.label]||m.label) : (DISPLAY_NAME[m.label]||m.label);}
 function companyOf(m){
   if(state.category==="agent") return "LogionOS";
   const v = m.vendor || "Unknown";
@@ -148,8 +159,13 @@ async function loadCategory(category){
   state.query = "";
   document.getElementById("report-search").value = "";
   document.querySelectorAll(".category-tab").forEach(b=>b.classList.toggle("active", b.dataset.category===category));
-  const d = await fetch(CATEGORY_FILES[category]).then(r=>r.json());
-  state.models = (d.models||[]).filter(m=>m.bare).sort((a,b)=>(b.bare.overall||0)-(a.bare.overall||0));
+  try {
+    const d = await fetch(CATEGORY_FILES[category]).then(r=>{if(!r.ok) throw new Error();return r.json();});
+    state.models = (d.models||[]).filter(m=>m.bare).sort((a,b)=>(b.bare.overall||0)-(a.bare.overall||0));
+  } catch(e) {
+    state.models = [];
+    document.getElementById("model-grid").innerHTML = '<div class="not-published">Unable to load reports. Please refresh the page.</div>';
+  }
   state.vendor = [...new Set(state.models.map(companyOf))][0] || null;
   state.selected = state.models.find(m=>companyOf(m)===state.vendor) || state.models[0] || null;
   render();
