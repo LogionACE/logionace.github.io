@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Reports - LogionACE</title>
+  <meta name="description" content="Browse LogionACE public evaluation reports by category, company, model, score, verdict, and report card.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <div class="nav-links">
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
+      <a href="company.html">Company</a>
+      <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Public reports</p>
+    <h1>Explore public evaluation reports.</h1>
+    <p>Browse published LogionACE report cards by category, company, and tested model.</p>
+  </section>
+
+  <section class="benchmark-app">
+    <div class="reports-toolbar">
+      <div class="category-tabs" role="tablist" aria-label="Report categories">
+      <button class="category-tab active" data-category="llm">LLM</button>
+      <button class="category-tab" data-category="agent">Agents</button>
+      </div>
+      <label class="report-search">
+        <span>Search</span>
+        <input id="report-search" type="search" placeholder="Type first letter, company, or model">
+      </label>
+    </div>
+
+    <div class="benchmark-grid">
+      <aside class="company-panel">
+        <div class="panel-title">Companies</div>
+        <div id="company-list" class="company-list"></div>
+      </aside>
+
+      <section class="models-panel">
+        <div class="panel-title" id="model-panel-title">Models</div>
+        <div id="model-grid" class="model-grid"></div>
+      </section>
+
+      <aside class="report-panel" id="report-panel">
+        <div class="empty-report">Select a model to view its report card.</div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="company.html">About</a>
+      <a href="company.html#trust">Trust &amp; Security</a>
+      <a href="evaluation.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="methodology.html#limitations">Limitations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+</footer>
+
+<script>
+const CATEGORY_FILES = {
+  llm: "ace-leaderboard.json",
+  agent: "agent-leaderboard.json"
+};
+const AGENT_LABEL = {
+  "agent-reference-compliant": "Reference: well-governed agent",
+  "agent-reference-reckless": "Reference: ungoverned agent"
+};
+const VENDOR_WORDMARK = {
+  OpenAI:"OpenAI", Google:"Google", Anthropic:"Anthropic", xAI:"xAI", Alibaba:"Qwen", DeepSeek:"DeepSeek", Meta:"Meta", LogionOS:"LogionOS"
+};
+const REPORT_FILE = {
+  "gpt-5.5":"ACE_Evaluation_Report_GPT-5.5.pdf",
+  "gemini-3.1-pro":"ACE_Evaluation_Report_Gemini-3.1-Pro.pdf",
+  "opus-4.8":"ACE_Evaluation_Report_Opus-4.8.pdf",
+  "fable-5":"ACE_Evaluation_Report_Fable-5.pdf",
+  "gpt-4o":"ACE_Evaluation_Report_GPT-4o.pdf",
+  "grok-4.3":"ACE_Evaluation_Report_Grok-4.3.pdf",
+  "qwen3.7-max":"ACE_Evaluation_Report_Qwen3.7-Max.pdf",
+  "deepseek-v4-pro":"ACE_Evaluation_Report_DeepSeek-V4-Pro.pdf",
+  "llama-4-maverick":"ACE_Evaluation_Report_Llama-4-Maverick.pdf"
+};
+const DOMAIN_DETAIL = {
+  DP:{name:"Data Protection", desc:"Measures whether the system leaks or mishandles personal data, identifiers, sensitive records, or transfer obligations.", controls:["DP-1 PII leakage","DP-2 minimization and lawful handling","DP-3 cross-border transfer guidance"]},
+  RF:{name:"Regulatory Fitness", desc:"Measures whether responses stay current and jurisdiction-specific under real regulatory obligations.", controls:["RF-1 obligation accuracy","RF-2 regulatory currency","RF-3 cross-jurisdiction consistency"]},
+  MR:{name:"Misuse Resistance", desc:"Measures resistance to prohibited use, manipulation, fraud assistance, and unsafe handling of vulnerable users.", controls:["MR-1 prohibited use refusal","MR-2 fraud and manipulation resistance","MR-3 dual-use decomposition","MR-4 vulnerable-user safety"]},
+  AG:{name:"Agentic Governance", desc:"Measures whether tool-using agents stay inside permission, escalation, exfiltration, and cost boundaries.", controls:["AG-1 destructive action control","AG-2 permission and exfiltration control","AG-3 data egress resistance","AG-4 escalation behavior","AG-5 resource and sub-agent limits"]},
+  TA:{name:"Transparency and Auditability", desc:"Measures disclosure, uncertainty handling, citation fidelity, and resistance to audit-record falsification.", controls:["TA-1 AI identity and source disclosure","TA-2 audit and citation integrity","TA-3 uncertainty disclosure"]},
+  CI:{name:"Content Integrity", desc:"Measures copyright, provenance, likeness, and impersonation risks in generated content.", controls:["CI-1 provenance handling","CI-2 copyright and licensing","CI-3 likeness and impersonation"]}
+};
+let state = {category:"llm", models:[], vendor:null, selected:null, query:""};
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function gradeClass(g){return "grade-"+String(g||"").toLowerCase();}
+function verdictClass(v){return String(v||"").includes("Conditional")?"verdict-conditional":String(v||"").includes("Ready")&&!String(v||"").includes("Not")?"verdict-ready":"verdict-notready";}
+function displayLabel(m){return state.category==="agent" ? (AGENT_LABEL[m.label]||m.label) : m.label;}
+function companyOf(m){
+  if(state.category==="agent") return "LogionOS";
+  const v = m.vendor || "Unknown";
+  return v.indexOf("OpenAI")===0 ? "OpenAI" : v;
+}
+function wordmark(v){return VENDOR_WORDMARK[v] || v;}
+function matchesQuery(m){
+  const q = state.query.trim().toLowerCase();
+  if(!q) return true;
+  const hay = [displayLabel(m), companyOf(m), m.label].join(" ").toLowerCase();
+  if(q.length===1) return hay.includes(q);
+  return hay.includes(q);
+}
+
+async function loadCategory(category){
+  state.category = category;
+  state.query = "";
+  document.getElementById("report-search").value = "";
+  document.querySelectorAll(".category-tab").forEach(b=>b.classList.toggle("active", b.dataset.category===category));
+  const d = await fetch(CATEGORY_FILES[category]).then(r=>r.json());
+  state.models = (d.models||[]).filter(m=>m.bare).sort((a,b)=>(b.bare.overall||0)-(a.bare.overall||0));
+  state.vendor = [...new Set(state.models.map(companyOf))][0] || null;
+  state.selected = state.models.find(m=>companyOf(m)===state.vendor) || state.models[0] || null;
+  render();
+}
+
+function render(){
+  if(state.category==="agent"){
+    document.getElementById("company-list").innerHTML = "";
+    document.getElementById("model-panel-title").textContent = "Agent reports";
+    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation.html#contact" style="color:var(--accent)">Request an agent evaluation</a></div>';
+    document.getElementById("report-panel").innerHTML = '<div class="empty-report">Select an agent evaluation to view its report card.</div>';
+    return;
+  }
+  const visibleModels = state.models.filter(matchesQuery);
+  const vendors = [...new Set(visibleModels.map(companyOf))];
+  if(!vendors.includes(state.vendor)){
+    state.vendor = vendors[0] || null;
+    state.selected = visibleModels.find(m=>companyOf(m)===state.vendor) || null;
+  }
+  document.getElementById("company-list").innerHTML = vendors.map(v => `
+    <button class="company-tile ${v===state.vendor?"active":""}" data-vendor="${esc(v)}">
+      <span class="vendor-logo wordmark">${esc(wordmark(v))}</span>
+      <span><strong>${esc(v)}</strong><em>${visibleModels.filter(m=>companyOf(m)===v).length} tested</em></span>
+    </button>
+  `).join("");
+  document.querySelectorAll(".company-tile").forEach(btn=>btn.onclick=()=>{
+    state.vendor = btn.dataset.vendor;
+    state.selected = state.models.find(m=>companyOf(m)===state.vendor);
+    render();
+  });
+
+  if(!vendors.length){
+    document.getElementById("company-list").innerHTML = '<div class="not-published">No reports match this search.</div>';
+    document.getElementById("model-panel-title").textContent = "Models";
+    document.getElementById("model-grid").innerHTML = "";
+    document.getElementById("report-panel").innerHTML = '<div class="empty-report">Try another company initial or model name.</div>';
+    return;
+  }
+  const rows = visibleModels.filter(m=>companyOf(m)===state.vendor);
+  if(!state.selected || !rows.some(m=>m.label===state.selected.label)){
+    state.selected = rows[0] || null;
+  }
+  document.getElementById("model-panel-title").textContent = "Models by "+state.vendor;
+  document.getElementById("model-grid").innerHTML = rows.map(m=>{
+    const b=m.bare;
+    return `
+      <button class="model-card ${state.selected&&state.selected.label===m.label?"active":""}" data-label="${esc(m.label)}">
+        <span class="model-logo wordmark">${esc(wordmark(companyOf(m)))}</span>
+        <strong>${esc(displayLabel(m))}</strong>
+        <span>${esc(companyOf(m))}</span>
+        <div class="model-meta">
+          <em>${esc(b.overall)}</em>
+          <i class="${gradeClass(b.grade)}">${esc(b.grade)}</i>
+        </div>
+      </button>
+    `;
+  }).join("");
+  document.querySelectorAll(".model-card").forEach(btn=>btn.onclick=()=>{
+    state.selected = state.models.find(m=>m.label===btn.dataset.label);
+    render();
+  });
+  renderReport();
+}
+
+function renderReport(){
+  const panel=document.getElementById("report-panel");
+  if(!state.selected){panel.innerHTML='<div class="empty-report">Select a model to view its report card.</div>';return;}
+  const m=state.selected, b=m.bare;
+  const domains = b.domains ? Object.entries(b.domains).map(([k,v])=>{
+    const d = DOMAIN_DETAIL[k] || {name:k, desc:"Domain details pending.", controls:[]};
+    return `<span class="domain-pop" tabindex="0" aria-label="${esc(d.name)}">
+      <strong>${esc(k)}</strong><span class="domain-score">${esc(v.score)}</span><em>?</em>
+      <span class="domain-tooltip" role="tooltip">
+        <b>${esc(d.name)}</b>
+        <small>${esc(d.desc)}</small>
+        <i>${d.controls.map(esc).join("<br>")}</i>
+      </span>
+    </span>`;
+  }).join("") : "";
+  const file = REPORT_FILE[m.label];
+  const date = m.evaluated_at ? new Date(m.evaluated_at).toISOString().slice(0,10) : "2026-06";
+  panel.innerHTML = `
+    <div class="report-card-detail">
+      <p class="eyebrow">Report Card</p>
+      <div class="report-top">
+        <span class="vendor-logo wordmark large">${esc(wordmark(companyOf(m)))}</span>
+        <div>
+          <p class="eyebrow">${esc(companyOf(m))}</p>
+          <h2>${esc(displayLabel(m))}</h2>
+        </div>
+      </div>
+      <div class="score-block">
+        <div><span>Overall</span><strong>${esc(b.overall)}</strong></div>
+        <div><span>Grade</span><strong class="${gradeClass(b.grade)}">${esc(b.grade)}</strong></div>
+      </div>
+      <div class="verdict-line ${verdictClass(b.verdict)}">${esc(b.verdict)}</div>
+      <div class="report-facts">
+        <span>Evaluated: <strong>${esc(date)}</strong></span>
+        <span>Critical exceptions: <strong>${esc(b.critical_exception_count)}</strong></span>
+        <span>Helpfulness: <strong>${b.helpfulness_retention==null?"-":esc(b.helpfulness_retention)+"%"}</strong></span>
+      </div>
+      ${domains?`<div class="domain-mini">${domains}</div>`:""}
+      <div class="risk-note">Evaluation focuses on business risk before enterprise AI deployment: data leakage, regulatory failure, unsafe agent actions, transparency gaps, and content integrity issues.</div>
+      <div class="report-actions">
+        <a class="btn primary" href="evaluation.html#contact">Request full report</a>
+        <a class="btn outline" href="whitepaper.html">Read whitepaper</a>
+      </div>
+      <p class="report-note">Report cards are public. Full evaluation reports with evidence packages, control-level analysis, and remediation guidance are delivered through evaluation engagements.</p>
+    </div>
+  `;
+}
+
+document.querySelectorAll(".category-tab").forEach(btn=>btn.onclick=()=>loadCategory(btn.dataset.category));
+document.getElementById("report-search").addEventListener("input", e=>{
+  state.query = e.target.value;
+  render();
+});
+loadCategory("llm");
+</script>
+<script>
+const obs2=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs2.observe(el));
+</script>
+</body>
+</html>

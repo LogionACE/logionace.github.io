@@ -1,276 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LogionACE — Independent compliance evaluation for AI models & agents</title>
-<meta name="description" content="LogionACE is an audit-style compliance benchmark for LLMs and AI agents. Multi-jurisdictional, reproducible, and modeled after SOC 2 control testing. Public leaderboard plus an enterprise evaluation service.">
-<meta name="keywords" content="AI compliance benchmark, LLM compliance, AI agent evaluation, AI audit, ACE benchmark, AI governance, agent security testing">
-<meta property="og:title" content="LogionACE — Independent compliance evaluation for AI models & agents">
-<meta property="og:description" content="Audit-style, reproducible compliance evaluation for LLMs and AI agents. Modeled after SOC 2 control testing.">
-<meta property="og:type" content="website">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LogionACE - AI Compliance Evaluation for Enterprise</title>
+  <meta name="description" content="LogionACE is AI Compliance Evaluation for Enterprise. Independent evaluation for AI systems, including model endpoints, agents, workflows, and deployed AI products.">
+  <meta property="og:title" content="LogionACE - AI Compliance Evaluation for Enterprise">
+  <meta property="og:description" content="ACE for AI Systems. Enterprise-ready compliance evaluation by LogionOS.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<nav>
-  <div class="nav-container">
-    <a href="/" class="logo"><span class="logo-icon"><img src="logo.svg" alt="LogionACE" width="32" height="32"></span> LogionACE</a>
-    <ul class="nav-links">
-      <li><a href="#leaderboard">Leaderboard</a></li>
-      <li><a href="#agents">Agents</a></li>
-      <li><a href="#methodology">Methodology</a></li>
-      <li><a href="#service">Service</a></li>
-      <li><a href="#service" class="nav-cta">Request an evaluation</a></li>
-    </ul>
-    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="logo.svg" alt="" width="30" height="30"><span>LogionACE</span></a>
+    <div class="nav-links">
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
+      <a href="company.html">Company</a>
+      <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
+    </div>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-container">
-    <a href="#service" class="hero-announce">
-      <span class="announce-tag">NEW</span>
-      Public benchmark live · ACE evaluation service opens end of June
-    </a>
-    <div class="hero-badge"><span class="status-dot"></span> ACE Protocol v1.1 · 2026-06</div>
-    <h1>Is your AI fit to operate under real regulation?</h1>
-    <p>LogionACE is an independent, audit-style compliance evaluation for language models and AI agents — controls, verdicts, and disclosed exceptions, the way auditors evaluate organizations. Multi-jurisdictional, reproducible, and modeled after SOC&nbsp;2 control testing.</p>
-    <div class="hero-actions">
-      <a href="#leaderboard" class="btn-primary">View the leaderboard
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+<main>
+  <section class="home-hero">
+    <div class="home-hero-inner">
+      <div class="home-copy">
+        <p class="eyebrow">AI assurance by LogionOS</p>
+        <h1>ACE for AI Systems</h1>
+        <p class="hero-subtitle short">Independent compliance evaluation before regulated AI deployment.</p>
+        <div class="hero-actions">
+          <a href="benchmark.html" class="btn primary">Explore reports</a>
+          <a href="evaluation.html" class="btn outline">Request evaluation</a>
+        </div>
+      </div>
+      <aside class="hero-preview" aria-label="Sample report card">
+        <div class="preview-card" id="hero-card">
+          <div class="preview-header">
+            <p class="eyebrow">Report Card</p>
+            <div class="preview-model-info">
+              <strong id="rc-model">Gemini 3.1 Pro</strong>
+              <span id="rc-vendor">Google</span>
+            </div>
+          </div>
+          <div class="preview-scores">
+            <div><span>Overall</span><strong id="rc-score">94.7</strong></div>
+            <div><span>Grade</span><strong id="rc-grade" class="grade-a">A</strong></div>
+          </div>
+          <div id="rc-verdict" class="preview-verdict verdict-notready">ACE Not Ready</div>
+          <div class="preview-domains" id="rc-domains">
+            <div><strong>DP</strong><span>82.8</span></div>
+            <div><strong>RF</strong><span>98</span></div>
+            <div><strong>MR</strong><span>100</span></div>
+            <div><strong>AG</strong><span>100</span></div>
+            <div><strong>TA</strong><span>85.7</span></div>
+            <div><strong>CI</strong><span>100</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-section" id="countdown-section">
+    <div class="countdown-inner" id="countdown-wrap">
+      <p class="eyebrow">ACE Benchmark v1.1</p>
+      <div class="countdown-clock" id="countdown-clock">
+        <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-label">Hours</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-label">Minutes</span></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-label">Seconds</span></div>
+      </div>
+      <div class="countdown-done" id="countdown-done" style="display:none">
+        <h2>ACE Benchmark v1.1 is live.</h2>
+        <p>The whitepaper and all model evaluation reports are now public.</p>
+        <div class="countdown-links">
+          <a href="whitepaper.html" class="btn primary">Read the whitepaper</a>
+          <a href="benchmark.html" class="btn outline">Browse reports</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-proof">
+    <div><strong>6</strong><span>Trust Domains</span></div>
+    <div><strong>21</strong><span>Controls</span></div>
+    <div><strong>12</strong><span>Jurisdictions</span></div>
+    <div><strong>272</strong><span>Test Cases</span></div>
+  </section>
+
+  <section class="section compact">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>From submission to report card</h2>
+    </div>
+    <div class="steps-row">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <h3>Submit</h3>
+        <p>Connect via API, MCP sandbox, or custom test environment -- we adapt to your deployment.</p>
+      </div>
+      <div class="step-arrow">&rarr;</div>
+      <div class="step fade-up">
+        <div class="step-num">02</div>
+        <h3>Evaluate</h3>
+        <p>ACE runs 272 test cases across 6 trust domains and 12 jurisdictions with independent judging.</p>
+      </div>
+      <div class="step-arrow">&rarr;</div>
+      <div class="step fade-up">
+        <div class="step-num">03</div>
+        <h3>Report</h3>
+        <p>Receive your evaluation report with score, verdict, exceptions, evidence, and remediation path. Delivered within 5-7 business days.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section compact">
+    <div class="cards three">
+      <a class="card link-card fade-up" href="benchmark.html">
+        <span class="card-kicker">01</span>
+        <h3>Public Reports</h3>
+        <p>Browse tested AI systems by category, company, model or product, score, and verdict.</p>
       </a>
-      <a href="#service" class="btn-secondary">Evaluate your agent &rarr;</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><span class="hero-stat-value">6 / 21</span><span class="hero-stat-label">Domains / Controls</span></div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat"><span class="hero-stat-value">272</span><span class="hero-stat-label">Model test cases</span></div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat"><span class="hero-stat-value">12</span><span class="hero-stat-label">Jurisdictions</span></div>
-      <div class="hero-stat-divider"></div>
-      <div class="hero-stat"><span class="hero-stat-value">9</span><span class="hero-stat-label">Models evaluated</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="about">
-  <div class="section-container">
-    <div class="section-header center">
-      <span class="section-label">What ACE measures</span>
-      <h2>Capability benchmarks miss the question enterprises actually ask</h2>
-      <p class="section-subtitle">Most benchmarks measure how smart a model is. ACE measures whether an AI system behaves in a way that is safe to deploy under real regulatory obligations — across data protection, regulated industries, misuse resistance, agentic governance, transparency, and content integrity.</p>
-    </div>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-icon blue">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="product-label">Audit-style</div>
-        <h3>Controls, verdicts, and disclosed exceptions</h3>
-        <ul class="product-features">
-          <li>6 trust domains, 21 controls</li>
-          <li>ACE Ready / Conditional / Not Ready</li>
-          <li>Every critical failure disclosed as an exception</li>
-        </ul>
-      </div>
-      <div class="product-card featured">
-        <div class="product-icon purple">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
-        </div>
-        <div class="product-label">Multi-jurisdictional</div>
-        <h3>One global posture, 12 jurisdictions</h3>
-        <ul class="product-features">
-          <li>Mapped to a structured regulatory corpus</li>
-          <li>English, Japanese, and Chinese cases</li>
-          <li>Deployment-scope aware scoring</li>
-        </ul>
-      </div>
-      <div class="product-card">
-        <div class="product-icon green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-        </div>
-        <div class="product-label">Reproducible</div>
-        <h3>Re-performable, not asserted</h3>
-        <ul class="product-features">
-          <li>Deterministic checks plus a pinned cross-family judge</li>
-          <li>Tamper-evident evidence for agent runs</li>
-          <li>Anyone can re-derive the verdict</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section alt-bg" id="leaderboard">
-  <div class="section-container">
-    <div class="section-header center">
-      <span class="section-label">Leaderboard</span>
-      <h2>Frontier models under the ACE battery</h2>
-      <p class="section-subtitle">Point-in-time evaluation under ACE Protocol v1.1, Global Default profile. Each model is scored on the full battery with a cross-family LLM judge; critical failures are disclosed as exceptions.</p>
-    </div>
-    <div class="lb-wrap">
-      <table class="lb-table" id="lb-table">
-        <thead>
-          <tr>
-            <th>Model</th><th>Vendor</th><th>Overall</th><th>Grade</th>
-            <th>Verdict</th><th>Critical exceptions</th><th>Helpfulness</th>
-          </tr>
-        </thead>
-        <tbody id="lb-body">
-          <tr><td colspan="7" class="lb-pending"><span class="status-dot amber"></span>Loading leaderboard data&hellip;</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="lb-footnote">Overall is the Global Default profile score. The published leaderboard adds a private holdout to the public cases. ACE verdicts describe behavior observed under the stated protocol version at evaluation time.</p>
-  </div>
-</section>
-
-<section class="section" id="agents">
-  <div class="section-container">
-    <div class="section-header center">
-      <span class="section-label">Agent evaluation</span>
-      <h2>We don't just test models. We test agents.</h2>
-      <p class="section-subtitle">An agent is defined by the tools it can touch. LogionACE provides a honeypot tool environment — locally or as an MCP connector — and observes what an agent product actually <em>does</em>: every action recorded to a tamper-evident evidence ledger, scored by a deterministic engine. This works even for app-only agents with no public API.</p>
-    </div>
-    <div class="lb-wrap">
-      <table class="lb-table" id="agent-table" style="min-width:680px">
-        <thead>
-          <tr><th>Agent profile</th><th>Overall</th><th>Grade</th><th>Verdict</th><th>Critical exceptions</th></tr>
-        </thead>
-        <tbody id="agent-body">
-          <tr><td colspan="5" class="lb-pending"><span class="status-dot amber"></span>Loading reference sample&hellip;</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="lb-footnote">Reference sample: a well-governed vs an ungoverned agent over the live honeypot suite, demonstrating that the engine separates dangerous actions (forbidden tool calls, data exfiltration, followed prompt injections) from benign task completion. Destructive tools are honeypots — no real action is ever performed.</p>
-  </div>
-</section>
-
-<section class="section alt-bg" id="methodology">
-  <div class="section-container">
-    <div class="section-header center">
-      <span class="section-label">Methodology</span>
-      <h2>Built the way SOC 2 is tested</h2>
-      <p class="section-subtitle">A SOC 2 examination tests controls by inspection and re-performance. LogionACE applies the same discipline to AI behavior.</p>
-    </div>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-label">Inspection</div>
-        <h3>Hash-chained evidence</h3>
-        <ul class="product-features">
-          <li>Every tool call and result recorded</li>
-          <li>Tamper-evident: any edit breaks the chain</li>
-          <li>Continuous, programmatic evidence — not screenshots</li>
-        </ul>
-      </div>
-      <div class="product-card">
-        <div class="product-label">Re-performance</div>
-        <h3>Deterministic scoring</h3>
-        <ul class="product-features">
-          <li>Verdict is a pure function of the evidence</li>
-          <li>The customer can re-run and get the identical result</li>
-          <li>No grade inflation, no hidden assertions</li>
-        </ul>
-      </div>
-      <div class="product-card">
-        <div class="product-label">Independence</div>
-        <h3>Cross-family judging</h3>
-        <ul class="product-features">
-          <li>Subjects are never judged by their own family</li>
-          <li>Authoritative regulatory text grounds obligation cases</li>
-          <li>Over-refusal penalized via Helpfulness Retention</li>
-        </ul>
-      </div>
-    </div>
-    <div class="disclaimer" style="max-width:760px;margin:2.5rem auto 0;text-align:center;color:var(--text-secondary);font-size:.82rem;line-height:1.7">ACE is an independent engineering evaluation modeled after the structure of established audit frameworks. It is not affiliated with, and an ACE verdict is not an attestation under, SOC 2, HIPAA, PCI DSS, Common Criteria, or Euro NCAP.</div>
-  </div>
-</section>
-
-<section class="section" id="service">
-  <div class="section-container">
-    <div class="section-header center">
-      <span class="section-label">Evaluation service</span>
-      <h2>Get your model or agent evaluated</h2>
-      <p class="section-subtitle">Beyond the public leaderboard, LogionACE delivers official, audit-style evaluation reports for your own models and agent products — with human QA and a reproducible evidence package. Opening end of June 2026.</p>
-    </div>
-    <div class="hero-actions" style="margin-top:0">
-      <a href="mailto:hello@logionace.com?subject=ACE%20Evaluation%20Request" class="btn-primary">Request an evaluation
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      <a class="card link-card fade-up" href="evaluation.html">
+        <span class="card-kicker">02</span>
+        <h3>Enterprise Evaluation</h3>
+        <p>Identify deployment blockers before AI failures become legal, security, or procurement risk.</p>
       </a>
-      <a href="#leaderboard" class="btn-secondary">See a sample report &rarr;</a>
+      <a class="card link-card fade-up" href="methodology.html">
+        <span class="card-kicker">03</span>
+        <h3>Methodology</h3>
+        <p>Review controls, evidence, verdict gating, judge independence, and limitations.</p>
+      </a>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="footer-container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
-        <p>Independent, audit-style compliance evaluation for AI models and agents.</p>
+  <section class="section alt compact">
+    <div class="section-head split">
+      <div>
+        <p class="eyebrow">Company</p>
+        <h2>Built by LogionOS for third-party AI assurance.</h2>
       </div>
-      <div class="footer-col">
-        <h4>Benchmark</h4>
-        <a href="#leaderboard">Leaderboard</a>
-        <a href="#agents">Agent evaluation</a>
-        <a href="#methodology">Methodology</a>
-      </div>
-      <div class="footer-col">
-        <h4>Service</h4>
-        <a href="#service">Request an evaluation</a>
-        <a href="mailto:hello@logionace.com">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <a href="https://logionos.com">LogionOS</a>
-      </div>
+      <p>LogionOS is building compliance infrastructure for AI adoption. LogionACE is the evaluation layer: a practical way for enterprises to understand AI system risk before deployment.</p>
     </div>
-    <div class="footer-bottom">© 2026 LogionACE. ACE Protocol v1.1. An evaluation methodology, not a legal certification.</div>
+    <div class="home-company">
+      <a href="company.html" class="btn secondary">About LogionOS and LogionACE</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="logo.svg" alt="" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">AI Compliance Evaluation for Enterprise. Powered by LogionOS.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="company.html">About</a>
+      <a href="company.html#trust">Trust &amp; Security</a>
+      <a href="evaluation.html#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="methodology.html#limitations">Limitations</a>
+    </div>
   </div>
+  <div class="footer-bottom">(c) 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 
 <script>
-const VERDICT_CLASS = {'ACE Ready':'verdict-ready','ACE Conditional':'verdict-conditional','ACE Not Ready':'verdict-notready'};
-const GRADE_CLASS = {A:'grade-a',B:'grade-b',C:'grade-c',D:'grade-d',F:'grade-f'};
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function gradeBadge(g){return '<span class="grade-badge '+(GRADE_CLASS[g]||'grade-pending')+'">'+esc(g||'–')+'</span>';}
-function verdictBadge(v){return '<span class="verdict-badge '+(VERDICT_CLASS[v]||'verdict-pending')+'">'+esc(v||'–')+'</span>';}
+var obs=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
 
-fetch('ace-leaderboard.json').then(r=>r.json()).then(d=>{
-  const rows = (d.models||[]).filter(m=>m.bare).sort((a,b)=>(b.bare.overall||0)-(a.bare.overall||0));
-  document.getElementById('lb-body').innerHTML = rows.map(m=>{
-    const b=m.bare;
-    return '<tr>'+
-      '<td class="lb-model">'+esc(m.label)+'</td>'+
-      '<td class="lb-vendor">'+esc(m.vendor)+'</td>'+
-      '<td class="lb-num">'+esc(b.overall)+'</td>'+
-      '<td>'+gradeBadge(b.grade)+'</td>'+
-      '<td>'+verdictBadge(b.verdict)+'</td>'+
-      '<td class="lb-num">'+esc(b.critical_exception_count)+'</td>'+
-      '<td class="lb-num">'+(b.helpfulness_retention==null?'–':esc(b.helpfulness_retention)+'%')+'</td>'+
-    '</tr>';
-  }).join('') || '<tr><td colspan="7" class="lb-pending">No data.</td></tr>';
-}).catch(()=>{document.getElementById('lb-body').innerHTML='<tr><td colspan="7" class="lb-pending">Leaderboard data unavailable.</td></tr>';});
+(function(){
+  var TARGET=new Date('2026-06-15T22:00:00Z').getTime();
+  var clock=document.getElementById('countdown-clock');
+  var done=document.getElementById('countdown-done');
+  var hEl=document.getElementById('cd-h');
+  var mEl=document.getElementById('cd-m');
+  var sEl=document.getElementById('cd-s');
 
-const AGENT_LABEL = {'agent-reference-compliant':'Reference · well-governed','agent-reference-reckless':'Reference · ungoverned'};
-fetch('agent-leaderboard.json').then(r=>r.json()).then(d=>{
-  const rows = (d.models||[]).filter(m=>m.bare).sort((a,b)=>(b.bare.overall||0)-(a.bare.overall||0));
-  document.getElementById('agent-body').innerHTML = rows.map(m=>{
-    const b=m.bare;
-    return '<tr>'+
-      '<td class="lb-model">'+esc(AGENT_LABEL[m.label]||m.label)+'</td>'+
-      '<td class="lb-num">'+esc(b.overall)+'</td>'+
-      '<td>'+gradeBadge(b.grade)+'</td>'+
-      '<td>'+verdictBadge(b.verdict)+'</td>'+
-      '<td class="lb-num">'+esc(b.critical_exception_count)+'</td>'+
-    '</tr>';
-  }).join('') || '<tr><td colspan="5" class="lb-pending">No data.</td></tr>';
-}).catch(()=>{document.getElementById('agent-body').innerHTML='<tr><td colspan="5" class="lb-pending">Reference sample unavailable.</td></tr>';});
+  function pad(n){return n<10?'0'+n:''+n}
+
+  function tick(){
+    var now=Date.now();
+    var diff=TARGET-now;
+    if(diff<=0){
+      clock.style.display='none';
+      done.style.display='block';
+      document.querySelector('.countdown-inner .eyebrow').style.display='none';
+      return;
+    }
+    var s=Math.floor(diff/1000);
+    var h=Math.floor(s/3600);
+    s%=3600;
+    var m=Math.floor(s/60);
+    s%=60;
+    hEl.textContent=pad(h);
+    mEl.textContent=pad(m);
+    sEl.textContent=pad(s);
+    requestAnimationFrame(function(){setTimeout(tick,200)});
+  }
+  tick();
+})();
+
+(function(){
+  var models=[
+    {name:"Gemini 3.1 Pro",vendor:"Google",score:"94.7",grade:"A",gradeClass:"grade-a",verdict:"ACE Not Ready",verdictClass:"verdict-notready",dp:"82.8",rf:"98",mr:"100",ag:"100",ta:"85.7",ci:"100"},
+    {name:"GPT-5.5",vendor:"OpenAI",score:"93.1",grade:"A",gradeClass:"grade-a",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"90.7",rf:"97.1",mr:"85.5",ag:"100",ta:"81.6",ci:"100"},
+    {name:"Fable 5",vendor:"Anthropic",score:"91.5",grade:"A",gradeClass:"grade-a",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"87.9",rf:"89.8",mr:"88.2",ag:"98.2",ta:"83.8",ci:"100"},
+    {name:"Opus 4.8",vendor:"Anthropic",score:"87.2",grade:"B",gradeClass:"grade-b",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"76.4",rf:"78.5",mr:"97",ag:"94.3",ta:"77.5",ci:"100"}
+  ];
+  var idx=0;
+  var card=document.getElementById('hero-card');
+
+  function show(i){
+    var m=models[i];
+    card.classList.add('rc-fade-out');
+    setTimeout(function(){
+      document.getElementById('rc-model').textContent=m.name;
+      document.getElementById('rc-vendor').textContent=m.vendor;
+      document.getElementById('rc-score').textContent=m.score;
+      var g=document.getElementById('rc-grade');
+      g.textContent=m.grade;g.className=m.gradeClass;
+      var v=document.getElementById('rc-verdict');
+      v.textContent=m.verdict;v.className='preview-verdict '+m.verdictClass;
+      var spans=document.querySelectorAll('#rc-domains div span');
+      var vals=[m.dp,m.rf,m.mr,m.ag,m.ta,m.ci];
+      for(var j=0;j<spans.length;j++) spans[j].textContent=vals[j];
+      card.classList.remove('rc-fade-out');
+      card.classList.add('rc-fade-in');
+      setTimeout(function(){card.classList.remove('rc-fade-in')},400);
+    },300);
+  }
+
+  setInterval(function(){
+    idx=(idx+1)%models.length;
+    show(idx);
+  },10000);
+
+})();
 </script>
 </body>
 </html>
