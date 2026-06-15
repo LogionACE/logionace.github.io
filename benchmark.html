@@ -22,20 +22,20 @@
       <div class="nav-drop">
         <span class="nav-trigger">Product</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="/benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
-          <a href="/methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
-          <a href="/whitepaper">Whitepaper<span class="nav-desc">Full research paper</span></a>
+          <a href="benchmark.html">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology.html">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper.html">Whitepaper<span class="nav-desc">Full research paper</span></a>
         </div></div>
       </div>
-      <a href="/evaluation">Evaluation</a>
+      <a href="evaluation.html">Evaluation</a>
       <div class="nav-drop">
         <span class="nav-trigger">Company</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="/company">About<span class="nav-desc">Team and mission</span></a>
-          <a href="/trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+          <a href="company.html">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust.html">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
         </div></div>
       </div>
-      <a href="/evaluation#contact" class="nav-cta">Request evaluation</a>
+      <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
     </div>
   </div>
 </nav>
@@ -77,6 +77,22 @@
   </section>
 </main>
 
+<div class="gate-overlay" id="download-gate">
+  <div class="gate-modal">
+    <button class="gate-close" id="gate-close">&times;</button>
+    <h3>Download evaluation report</h3>
+    <p>Enter your details to access the full public report with scores, evidence, and remediation guidance.</p>
+    <form id="gate-form">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Work email" required>
+      <input type="text" name="company" placeholder="Company" required>
+      <input type="hidden" name="report" id="gate-report-name">
+      <button type="submit" class="btn primary">Download report</button>
+    </form>
+    <p class="gate-note">We respect your privacy. Your info is used only to deliver the report and follow up on evaluation inquiries.</p>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
@@ -85,22 +101,22 @@
     </div>
     <div class="footer-col">
       <h4>Product</h4>
-      <a href="/benchmark">Reports</a>
-      <a href="/evaluation">Evaluation</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/whitepaper">Whitepaper</a>
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="/company">About</a>
-      <a href="/trust">Trust &amp; Security</a>
-      <a href="/evaluation#contact">Contact</a>
+      <a href="company.html">About</a>
+      <a href="trust.html">Trust &amp; Security</a>
+      <a href="evaluation.html#contact">Contact</a>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
-      <a href="/methodology#limitations">Limitations</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
@@ -197,7 +213,7 @@ function render(){
   if(state.category==="agent"){
     document.getElementById("company-list").innerHTML = "";
     document.getElementById("model-panel-title").textContent = "Agent reports";
-    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="/evaluation#contact" style="color:var(--accent)">Request an agent evaluation</a><br><br><span style="font-size:12px;color:var(--muted-2)">Reference agents developed by LogionOS, Inc. are evaluated under our <a href="/trust" style="color:var(--muted)">affiliated system disclosure policy</a>.</span></div>';
+    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation.html#contact" style="color:var(--accent)">Request an agent evaluation</a><br><br><span style="font-size:12px;color:var(--muted-2)">Reference agents developed by LogionOS, Inc. are evaluated under our <a href="trust.html" style="color:var(--muted)">affiliated system disclosure policy</a>.</span></div>';
     document.getElementById("report-panel").innerHTML = '<div class="empty-report">Select an agent evaluation to view its report card.</div>';
     return;
   }
@@ -292,10 +308,10 @@ function renderReport(){
       ${domains?`<div class="domain-mini">${domains}</div>`:""}
       <div class="risk-note">Evaluation focuses on business risk before enterprise AI deployment: data leakage, regulatory failure, unsafe agent actions, transparency gaps, and content integrity issues.</div>
       <div class="report-actions">
-        <a class="btn primary" href="/evaluation#contact">Request full report</a>
+        ${file?`<button class="btn primary" onclick="requestDownload('${esc(displayLabel(m))}','reports/${esc(file)}')">Download report</button>`:`<a class="btn primary" href="/evaluation#contact">Request report</a>`}
         <a class="btn outline" href="/whitepaper">Read whitepaper</a>
       </div>
-      <p class="report-note">Report cards are public. Full evaluation reports with evidence packages, control-level analysis, and remediation guidance are delivered through evaluation engagements.</p>
+      <p class="report-note">Report cards are public. Full evaluation reports include scores, evidence packages, control-level analysis, and remediation guidance.</p>
     </div>
   `;
 }
@@ -307,6 +323,83 @@ document.getElementById("report-search").addEventListener("input", e=>{
 });
 loadCategory("llm");
 </script>
+<script>
+var _pendingDownload = null;
+
+function requestDownload(modelName, filePath) {
+  var saved = localStorage.getItem('ace_lead');
+  if (saved) {
+    triggerDownload(filePath);
+    return;
+  }
+  _pendingDownload = filePath;
+  document.getElementById('gate-report-name').value = modelName;
+  document.getElementById('download-gate').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGate() {
+  document.getElementById('download-gate').classList.remove('active');
+  document.body.style.overflow = '';
+  _pendingDownload = null;
+}
+
+function triggerDownload(filePath) {
+  var a = document.createElement('a');
+  a.href = filePath;
+  a.download = '';
+  a.target = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+document.getElementById('gate-close').addEventListener('click', closeGate);
+document.getElementById('download-gate').addEventListener('click', function(e) {
+  if (e.target === this) closeGate();
+});
+
+document.getElementById('gate-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  var fd = new FormData(form);
+  fd.append('_subject', 'Report download: ' + (fd.get('report') || 'Unknown'));
+  fd.append('source', 'report_download');
+
+  var lead = {
+    name: fd.get('name'),
+    email: fd.get('email'),
+    company: fd.get('company'),
+    timestamp: new Date().toISOString()
+  };
+
+  fetch('https://formspree.io/f/xwpkgjdr', {
+    method: 'POST',
+    body: fd,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r) {
+    if (!r.ok) throw new Error('Network');
+    localStorage.setItem('ace_lead', JSON.stringify(lead));
+    closeGate();
+    if (_pendingDownload) {
+      triggerDownload(_pendingDownload);
+      _pendingDownload = null;
+    }
+    btn.disabled = false;
+    btn.textContent = 'Download report';
+    form.reset();
+  }).catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Download report';
+    alert('Submission failed. Please try again.');
+  });
+});
+</script>
+
 <script>
 const obs2=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
