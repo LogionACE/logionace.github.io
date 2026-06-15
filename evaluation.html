@@ -67,22 +67,22 @@
         <span class="card-kicker">Public evaluation</span>
         <h3>$25K</h3>
         <p>For AI vendors that want to demonstrate compliance publicly. Results are published, citable, and listed on the leaderboard.</p>
-        <ul>
+        <ul class="truncated">
           <li>Standard ACE battery</li>
           <li>Full public evaluation report</li>
-          <li>Public report card</li>
-          <li>Leaderboard listing</li>
+          <li>Public report card &amp; leaderboard listing</li>
           <li>Public citation rights</li>
           <li>Publication approval workflow</li>
           <li>Evaluated by LogionACE mark, if eligible</li>
         </ul>
+        <button class="price-toggle" onclick="this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show less':'See all features'">See all features</button>
         <a href="#contact" class="btn outline" style="margin-top:auto;width:100%">Request public evaluation</a>
       </article>
       <article class="price-card featured fade-up">
         <span class="card-kicker">Private evaluation</span>
-        <h3>$40K-$50K</h3>
-        <p>For enterprises evaluating third-party AI products before procurement or deployment. Results delivered exclusively to you &mdash; never published.</p>
-        <ul>
+        <h3>$40-50K</h3>
+        <p>For enterprises evaluating third-party AI products before procurement or deployment. Results delivered exclusively to you.</p>
+        <ul class="truncated">
           <li>Standard ACE battery + extended depth</li>
           <li>Detailed private findings report</li>
           <li>Management-ready risk snapshot</li>
@@ -91,13 +91,14 @@
           <li>Stakeholder debrief session</li>
           <li>Evaluated by LogionACE mark, if eligible</li>
         </ul>
+        <button class="price-toggle" onclick="this.previousElementSibling.classList.toggle('expanded');this.textContent=this.previousElementSibling.classList.contains('expanded')?'Show less':'See all features'">See all features</button>
         <a href="#contact" class="btn primary" style="margin-top:auto;width:100%">Request private evaluation</a>
       </article>
       <article class="price-card fade-up">
         <span class="card-kicker">Custom environment</span>
-        <h3>From $60K+</h3>
+        <h3>$60K+</h3>
         <p>For AI systems that cannot be evaluated through the standard harness and require custom test-environment setup.</p>
-        <ul>
+        <ul class="truncated">
           <li>Scoped test environment</li>
           <li>Agent/tooling integration</li>
           <li>Evidence packaging</li>
@@ -109,14 +110,14 @@
       <article class="price-card founder fade-up">
         <span class="card-kicker">AI Founder Program</span>
         <h3>$0</h3>
-        <p>Up to $50K in evaluation credits for selected LogionOS Founder Program members. Coverage follows a standard evaluation scope where applicable, subject to program approval.</p>
-        <ul>
+        <p>Up to $50K in evaluation credits for selected LogionOS Founder Program members, subject to program approval.</p>
+        <ul class="truncated">
           <li>LogionOS Founder Program only</li>
-          <li>Standard evaluation scope where applicable</li>
+          <li>Standard evaluation scope</li>
           <li>Credits applied to eligible work</li>
           <li>Subject to acceptance and eligibility</li>
         </ul>
-        <a href="#contact" class="btn outline" style="margin-top:auto;width:100%">Apply to program</a>
+        <a href="https://logionos.com/founders.html" class="btn outline" style="margin-top:auto;width:100%" target="_blank">Apply to program</a>
       </article>
     </div>
     <p class="pricing-note">Evaluated by LogionACE marks may be displayed only when the evaluated system reaches an eligible LogionACE result. Not Ready results do not receive a mark. Evaluation marks indicate completion under the applicable ACE protocol and do not represent certification, legal approval, or regulatory compliance approval. Public evaluations include a publication approval workflow.</p>
