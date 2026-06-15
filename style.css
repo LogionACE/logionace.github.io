@@ -435,23 +435,25 @@ button{font:inherit}
 .price-card{
   border:1px solid var(--line);border-radius:22px;
   background:linear-gradient(180deg,var(--panel-2),var(--panel));
-  padding:24px;display:flex;flex-direction:column;
+  padding:28px 24px;display:flex;flex-direction:column;
 }
 .price-card.featured{border-color:rgba(79,140,255,.65);background:linear-gradient(180deg,rgba(79,140,255,.13),var(--panel))}
 .price-card.founder{border-color:rgba(49,209,139,.42);background:linear-gradient(180deg,rgba(49,209,139,.10),var(--panel))}
-.price-card h3{font-family:var(--font-mono);font-size:48px;line-height:1;margin:16px 0 14px;letter-spacing:-.04em}
+.price-card .card-kicker{margin-bottom:0}
+.price-card h3{font-family:var(--font-mono);font-size:48px;line-height:1;margin:14px 0;letter-spacing:-.04em}
+.price-card p{color:var(--muted);font-size:13px;line-height:1.6;min-height:80px}
+.price-card ul{list-style:none;display:grid;gap:7px;padding-top:16px;border-top:1px solid var(--line);margin-top:16px}
 .price-card ul.truncated li:nth-child(n+5){display:none}
 .price-card ul.truncated.expanded li{display:list-item}
+.price-card li{color:#dce5f2;font-size:13px;line-height:1.5;padding-left:18px;position:relative}
+.price-card li:before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .price-toggle{
-  display:inline-block;margin-top:10px;padding:0;
-  background:none;border:none;color:var(--accent);font-size:13px;
-  cursor:pointer;font-family:var(--font-sans);
+  display:inline-block;margin-top:8px;padding:0;
+  background:none;border:none;color:var(--accent);font-size:12px;
+  cursor:pointer;font-family:var(--font-sans);letter-spacing:.02em;
 }
 .price-toggle:hover{text-decoration:underline}
-.price-card p{color:var(--muted);font-size:14px;line-height:1.65;min-height:70px}
-.price-card ul{list-style:none;display:grid;gap:8px;margin-top:auto;padding-top:18px}
-.price-card li{color:#dce5f2;font-size:13px;line-height:1.4;padding-left:16px;position:relative}
-.price-card li:before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.price-card .btn{margin-top:auto;width:100%;padding-top:12px}
 .price-card.founder li:before{background:var(--good)}
 .pricing-note{
   max-width:980px;margin:18px auto 0;
