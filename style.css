@@ -27,13 +27,14 @@
 
 /* === RESET === */
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);overflow-x:hidden}
+html{background:var(--bg);overflow-x:hidden;overscroll-behavior-y:none}
 html{background:#040609;margin:0;padding:0}
 body{
   font-family:var(--font-sans);
   color:var(--text);
   margin:0;
   overflow-x:hidden;
+  overscroll-behavior-y:none;
   background:
     linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),
@@ -50,9 +51,8 @@ button{font:inherit}
 /* === NAVIGATION === */
 .site-nav{
   position:fixed;top:0;left:0;right:0;z-index:70;
-  background:rgba(5,7,10,.78);
+  background:rgba(5,7,10,.96);
   border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(18px);
 }
 .nav-shell{
   max-width:1180px;margin:0 auto;padding:14px 22px;
@@ -72,7 +72,7 @@ button{font:inherit}
 }
 .nav-drop-menu-inner{
   background:rgba(12,17,24,.97);border:1px solid var(--line-2);border-radius:14px;
-  backdrop-filter:blur(18px);box-shadow:0 16px 48px rgba(0,0,0,.45);
+  box-shadow:0 16px 48px rgba(0,0,0,.45);
   padding:8px;
 }
 .nav-drop:hover .nav-drop-menu{visibility:visible;opacity:1}
@@ -897,28 +897,38 @@ button{font:inherit}
 }
 .dl-overlay.active{display:flex}
 .dl-card{
-  background:#fff;border-radius:18px;
-  padding:40px 36px;max-width:440px;width:100%;
-  box-shadow:0 24px 64px rgba(0,0,0,.4);
+  background:var(--panel);border:1px solid var(--line-2);border-radius:22px;
+  padding:32px;max-width:460px;width:100%;
+  box-shadow:0 24px 64px rgba(0,0,0,.45);
   position:relative;z-index:201;
 }
-.dl-card h3{font-size:22px;margin:0 0 6px;color:#111}
-.dl-card p{font-size:14px;color:#555;margin:0 0 24px;line-height:1.6}
-.dl-card input{
-  display:block;width:100%;padding:12px 14px;margin-bottom:12px;
-  background:#f5f7fa;border:1px solid #d0d5dd;border-radius:10px;
-  color:#111;font-size:14px;font-family:inherit;
+.dl-card h3{font-size:22px;margin:0 0 6px;color:var(--text)}
+.dl-card p{font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6}
+.dl-card .dl-file{
+  color:var(--accent-2);font-family:var(--font-mono);
+  font-size:13px;margin-bottom:10px;
 }
-.dl-card input::placeholder{color:#999}
-.dl-card input:focus{border-color:var(--accent);outline:none;background:#fff}
-.dl-card .btn{width:100%;margin-top:8px}
+.dl-card .dl-intro{margin-bottom:20px}
+.dl-card form{display:grid;gap:10px}
+.dl-card label{
+  font-size:12px;color:var(--muted);font-weight:600;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.dl-card input{
+  display:block;width:100%;padding:11px 14px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:10px;
+  color:var(--text);font-size:14px;font-family:inherit;
+}
+.dl-card input::placeholder{color:var(--muted-2)}
+.dl-card input:focus{border-color:var(--accent);outline:none}
+.dl-card .btn{width:100%;margin-top:12px}
 .dl-close{
   position:absolute;top:14px;right:14px;
-  background:none;border:none;color:#999;cursor:pointer;
+  background:none;border:none;color:var(--muted);cursor:pointer;
   font-size:22px;line-height:1;padding:4px;
 }
-.dl-close:hover{color:#333}
-.dl-card .dl-note{font-size:12px;color:#888;margin-top:14px;text-align:center}
+.dl-close:hover{color:var(--text)}
+.dl-card .dl-note{font-size:12px;color:var(--muted-2);margin-top:14px;text-align:center}
 
 /* === MOBILE HAMBURGER NAV === */
 .nav-hamburger{
@@ -945,8 +955,7 @@ button{font:inherit}
   .nav-links{
     position:fixed;top:58px;right:0;bottom:0;
     width:min(320px,85vw);
-    background:rgba(5,7,10,.97);
-    backdrop-filter:blur(20px);
+    background:rgba(5,7,10,.985);
     flex-direction:column;
     align-items:stretch;
     padding:24px 24px 32px;

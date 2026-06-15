@@ -79,13 +79,17 @@
 
 <div class="dl-overlay" id="dl-gate">
   <div class="dl-card">
-    <button class="dl-close" id="dl-close">&times;</button>
+    <button class="dl-close" id="dl-close" aria-label="Close">&times;</button>
     <h3>Download evaluation report</h3>
-    <p>Enter your details to access the full public report with scores, evidence, and remediation guidance.</p>
+    <p class="dl-file" id="dl-current-report">Select a report</p>
+    <p class="dl-intro">Enter your details to access the full public report with scores, evidence, and remediation guidance.</p>
     <form id="dl-form">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="email" name="email" placeholder="Work email" required>
-      <input type="text" name="company" placeholder="Company" required>
+      <label for="dl-name">Name *</label>
+      <input type="text" id="dl-name" name="name" placeholder="Your name" required>
+      <label for="dl-email">Work email *</label>
+      <input type="email" id="dl-email" name="email" placeholder="you@company.com" required>
+      <label for="dl-company">Company *</label>
+      <input type="text" id="dl-company" name="company" placeholder="Company name" required>
       <input type="hidden" name="report" id="dl-report-name">
       <button type="submit" class="btn primary">Download report</button>
     </form>
@@ -334,6 +338,7 @@ function requestDownload(modelName, filePath) {
   }
   _pendingDownload = filePath;
   document.getElementById('dl-report-name').value = modelName;
+  document.getElementById('dl-current-report').textContent = modelName + ' -- evaluation report';
   document.getElementById('dl-gate').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -363,6 +368,7 @@ document.getElementById('dl-form').addEventListener('submit', function(e) {
   e.preventDefault();
   var form = this;
   var btn = form.querySelector('button[type="submit"]');
+  var downloadPath = _pendingDownload;
   btn.disabled = true;
   btn.textContent = 'Submitting...';
 
@@ -374,29 +380,30 @@ document.getElementById('dl-form').addEventListener('submit', function(e) {
     name: fd.get('name'),
     email: fd.get('email'),
     company: fd.get('company'),
+    report: fd.get('report'),
     timestamp: new Date().toISOString()
   };
 
+  localStorage.setItem('ace_lead', JSON.stringify(lead));
   fetch('https://formspree.io/f/xlgkzvaz', {
     method: 'POST',
     body: fd,
     headers: { 'Accept': 'application/json' }
   }).then(function(r) {
-    if (!r.ok) throw new Error('Network');
-    localStorage.setItem('ace_lead', JSON.stringify(lead));
-    closeGate();
-    if (_pendingDownload) {
-      triggerDownload(_pendingDownload);
-      _pendingDownload = null;
-    }
+    if (!r.ok) console.warn('Formspree submission failed');
+  }).catch(function(err) {
+    console.warn('Formspree submission failed', err);
+  });
+
+  if (downloadPath) {
+    triggerDownload(downloadPath);
+  }
+  closeGate();
+  setTimeout(function() {
     btn.disabled = false;
     btn.textContent = 'Download report';
     form.reset();
-  }).catch(function() {
-    btn.disabled = false;
-    btn.textContent = 'Download report';
-    alert('Submission failed. Please try again.');
-  });
+  }, 150);
 });
 </script>
 
