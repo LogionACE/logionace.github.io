@@ -22,20 +22,20 @@
       <div class="nav-drop">
         <span class="nav-trigger">Product</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="benchmark.html">Reports<span class="nav-desc">Public evaluation results</span></a>
-          <a href="methodology.html">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
-          <a href="whitepaper.html">Whitepaper<span class="nav-desc">Full research paper</span></a>
+          <a href="benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper">Whitepaper<span class="nav-desc">Full research paper</span></a>
         </div></div>
       </div>
-      <a href="evaluation.html">Evaluation</a>
+      <a href="evaluation">Evaluation</a>
       <div class="nav-drop">
         <span class="nav-trigger">Company</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="company.html">About<span class="nav-desc">Team and mission</span></a>
-          <a href="trust.html">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+          <a href="company">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
         </div></div>
       </div>
-      <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
+      <a href="evaluation#contact" class="nav-cta">Request evaluation</a>
     </div>
   </div>
 </nav>
@@ -101,22 +101,22 @@
     </div>
     <div class="footer-col">
       <h4>Product</h4>
-      <a href="benchmark.html">Reports</a>
-      <a href="evaluation.html">Evaluation</a>
-      <a href="methodology.html">Methodology</a>
-      <a href="whitepaper.html">Whitepaper</a>
+      <a href="benchmark">Reports</a>
+      <a href="evaluation">Evaluation</a>
+      <a href="methodology">Methodology</a>
+      <a href="whitepaper">Whitepaper</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="company.html">About</a>
-      <a href="trust.html">Trust &amp; Security</a>
-      <a href="evaluation.html#contact">Contact</a>
+      <a href="company">About</a>
+      <a href="trust">Trust &amp; Security</a>
+      <a href="evaluation#contact">Contact</a>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="methodology.html#limitations">Limitations</a>
+      <a href="privacy">Privacy Policy</a>
+      <a href="terms">Terms of Service</a>
+      <a href="methodology#limitations">Limitations</a>
     </div>
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
@@ -213,7 +213,7 @@ function render(){
   if(state.category==="agent"){
     document.getElementById("company-list").innerHTML = "";
     document.getElementById("model-panel-title").textContent = "Agent reports";
-    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation.html#contact" style="color:var(--accent)">Request an agent evaluation</a><br><br><span style="font-size:12px;color:var(--muted-2)">Reference agents developed by LogionOS, Inc. are evaluated under our <a href="trust.html" style="color:var(--muted)">affiliated system disclosure policy</a>.</span></div>';
+    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation#contact" style="color:var(--accent)">Request an agent evaluation</a><br><br><span style="font-size:12px;color:var(--muted-2)">Reference agents developed by LogionOS, Inc. are evaluated under our <a href="trust" style="color:var(--muted)">affiliated system disclosure policy</a>.</span></div>';
     document.getElementById("report-panel").innerHTML = '<div class="empty-report">Select an agent evaluation to view its report card.</div>';
     return;
   }
