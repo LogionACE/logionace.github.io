@@ -885,37 +885,37 @@ button{font:inherit}
   .eval-form .form-row{grid-template-columns:1fr}
 }
 
-/* === DOWNLOAD GATE MODAL === */
-.gate-overlay{
+/* === REPORT DOWNLOAD GATE === */
+.dl-overlay{
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.7);
   display:none;align-items:center;justify-content:center;
   padding:24px;
 }
-.gate-overlay.active{display:flex}
-.gate-modal{
+.dl-overlay.active{display:flex}
+.dl-card{
   background:#fff;border-radius:18px;
   padding:40px 36px;max-width:440px;width:100%;
   box-shadow:0 24px 64px rgba(0,0,0,.4);
   position:relative;z-index:201;
 }
-.gate-modal h3{font-size:22px;margin:0 0 6px;color:#111}
-.gate-modal p{font-size:14px;color:#555;margin:0 0 24px;line-height:1.6}
-.gate-modal input{
+.dl-card h3{font-size:22px;margin:0 0 6px;color:#111}
+.dl-card p{font-size:14px;color:#555;margin:0 0 24px;line-height:1.6}
+.dl-card input{
   display:block;width:100%;padding:12px 14px;margin-bottom:12px;
   background:#f5f7fa;border:1px solid #d0d5dd;border-radius:10px;
   color:#111;font-size:14px;font-family:inherit;
 }
-.gate-modal input::placeholder{color:#999}
-.gate-modal input:focus{border-color:var(--accent);outline:none;background:#fff}
-.gate-modal .btn{width:100%;margin-top:8px}
-.gate-close{
+.dl-card input::placeholder{color:#999}
+.dl-card input:focus{border-color:var(--accent);outline:none;background:#fff}
+.dl-card .btn{width:100%;margin-top:8px}
+.dl-close{
   position:absolute;top:14px;right:14px;
   background:none;border:none;color:#999;cursor:pointer;
   font-size:22px;line-height:1;padding:4px;
 }
-.gate-close:hover{color:#333}
-.gate-modal .gate-note{font-size:12px;color:#888;margin-top:14px;text-align:center}
+.dl-close:hover{color:#333}
+.dl-card .dl-note{font-size:12px;color:#888;margin-top:14px;text-align:center}
 
 /* === MOBILE HAMBURGER NAV === */
 .nav-hamburger{
