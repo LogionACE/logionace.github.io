@@ -84,9 +84,6 @@ button{font:inherit}
   letter-spacing:.08em;
   text-transform:uppercase;
 }
-.home-copy h1,.wp-hero h1,.page-hero h1,.countdown-done h2,.final-panel h2{
-  font-family:var(--font-serif);font-weight:400;
-}
 
 /* === BUTTONS === */
 .hero-actions,.final-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
@@ -149,7 +146,7 @@ button{font:inherit}
 }
 .home-copy h1{
   max-width:760px;font-size:80px;line-height:1.02;
-  letter-spacing:-.065em;
+  letter-spacing:-.065em;font-weight:760;
 }
 .hero-subtitle.short{
   max-width:460px;margin-top:26px;
@@ -541,7 +538,7 @@ button{font:inherit}
   background:rgba(79,140,255,.06);
 }
 .wp-hero h1{
-  font-size:72px;line-height:1;letter-spacing:-.065em;
+  font-size:72px;line-height:1;letter-spacing:-.065em;font-weight:800;
   margin:28px 0 0;
   background:linear-gradient(180deg,#ffffff 40%,rgba(255,255,255,.55));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
