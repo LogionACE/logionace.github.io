@@ -186,7 +186,7 @@ function render(){
   if(state.category==="agent"){
     document.getElementById("company-list").innerHTML = "";
     document.getElementById("model-panel-title").textContent = "Agent reports";
-    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation.html#contact" style="color:var(--accent)">Request an agent evaluation</a></div>';
+    document.getElementById("model-grid").innerHTML = '<div class="not-published"><strong>Coming Q3 2026</strong><br><br>Agent evaluations are conducted under the ACE Agentic Governance track (AG-1 through AG-5), including tool-call safety, permission boundaries, and autonomous action controls.<br><br>Public agent reports will be listed here as evaluations are completed. <a href="evaluation.html#contact" style="color:var(--accent)">Request an agent evaluation</a><br><br><span style="font-size:12px;color:var(--muted-2)">Reference agents developed by LogionOS, Inc. are evaluated under our <a href="trust.html" style="color:var(--muted)">affiliated system disclosure policy</a>.</span></div>';
     document.getElementById("report-panel").innerHTML = '<div class="empty-report">Select an agent evaluation to view its report card.</div>';
     return;
   }
