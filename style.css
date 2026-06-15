@@ -28,10 +28,11 @@
 /* === RESET === */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--bg);overflow-x:hidden}
-html{background:#040609}
+html{background:#040609;margin:0;padding:0}
 body{
   font-family:var(--font-sans);
   color:var(--text);
+  margin:0;
   overflow-x:hidden;
   background:
     linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
@@ -485,7 +486,8 @@ button{font:inherit}
 .final-actions{justify-content:center}
 
 /* === FOOTER === */
-.site-footer{border-top:1px solid var(--line);background:#040609;padding:48px 22px 28px}
+.site-footer{border-top:1px solid var(--line);background:#040609;padding:48px 22px 28px;position:relative;z-index:1}
+.site-footer::after{content:'';display:block;position:absolute;left:0;right:0;bottom:-200px;height:200px;background:#040609}
 .footer-inner{
   max-width:1180px;margin:0 auto;
   display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px;
