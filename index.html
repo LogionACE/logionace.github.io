@@ -25,6 +25,9 @@
 <nav class="site-nav">
   <div class="nav-shell">
     <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
       <div class="nav-drop">
         <span class="nav-trigger">Product</span>
@@ -343,6 +346,34 @@ document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
       }
     });
   }
+})();
+
+(function(){
+  var btn=document.querySelector('.nav-hamburger');
+  var links=document.querySelector('.nav-links');
+  if(!btn||!links) return;
+  btn.addEventListener('click',function(){
+    var open=links.classList.toggle('nav-open');
+    btn.classList.toggle('active',open);
+    btn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
+    trigger.addEventListener('click',function(e){
+      if(window.innerWidth<=768){
+        e.preventDefault();
+        this.parentElement.classList.toggle('drop-open');
+      }
+    });
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      links.classList.remove('nav-open');
+      btn.classList.remove('active');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
 })();
 </script>
 </body>

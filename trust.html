@@ -15,22 +15,25 @@
 <nav class="site-nav">
   <div class="nav-shell">
     <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <div class="nav-links">
       <div class="nav-drop">
-        <span>Product</span>
-        <div class="nav-drop-menu">
-          <a href="benchmark.html">Reports<span>Public evaluation results</span></a>
-          <a href="methodology.html">Methodology<span>Controls, scoring, limitations</span></a>
-          <a href="whitepaper.html">Whitepaper<span>Full research paper</span></a>
-        </div>
+        <span class="nav-trigger">Product</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="benchmark.html">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology.html">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper.html">Whitepaper<span class="nav-desc">Full research paper</span></a>
+        </div></div>
       </div>
       <a href="evaluation.html">Evaluation</a>
       <div class="nav-drop">
-        <span>Company</span>
-        <div class="nav-drop-menu">
-          <a href="company.html">About<span>Team and mission</span></a>
-          <a href="trust.html">Trust &amp; Security<span>Compliance and data handling</span></a>
-        </div>
+        <span class="nav-trigger">Company</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="company.html">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust.html">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+        </div></div>
       </div>
       <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
     </div>
@@ -244,6 +247,34 @@ var obs=new IntersectionObserver(function(es){
   es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
 },{threshold:.15});
 document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
+
+(function(){
+  var btn=document.querySelector('.nav-hamburger');
+  var links=document.querySelector('.nav-links');
+  if(!btn||!links) return;
+  btn.addEventListener('click',function(){
+    var open=links.classList.toggle('nav-open');
+    btn.classList.toggle('active',open);
+    btn.setAttribute('aria-expanded',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
+    trigger.addEventListener('click',function(e){
+      if(window.innerWidth<=768){
+        e.preventDefault();
+        this.parentElement.classList.toggle('drop-open');
+      }
+    });
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      links.classList.remove('nav-open');
+      btn.classList.remove('active');
+      btn.setAttribute('aria-expanded','false');
+      document.body.style.overflow='';
+    });
+  });
+})();
 </script>
 </body>
 </html>
