@@ -58,26 +58,28 @@ button{font:inherit}
 .brand{display:flex;align-items:center;gap:10px;font-weight:750;letter-spacing:.01em}
 .brand img{border-radius:8px}
 .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--muted)}
-.nav-links>a,.nav-drop>span{color:var(--muted);background:none;border:0;cursor:pointer}
-.nav-links>a:hover,.nav-drop:hover>span{color:var(--text)}
-.nav-drop{position:relative}
-.nav-drop>span{display:inline-flex;align-items:center;gap:4px}
-.nav-drop>span::after{content:"";border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid currentColor;transition:transform .2s}
-.nav-drop:hover>span::after{transform:rotate(180deg)}
+.nav-links>a,.nav-drop>.nav-trigger{color:var(--muted);background:none;border:0;cursor:pointer;font:inherit;font-size:14px;padding:0}
+.nav-links>a:hover,.nav-drop:hover>.nav-trigger{color:var(--text)}
+.nav-drop{position:relative;display:flex;align-items:center}
 .nav-drop-menu{
-  position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);
-  min-width:200px;padding:8px;
-  background:rgba(12,17,24,.96);border:1px solid var(--line-2);border-radius:14px;
-  backdrop-filter:blur(18px);box-shadow:0 16px 48px rgba(0,0,0,.45);
+  position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  min-width:210px;padding:10px 8px;padding-top:20px;
   visibility:hidden;opacity:0;transition:opacity .15s,visibility .15s;
+  z-index:60;
+}
+.nav-drop-menu-inner{
+  background:rgba(12,17,24,.97);border:1px solid var(--line-2);border-radius:14px;
+  backdrop-filter:blur(18px);box-shadow:0 16px 48px rgba(0,0,0,.45);
+  padding:8px;
 }
 .nav-drop:hover .nav-drop-menu{visibility:visible;opacity:1}
 .nav-drop-menu a{
   display:block;padding:10px 14px;border-radius:8px;
   color:var(--muted);font-size:14px;transition:background .12s,color .12s;
+  white-space:nowrap;
 }
 .nav-drop-menu a:hover{background:rgba(79,140,255,.08);color:var(--text)}
-.nav-drop-menu a span{display:block;font-size:12px;color:var(--muted-2);margin-top:2px}
+.nav-drop-menu a .nav-desc{display:block;font-size:12px;color:var(--muted-2);margin-top:2px;white-space:normal}
 .nav-links .nav-cta{
   display:inline-flex;align-items:center;justify-content:center;
   color:var(--text)!important;
