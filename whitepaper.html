@@ -22,20 +22,20 @@
       <div class="nav-drop">
         <span class="nav-trigger">Product</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="/benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
-          <a href="/methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
-          <a href="/whitepaper">Whitepaper<span class="nav-desc">Full research paper</span></a>
+          <a href="benchmark.html">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology.html">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper.html">Whitepaper<span class="nav-desc">Full research paper</span></a>
         </div></div>
       </div>
-      <a href="/evaluation">Evaluation</a>
+      <a href="evaluation.html">Evaluation</a>
       <div class="nav-drop">
         <span class="nav-trigger">Company</span>
         <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
-          <a href="/company">About<span class="nav-desc">Team and mission</span></a>
-          <a href="/trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+          <a href="company.html">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust.html">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
         </div></div>
       </div>
-      <a href="/evaluation#contact" class="nav-cta">Request evaluation</a>
+      <a href="evaluation.html#contact" class="nav-cta">Request evaluation</a>
     </div>
   </div>
 </nav>
@@ -258,7 +258,7 @@
       </article>
     </div>
     <div style="text-align:center;margin-top:24px">
-      <a href="/methodology" class="btn outline">Read full methodology</a>
+      <a href="methodology.html" class="btn outline">Read full methodology</a>
     </div>
   </section>
 
@@ -279,8 +279,8 @@
       <h2>See how your AI system scores.</h2>
       <p>Request a LogionACE evaluation for your model, agent, or deployed AI product.</p>
       <div class="final-actions">
-        <a href="/evaluation#contact" class="btn primary">Request evaluation</a>
-        <a href="/benchmark" class="btn secondary">Browse public reports</a>
+        <a href="evaluation.html#contact" class="btn primary">Request evaluation</a>
+        <a href="benchmark.html" class="btn secondary">Browse public reports</a>
       </div>
     </div>
   </section>
@@ -295,22 +295,22 @@
     </div>
     <div class="footer-col">
       <h4>Product</h4>
-      <a href="/benchmark">Reports</a>
-      <a href="/evaluation">Evaluation</a>
-      <a href="/methodology">Methodology</a>
-      <a href="/whitepaper">Whitepaper</a>
+      <a href="benchmark.html">Reports</a>
+      <a href="evaluation.html">Evaluation</a>
+      <a href="methodology.html">Methodology</a>
+      <a href="whitepaper.html">Whitepaper</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
-      <a href="/company">About</a>
-      <a href="/trust">Trust &amp; Security</a>
-      <a href="/evaluation#contact">Contact</a>
+      <a href="company.html">About</a>
+      <a href="trust.html">Trust &amp; Security</a>
+      <a href="evaluation.html#contact">Contact</a>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
-      <a href="/methodology#limitations">Limitations</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="methodology.html#limitations">Limitations</a>
     </div>
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
@@ -379,7 +379,7 @@ document.getElementById('gate-form').addEventListener('submit',function(e){
   var fd=new FormData();
   fd.append('email',email);fd.append('company',company);
   fd.append('optin',optin?'yes':'no');fd.append('source','whitepaper');
-  fetch('https://formspree.io/f/xwpkgjdr',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)console.warn('Formspree submission failed')}).catch(function(e){console.warn('Formspree error',e)});
+  fetch('https://formspree.io/f/xlgkzvaz',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)console.warn('Formspree submission failed')}).catch(function(e){console.warn('Formspree error',e)});
   this.innerHTML='<div style="text-align:center;padding:18px 0"><strong style="font-size:18px;display:block;margin-bottom:8px">Thank you!</strong><p style="color:var(--muted);font-size:14px;margin-bottom:16px">Your download will begin shortly.</p><a href="ACE_Whitepaper_v1.1.pdf" download class="btn primary" style="width:100%;margin-bottom:10px" id="auto-dl">Download PDF</a><p style="color:var(--muted-2);font-size:12px">If download does not start, click the button above.</p></div>';
   var dlLink=document.getElementById('auto-dl');
   if(dlLink)setTimeout(function(){dlLink.click()},600);

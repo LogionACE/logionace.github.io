@@ -77,19 +77,19 @@
   </section>
 </main>
 
-<div class="dl-overlay" id="dl-gate">
-  <div class="dl-card">
-    <button class="dl-close" id="dl-close">&times;</button>
+<div class="gate-overlay" id="download-gate">
+  <div class="gate-modal">
+    <button class="gate-close" id="gate-close">&times;</button>
     <h3>Download evaluation report</h3>
     <p>Enter your details to access the full public report with scores, evidence, and remediation guidance.</p>
-    <form id="dl-form">
+    <form id="gate-form">
       <input type="text" name="name" placeholder="Name" required>
       <input type="email" name="email" placeholder="Work email" required>
       <input type="text" name="company" placeholder="Company" required>
-      <input type="hidden" name="report" id="dl-report-name">
+      <input type="hidden" name="report" id="gate-report-name">
       <button type="submit" class="btn primary">Download report</button>
     </form>
-    <p class="dl-note">We respect your privacy. Your info is used only to deliver the report and follow up on evaluation inquiries.</p>
+    <p class="gate-note">We respect your privacy. Your info is used only to deliver the report and follow up on evaluation inquiries.</p>
   </div>
 </div>
 
@@ -333,13 +333,13 @@ function requestDownload(modelName, filePath) {
     return;
   }
   _pendingDownload = filePath;
-  document.getElementById('dl-report-name').value = modelName;
-  document.getElementById('dl-gate').classList.add('active');
+  document.getElementById('gate-report-name').value = modelName;
+  document.getElementById('download-gate').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function closeGate() {
-  document.getElementById('dl-gate').classList.remove('active');
+  document.getElementById('download-gate').classList.remove('active');
   document.body.style.overflow = '';
   _pendingDownload = null;
 }
@@ -354,12 +354,12 @@ function triggerDownload(filePath) {
   document.body.removeChild(a);
 }
 
-document.getElementById('dl-close').addEventListener('click', closeGate);
-document.getElementById('dl-gate').addEventListener('click', function(e) {
+document.getElementById('gate-close').addEventListener('click', closeGate);
+document.getElementById('download-gate').addEventListener('click', function(e) {
   if (e.target === this) closeGate();
 });
 
-document.getElementById('dl-form').addEventListener('submit', function(e) {
+document.getElementById('gate-form').addEventListener('submit', function(e) {
   e.preventDefault();
   var form = this;
   var btn = form.querySelector('button[type="submit"]');
@@ -377,7 +377,7 @@ document.getElementById('dl-form').addEventListener('submit', function(e) {
     timestamp: new Date().toISOString()
   };
 
-  fetch('https://formspree.io/f/xwpkgjdr', {
+  fetch('https://formspree.io/f/xlgkzvaz', {
     method: 'POST',
     body: fd,
     headers: { 'Accept': 'application/json' }
