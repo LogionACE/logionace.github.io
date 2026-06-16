@@ -27,13 +27,13 @@
 
 /* === RESET === */
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--bg);overflow-x:hidden}
+html{background:var(--bg);overflow-x:clip}
 html{background:#040609;margin:0;padding:0}
 body{
   font-family:var(--font-sans);
   color:var(--text);
   margin:0;
-  overflow-x:hidden;
+  overflow-x:clip;
   background:
     linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),
@@ -158,8 +158,8 @@ button{font:inherit}
 
 /* === HOMEPAGE === */
 .home-hero{
-  padding:150px clamp(48px,7vw,86px) 78px;
-  min-height:690px;display:flex;align-items:center;
+  padding:132px clamp(48px,7vw,86px) 64px;
+  display:flex;align-items:center;
 }
 .home-hero-inner{
   width:100%;max-width:1180px;margin:0 auto;
@@ -1035,7 +1035,7 @@ button{font:inherit}
   .page-hero p:not(.eyebrow){font-size:15px}
   .home-copy h1{font-size:36px}
   .hero-subtitle.short{font-size:15px}
-  .home-hero{padding:120px 16px 48px;min-height:auto}
+  .home-hero{padding:104px 16px 44px}
   .wp-hero{padding:120px 16px 48px}
   .wp-hero h1{font-size:36px}
   .wp-hero-tagline{font-size:15px}
