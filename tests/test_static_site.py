@@ -487,6 +487,49 @@ def test_the_homepage_states_no_count_of_its_own():
         assert rendered.strip() in ("&mdash;", "-", ""), f"{name} is hard-coded"
 
 
+#: Numbers the homepage is allowed to contain: the step numbering, the delivery
+#: window, and the copyright year. Everything else a reader would take for an
+#: evaluation result, and a result belongs in the verified artifact.
+HOMEPAGE_ALLOWED_NUMBERS = {"01", "02", "03", "2", "3", "2026"}
+
+
+def test_the_homepage_quotes_no_report_statistic_anywhere():
+    """Including the social cards, which no reader can check and nobody rebuilds.
+
+    `9 tested. 0 passed.` sat in a twitter:description for as long as it took
+    somebody to notice, which is exactly the drift the verified manifest exists
+    to stop -- and a share preview is a worse place for a stale number than the
+    page body, because it is quoted without the page.
+    """
+    body = read("index.html")
+    for meta in re.findall(r"<meta[^>]*>", body):
+        name = re.search(r'(?:property|name)="([^"]+)"', meta)
+        if not name or name.group(1) == "viewport":
+            continue
+        content = re.search(r'content="([^"]*)"', meta)
+        assert content, meta
+        assert not re.search(r"\d", content.group(1)), meta
+
+    text = re.sub(r"<[^>]+>", " ", body)
+    numbers = set(re.findall(r"\d[\d,]*\+?", text))
+    assert numbers <= HOMEPAGE_ALLOWED_NUMBERS, sorted(
+        numbers - HOMEPAGE_ALLOWED_NUMBERS
+    )
+
+
+@pytest.mark.parametrize("page", ("index.html", "methodology.html"))
+def test_the_corpus_is_described_without_being_sized(page):
+    """`10,000+ rules` reads as a result and nothing verifies it.
+
+    The corpus is real and the claim may well be conservative, but a figure on a
+    marketing page that no artifact backs is the same failure mode as a stale
+    leaderboard count -- it just has nobody to catch it.
+    """
+    body = read(page)
+    assert "10,000" not in body
+    assert "regulatory corpus" in body
+
+
 def test_verification_failure_is_the_only_fallback():
     for script in ("ace-home.js", "ace-benchmark.js"):
         body = read(script)
@@ -581,14 +624,36 @@ TERMS_CLAUSES = (
     "authorised",
     "credential",
     "signed engagement agreement",
-    "legal review",
-    "Joanna",
 )
 
 
 @pytest.mark.parametrize("clause", TERMS_CLAUSES)
 def test_the_terms_cover_the_payment_flow(clause):
     assert clause.lower() in read("terms.html").lower(), clause
+
+
+def test_no_public_page_names_a_person_or_admits_to_being_unreviewed():
+    """Internal process belongs in internal documents.
+
+    Naming the reviewer tells a customer who to pressure, and publishing "this
+    has not been reviewed yet" invites them to argue the terms do not bind. The
+    requirement itself is not dropped: it lives in the task report and in the
+    backend's paid-launch checklist, where it gates the launch.
+    """
+    for page in PUBLIC_PAGES + CUSTOMER_FLOW_PAGES:
+        body = read(page)
+        assert "Joanna" not in body, page
+        lowered = body.lower()
+        for admission in ("legal review", "not yet completed",
+                          "have not yet completed", "pending review",
+                          "status of this document"):
+            assert admission not in lowered, f"{page}: {admission}"
+
+
+def test_the_terms_still_defer_to_a_signed_agreement():
+    body = read("terms.html").lower()
+    assert "takes precedence over these terms" in body
+    assert "signed engagement agreement" in body
 
 
 def test_the_terms_claim_no_certification():
