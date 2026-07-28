@@ -63,37 +63,39 @@
         </div>
       </div>
       <aside class="hero-preview" aria-label="Sample report card">
-        <div class="preview-card" id="hero-card">
+        <div class="preview-card" id="hero-card" hidden>
           <div class="preview-header">
             <p class="eyebrow">Report Card</p>
             <div class="preview-model-info">
-              <strong id="rc-model">Gemini 3.1 Pro</strong>
-              <span id="rc-vendor">Google</span>
+              <strong id="rc-model"></strong>
+              <span id="rc-vendor"></span>
             </div>
           </div>
           <div class="preview-scores">
-            <div><span>Overall</span><strong id="rc-score">94.7</strong></div>
-            <div><span>Grade</span><strong id="rc-grade" class="grade-a">A</strong></div>
+            <div><span>Overall</span><strong id="rc-score"></strong></div>
+            <div><span>Grade</span><strong id="rc-grade"></strong></div>
           </div>
-          <div id="rc-verdict" class="preview-verdict verdict-notready">ACE Not Ready</div>
+          <div id="rc-verdict" class="preview-verdict"></div>
           <div class="preview-domains" id="rc-domains">
-            <div><strong>DP</strong><span>82.8</span></div>
-            <div><strong>RF</strong><span>98</span></div>
-            <div><strong>MR</strong><span>100</span></div>
-            <div><strong>AG</strong><span>100</span></div>
-            <div><strong>TA</strong><span>85.7</span></div>
-            <div><strong>CI</strong><span>100</span></div>
+            <div><strong>DP</strong><span></span></div>
+            <div><strong>RF</strong><span></span></div>
+            <div><strong>MR</strong><span></span></div>
+            <div><strong>AG</strong><span></span></div>
+            <div><strong>TA</strong><span></span></div>
+            <div><strong>CI</strong><span></span></div>
           </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <section class="home-proof">
-    <div><strong>9</strong><span>Systems evaluated</span></div>
-    <div><strong>47</strong><span>Critical failures</span></div>
-    <div><strong>0</strong><span>Achieved ACE Ready</span></div>
-    <div><strong>272</strong><span>Test cases</span></div>
+  <section class="home-proof" aria-labelledby="ace-proof-heading">
+    <h2 id="ace-proof-heading" class="visually-hidden">Published evaluation results to date</h2>
+    <div><strong id="ace-count-systems">&mdash;</strong><span>Systems evaluated</span></div>
+    <div><strong id="ace-count-critical">&mdash;</strong><span>Critical failures</span></div>
+    <div><strong id="ace-count-ready">&mdash;</strong><span>Achieved ACE Ready</span></div>
+    <div><strong id="ace-count-domains">&mdash;</strong><span>Trust domains scored</span></div>
+    <p id="ace-proof-note" class="proof-note" role="status" hidden></p>
   </section>
 
   <section class="section compact">
@@ -138,7 +140,7 @@
       <div class="step fade-up">
         <div class="step-num">02</div>
         <h3>Evaluate</h3>
-        <p>ACE runs 272 test cases across 6 trust domains and 12 jurisdictions using a proprietary evaluation engine.</p>
+        <p>ACE runs a fixed battery across six trust domains and multiple jurisdictions using a proprietary evaluation engine. The <a href="methodology.html">methodology</a> describes the controls and the scoring.</p>
       </div>
       <div class="step-arrow">&rarr;</div>
       <div class="step fade-up">
@@ -232,76 +234,9 @@
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
 
-<script>
-var obs=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el)});
-
-(function(){
-  var models=[
-    {name:"Gemini 3.1 Pro",vendor:"Google",score:"94.7",grade:"A",gradeClass:"grade-a",verdict:"ACE Not Ready",verdictClass:"verdict-notready",dp:"82.8",rf:"98",mr:"100",ag:"100",ta:"85.7",ci:"100"},
-    {name:"GPT-5.5",vendor:"OpenAI",score:"93.1",grade:"A",gradeClass:"grade-a",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"90.7",rf:"97.1",mr:"85.5",ag:"100",ta:"81.6",ci:"100"},
-    {name:"Fable 5",vendor:"Anthropic",score:"91.5",grade:"A",gradeClass:"grade-a",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"87.9",rf:"89.8",mr:"88.2",ag:"98.2",ta:"83.8",ci:"100"},
-    {name:"Opus 4.8",vendor:"Anthropic",score:"87.2",grade:"B",gradeClass:"grade-b",verdict:"ACE Conditional",verdictClass:"verdict-conditional",dp:"76.4",rf:"78.5",mr:"97",ag:"94.3",ta:"77.5",ci:"100"}
-  ];
-  var idx=0;
-  var card=document.getElementById('hero-card');
-
-  function show(i){
-    var m=models[i];
-    card.classList.add('rc-fade-out');
-    setTimeout(function(){
-      document.getElementById('rc-model').textContent=m.name;
-      document.getElementById('rc-vendor').textContent=m.vendor;
-      document.getElementById('rc-score').textContent=m.score;
-      var g=document.getElementById('rc-grade');
-      g.textContent=m.grade;g.className=m.gradeClass;
-      var v=document.getElementById('rc-verdict');
-      v.textContent=m.verdict;v.className='preview-verdict '+m.verdictClass;
-      var spans=document.querySelectorAll('#rc-domains div span');
-      var vals=[m.dp,m.rf,m.mr,m.ag,m.ta,m.ci];
-      for(var j=0;j<spans.length;j++) spans[j].textContent=vals[j];
-      card.classList.remove('rc-fade-out');
-      card.classList.add('rc-fade-in');
-      setTimeout(function(){card.classList.remove('rc-fade-in')},400);
-    },300);
-  }
-
-  setInterval(function(){
-    idx=(idx+1)%models.length;
-    show(idx);
-  },10000);
-
-})();
-
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var links=document.querySelector('.nav-links');
-  if(!btn||!links) return;
-  btn.addEventListener('click',function(){
-    var open=links.classList.toggle('nav-open');
-    btn.classList.toggle('active',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
-    trigger.addEventListener('click',function(e){
-      if(window.innerWidth<=768){
-        e.preventDefault();
-        this.parentElement.classList.toggle('drop-open');
-      }
-    });
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      links.classList.remove('nav-open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    });
-  });
-})();
-</script>
+<script src="ace-config.js"></script>
+<script src="ace-artifacts.js"></script>
+<script src="ace-home.js"></script>
+<script src="ace-nav.js"></script>
 </body>
 </html>
