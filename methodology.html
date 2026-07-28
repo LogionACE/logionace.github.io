@@ -209,39 +209,6 @@
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
-<script>
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var links=document.querySelector('.nav-links');
-  if(!btn||!links) return;
-  btn.addEventListener('click',function(){
-    var open=links.classList.toggle('nav-open');
-    btn.classList.toggle('active',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
-    trigger.addEventListener('click',function(e){
-      if(window.innerWidth<=768){
-        e.preventDefault();
-        this.parentElement.classList.toggle('drop-open');
-      }
-    });
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      links.classList.remove('nav-open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    });
-  });
-})();
-</script>
+<script src="ace-nav.js"></script>
 </body>
 </html>

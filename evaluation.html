@@ -79,7 +79,7 @@
           <li>Evaluated by LogionACE mark</li>
         </ul>
         <div class="price-bottom">
-          <button class="price-toggle" onclick="document.getElementById('ul-public').classList.toggle('expanded');this.textContent=document.getElementById('ul-public').classList.contains('expanded')?'Show less':'See all features'">See all features</button>
+          <button class="price-toggle" type="button" data-toggle-list="ul-public" aria-controls="ul-public" aria-expanded="false">See all features</button>
           <a href="#contact" class="btn outline">Request</a>
         </div>
       </article>
@@ -97,7 +97,7 @@
           <li>Evaluated by LogionACE mark</li>
         </ul>
         <div class="price-bottom">
-          <button class="price-toggle" onclick="document.getElementById('ul-private').classList.toggle('expanded');this.textContent=document.getElementById('ul-private').classList.contains('expanded')?'Show less':'See all features'">See all features</button>
+          <button class="price-toggle" type="button" data-toggle-list="ul-private" aria-controls="ul-private" aria-expanded="false">See all features</button>
           <a href="#contact" class="btn outline">Request</a>
         </div>
       </article>
@@ -175,32 +175,190 @@
       <p class="eyebrow">Contact</p>
       <h2>Request a LogionACE evaluation.</h2>
       <p>Tell us what you want evaluated: model, agent, product workflow, jurisdiction, and expected launch timeline.</p>
-      <form id="eval-lead-form" class="eval-form">
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="email" name="email" placeholder="Work email" required>
-        </div>
-        <div class="form-row">
-          <input type="text" name="company" placeholder="Company" required>
-          <select name="eval_type" required>
-            <option value="" disabled selected>Evaluation type</option>
-            <option value="Public">Public</option>
-            <option value="Private">Private</option>
-            <option value="Custom">Custom</option>
-            <option value="Founder Program">Founder Program</option>
-            <option value="Not sure">Not sure</option>
-          </select>
-        </div>
-        <textarea name="description" placeholder="Brief description of your AI system" rows="4" required></textarea>
-        <label class="gate-checkbox" style="margin-top:8px">
-          <input type="checkbox" name="agree_terms" id="agree-terms" required>
-          <span>I agree to the <a href="privacy" style="color:var(--accent)">Privacy Policy</a> and <a href="terms" style="color:var(--accent)">Terms of Service</a></span>
-        </label>
+      <p class="form-intro">Submitting this form asks us to scope an evaluation. It does
+        not start one and does not charge anything. We reply with a scope and a fixed
+        quote; payment comes after you approve it.</p>
+
+      <div id="ace-form-error" class="form-error-summary" role="alert" hidden></div>
+      <p id="ace-form-status" class="form-live" role="status" aria-live="polite"></p>
+
+      <form id="ace-order-form" class="ace-form" novalidate>
+        <fieldset>
+          <legend>Who you are</legend>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="ace-contact-name">Your name</label>
+              <input id="ace-contact-name" name="contact_name" type="text"
+                     maxlength="120" autocomplete="name" required>
+              <p class="field-error" data-field-error="contact_name" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-contact-email">Work email</label>
+              <input id="ace-contact-email" name="contact_email" type="email"
+                     maxlength="254" autocomplete="email" required
+                     aria-describedby="help-contact-email">
+              <p class="field-help" id="help-contact-email">We reply here with the scope
+                and quote. Please use an address you can receive attachments at.</p>
+              <p class="field-error" data-field-error="contact_email" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-company-name">Organisation</label>
+              <input id="ace-company-name" name="company_name" type="text"
+                     maxlength="160" autocomplete="organization" required>
+              <p class="field-error" data-field-error="company_name" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-company-domain">Company domain <span class="optional">optional</span></label>
+              <input id="ace-company-domain" name="company_domain" type="text"
+                     maxlength="253" placeholder="example.com"
+                     aria-describedby="help-company-domain">
+              <p class="field-help" id="help-company-domain">Helps us confirm who we are
+                dealing with. No www, no https.</p>
+              <p class="field-error" data-field-error="company_domain" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>What should be evaluated</legend>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="ace-system-type">Kind of system</label>
+              <select id="ace-system-type" name="system_type" required>
+                <option value="" selected>Choose one</option>
+                <option value="model_endpoint">Model endpoint</option>
+                <option value="ai_agent">AI agent</option>
+                <option value="workflow">Workflow or pipeline</option>
+                <option value="deployed_product">Deployed AI product</option>
+                <option value="other">Something else</option>
+              </select>
+              <p class="field-error" data-field-error="system_type" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-system-name">System name <span class="optional">optional</span></label>
+              <input id="ace-system-name" name="system_name" type="text" maxlength="160"
+                     aria-describedby="help-system-name">
+              <p class="field-help" id="help-system-name">Whatever you call it internally,
+                so our scope and your team are talking about the same thing.</p>
+              <p class="field-error" data-field-error="system_name" hidden></p>
+            </div>
+            <div class="form-field wide">
+              <label for="ace-endpoint">How the system can be reached</label>
+              <textarea id="ace-endpoint" name="endpoint_descriptor" rows="3"
+                        maxlength="400" required
+                        aria-describedby="help-endpoint"></textarea>
+              <p class="field-help" id="help-endpoint"><strong>Describe it; do not paste
+                credentials.</strong> For example: "staging REST endpoint behind our VPN,
+                OpenAI-compatible" or "MCP server over SSE in a sandbox tenant". Keys,
+                tokens and passwords are exchanged securely after the scope is approved
+                and paid for &mdash; never through this form.</p>
+              <p class="field-error" data-field-error="endpoint_descriptor" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-transport">MCP transport</label>
+              <select id="ace-transport" name="mcp_transport" required
+                      aria-describedby="help-transport">
+                <option value="" selected>Choose one</option>
+                <option value="none">Not applicable</option>
+                <option value="stdio">stdio</option>
+                <option value="http_streamable">Streamable HTTP</option>
+                <option value="sse">SSE</option>
+                <option value="websocket">WebSocket</option>
+                <option value="other">Other</option>
+              </select>
+              <p class="field-help" id="help-transport">Only relevant for agents and tool
+                servers. Choose "Not applicable" for a plain model endpoint.</p>
+              <p class="field-error" data-field-error="mcp_transport" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-industry">Industry</label>
+              <select id="ace-industry" name="industry" required
+                      aria-describedby="help-industry">
+                <option value="" selected>Choose one</option>
+                <option value="financial_services">Financial services</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="legal">Legal</option>
+                <option value="government">Government</option>
+                <option value="education">Education</option>
+                <option value="technology">Technology</option>
+                <option value="retail">Retail</option>
+                <option value="manufacturing">Manufacturing</option>
+                <option value="media">Media</option>
+                <option value="telecom">Telecom</option>
+                <option value="other">Other</option>
+              </select>
+              <p class="field-help" id="help-industry">Determines which regulatory profile
+                the evaluation is scored against.</p>
+              <p class="field-error" data-field-error="industry" hidden></p>
+            </div>
+            <div class="form-field wide">
+              <label class="checkbox-field" for="ace-sandbox">
+                <input id="ace-sandbox" name="sandbox_required" type="checkbox">
+                <span>This system needs an isolated sandbox or test tenant to be evaluated</span>
+              </label>
+              <p class="field-help">Tick this if we must not touch a production
+                deployment. It affects the scope and the timeline.</p>
+              <p class="field-error" data-field-error="sandbox_required" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>What you are asking for</legend>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="ace-package">Evaluation</label>
+              <select id="ace-package" name="requested_package" required>
+                <option value="" selected>Choose one</option>
+                <option value="public">Public evaluation &mdash; $25,000</option>
+                <option value="private">Private evaluation &mdash; $40,000+</option>
+                <option value="custom">Custom environment &mdash; $60,000+</option>
+                <option value="founder_program">AI Founder Program &mdash; $0</option>
+                <option value="undecided">Not sure yet &mdash; advise me</option>
+              </select>
+              <p class="field-error" data-field-error="requested_package" hidden></p>
+            </div>
+            <div class="form-field">
+              <label for="ace-visibility">Results</label>
+              <select id="ace-visibility" name="visibility" required
+                      aria-describedby="help-visibility">
+                <option value="" selected>Choose one</option>
+                <option value="public">May be published</option>
+                <option value="private">Delivered to us only</option>
+              </select>
+              <p class="field-help" id="help-visibility">Public results are published only
+                through an approval workflow, after you have seen them.</p>
+              <p class="field-error" data-field-error="visibility" hidden></p>
+            </div>
+            <div class="form-field wide">
+              <label for="ace-notes">Anything else we should know <span class="optional">optional</span></label>
+              <textarea id="ace-notes" name="notes" rows="4" maxlength="2000"
+                        aria-describedby="help-notes"></textarea>
+              <p class="field-help" id="help-notes">Jurisdictions, launch dates, the
+                decision this evaluation feeds into, constraints on when we may test.</p>
+              <p class="field-error" data-field-error="notes" hidden></p>
+            </div>
+            <div class="form-field wide">
+              <label class="checkbox-field" for="ace-authorization">
+                <input id="ace-authorization" name="data_authorization" type="checkbox" required>
+                <span>I am authorised to have this system evaluated, and to arrange the
+                  access the evaluation needs.</span>
+              </label>
+              <p class="field-help">We evaluate systems on the authority of someone who
+                can grant it. If that is a colleague, please have them submit this.</p>
+              <p class="field-error" data-field-error="data_authorization" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <p class="form-legal">By submitting you accept our
+          <a href="terms.html">Terms of Service</a> and
+          <a href="privacy.html">Privacy Policy</a>. We keep what you send here to
+          scope the work and reply to you; we do not sell it or share it with third
+          parties. <a href="access.html">Access and security</a> explains how
+          credentials are handled once a scope is approved.</p>
         <button type="submit" class="btn primary">Submit request</button>
       </form>
-      <div id="eval-form-thanks" class="eval-form-thanks" style="display:none;">
-        <p><strong>Thank you.</strong> We've received your request and will be in touch within 2 business days.</p>
-      </div>
       <p class="contact-alt">Or email us directly at <a href="mailto:info@logionace.com">info@logionace.com</a></p>
       <p class="contact-alt"><a href="mailto:info@logionace.com?subject=Schedule%20a%20call%20-%20evaluation%20inquiry">Schedule a call with our team</a></p>
     </div>
@@ -234,69 +392,9 @@
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
-<script>
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-document.getElementById('eval-lead-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  var form = this;
-  var btn = form.querySelector('button[type="submit"]');
-  btn.disabled = true;
-  btn.textContent = 'Submitting...';
-  var fd = new FormData(form);
-  var entry = { timestamp: new Date().toISOString() };
-  fd.forEach(function(v, k) { entry[k] = v; });
-  try {
-    var leads = JSON.parse(localStorage.getItem('eval_leads') || '[]');
-    leads.push(entry);
-    localStorage.setItem('eval_leads', JSON.stringify(leads));
-  } catch(ex) {}
-  fd.append('_subject', 'New evaluation request from ' + (fd.get('company') || 'Unknown'));
-  fetch('https://formspree.io/f/xlgkzvaz', {
-    method: 'POST',
-    body: fd,
-    headers: { 'Accept': 'application/json' }
-  }).then(function(r) {
-    if (!r.ok) throw new Error('Network');
-    form.style.display = 'none';
-    document.getElementById('eval-form-thanks').style.display = 'block';
-  }).catch(function() {
-    btn.disabled = false;
-    btn.textContent = 'Submit request';
-    alert('Submission failed. Please try again or email us directly at info@logionace.com');
-  });
-});
-
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var links=document.querySelector('.nav-links');
-  if(!btn||!links) return;
-  btn.addEventListener('click',function(){
-    var open=links.classList.toggle('nav-open');
-    btn.classList.toggle('active',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
-    trigger.addEventListener('click',function(e){
-      if(window.innerWidth<=768){
-        e.preventDefault();
-        this.parentElement.classList.toggle('drop-open');
-      }
-    });
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      links.classList.remove('nav-open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    });
-  });
-})();
-</script>
+<script src="ace-config.js"></script>
+<script src="ace-session.js"></script>
+<script src="ace-order.js"></script>
+<script src="ace-nav.js"></script>
 </body>
 </html>

@@ -27,6 +27,10 @@
 
 /* === RESET === */
 *{box-sizing:border-box;margin:0;padding:0}
+/* `hidden` is a user-agent rule, so any class that sets `display` beats it --
+   `.btn` did, which meant a payment button the script had hidden was still on
+   the page. Whatever the script hides stays hidden. */
+[hidden]{display:none !important}
 html{background:var(--bg);overflow-x:clip}
 html{background:#040609;margin:0;padding:0}
 body{
@@ -738,49 +742,6 @@ button{font:inherit}
 .gate-trigger{margin-top:24px;padding:0 32px}
 
 /* Download modal */
-.gate-modal{
-  position:fixed;inset:0;z-index:200;
-  display:flex;align-items:center;justify-content:center;
-  visibility:hidden;opacity:0;transition:opacity .25s,visibility .25s;
-}
-.gate-modal.open{visibility:visible;opacity:1}
-.gate-modal-overlay{
-  position:absolute;inset:0;background:rgba(0,0,0,.65);
-  backdrop-filter:blur(6px);
-}
-.gate-modal-card{
-  position:relative;width:420px;max-width:92vw;
-  background:var(--panel);border:1px solid var(--line-2);border-radius:22px;
-  padding:32px;z-index:1;
-}
-.gate-modal-close{
-  position:absolute;top:14px;right:16px;
-  background:none;border:none;color:var(--muted);
-  font-size:24px;cursor:pointer;line-height:1;
-}
-.gate-modal-close:hover{color:var(--text)}
-.gate-modal-card h3{font-size:22px;margin-bottom:4px}
-.gate-modal-card>p{color:var(--muted);font-size:13px;margin-bottom:20px}
-.gate-form{display:grid;gap:10px}
-.gate-form label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.gate-form input[type="email"],.gate-form input[type="text"]{
-  width:100%;padding:11px 14px;border:1px solid var(--line-2);
-  border-radius:10px;background:rgba(255,255,255,.04);
-  color:var(--text);font:inherit;font-size:14px;
-  transition:border-color .15s;
-}
-.gate-form input:focus{outline:0;border-color:var(--accent)}
-.gate-form input::placeholder{color:var(--muted-2)}
-.gate-checkbox{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:13px;color:var(--muted);cursor:pointer;margin-top:4px;
-  text-transform:none;letter-spacing:0;font-weight:400;
-}
-.gate-checkbox input[type="checkbox"]{
-  margin-top:2px;width:16px;height:16px;accent-color:var(--accent);
-  cursor:pointer;flex-shrink:0;
-}
-
 /* === LEGAL PAGES === */
 .section h2{font-size:22px;line-height:1.25;letter-spacing:-.02em;margin:32px 0 12px}
 .section ul{margin:8px 0 16px 20px;display:grid;gap:6px}
@@ -905,48 +866,6 @@ button{font:inherit}
   .eval-form .form-row{grid-template-columns:1fr}
 }
 
-/* === REPORT DOWNLOAD GATE === */
-.dl-overlay{
-  position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.7);
-  display:none;align-items:center;justify-content:center;
-  padding:24px;
-}
-.dl-overlay.active{display:flex}
-.dl-card{
-  background:var(--panel);border:1px solid var(--line-2);border-radius:22px;
-  padding:32px;max-width:460px;width:100%;
-  box-shadow:0 24px 64px rgba(0,0,0,.45);
-  position:relative;z-index:201;
-}
-.dl-card h3{font-size:22px;margin:0 0 6px;color:var(--text)}
-.dl-card p{font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6}
-.dl-card .dl-file{
-  color:var(--accent-2);font-family:var(--font-mono);
-  font-size:13px;margin-bottom:10px;
-}
-.dl-card .dl-intro{margin-bottom:20px}
-.dl-card form{display:grid;gap:10px}
-.dl-card label{
-  font-size:12px;color:var(--muted);font-weight:600;
-  text-transform:uppercase;letter-spacing:.04em;
-}
-.dl-card input{
-  display:block;width:100%;padding:11px 14px;
-  background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:10px;
-  color:var(--text);font-size:14px;font-family:inherit;
-}
-.dl-card input::placeholder{color:var(--muted-2)}
-.dl-card input:focus{border-color:var(--accent);outline:none}
-.dl-card .btn{width:100%;margin-top:12px}
-.dl-close{
-  position:absolute;top:14px;right:14px;
-  background:none;border:none;color:var(--muted);cursor:pointer;
-  font-size:22px;line-height:1;padding:4px;
-}
-.dl-close:hover{color:var(--text)}
-.dl-card .dl-note{font-size:12px;color:var(--muted-2);margin-top:14px;text-align:center}
-
 /* === MOBILE HAMBURGER NAV === */
 .nav-hamburger{
   display:none;
@@ -1069,4 +988,124 @@ button{font:inherit}
   .chat-bubble{max-width:88%}
   .gate-section h2{font-size:24px}
   .price-card h3{font-size:clamp(24px,7vw,36px)}
+}
+
+/* === ACE ORDER FLOW ===
+   The request form, the customer status pages, and the small pieces the
+   approved-artifact pages need (a hidden heading, a failed-verification note).
+   Reuses the existing tokens throughout: this is new structure, not a new
+   look. */
+.visually-hidden{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+.narrow-body{max-width:760px;margin:0 auto}
+.narrow-body h2{font-size:26px;letter-spacing:-.02em;margin:36px 0 12px}
+.narrow-body h3{font-size:18px;margin:24px 0 8px}
+.narrow-body p,.narrow-body li{color:var(--muted);font-size:16px;line-height:1.75}
+.narrow-body ul,.narrow-body ol{margin:12px 0 12px 20px;display:grid;gap:8px}
+.narrow-body a{color:var(--accent)}
+.narrow-body code{font-family:var(--font-mono);font-size:14px;color:var(--text)}
+
+.form-intro{color:var(--muted);font-size:15px;line-height:1.7;max-width:640px;margin:0 auto 22px;text-align:center}
+.form-live{min-height:20px;color:var(--muted);font-size:14px;text-align:center;margin:0 auto 8px;max-width:640px}
+.form-error-summary{
+  max-width:640px;margin:0 auto 18px;padding:14px 16px;
+  border:1px solid rgba(255,107,107,.4);border-radius:var(--radius-sm);
+  background:rgba(255,107,107,.08);color:var(--text);font-size:15px;line-height:1.6;
+}
+.form-error-summary a{color:var(--accent)}
+
+/* The contact section centres its prose; a form full of centred labels and
+   centred error messages is unreadable, so the form opts out. */
+.ace-form{max-width:640px;margin:0 auto;display:grid;gap:26px;text-align:left}
+.ace-form fieldset{border:0;padding:0;margin:0}
+.ace-form legend{
+  font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);padding:0 0 12px;
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-field{display:grid;gap:6px;align-content:start}
+.form-field.wide{grid-column:1 / -1}
+.form-field > label{
+  font-size:12px;color:var(--muted);font-weight:600;
+  text-transform:uppercase;letter-spacing:.04em;
+}
+.form-field .optional{text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted-2)}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;padding:11px 14px;border:1px solid var(--line-2);
+  border-radius:10px;background:rgba(255,255,255,.04);
+  color:var(--text);font:inherit;font-size:14px;transition:border-color .15s;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+  outline:2px solid rgba(79,140,255,.45);outline-offset:1px;border-color:var(--accent);
+}
+.form-field textarea{min-height:88px;resize:vertical}
+.form-field select{appearance:none;cursor:pointer}
+.form-field [aria-invalid="true"]{border-color:#ff6b6b}
+.field-help{color:var(--muted-2);font-size:13px;line-height:1.6}
+.field-help a{color:var(--accent)}
+.field-error{color:#ff9d9d;font-size:13px;line-height:1.5}
+.checkbox-field{
+  display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start;
+  text-transform:none;letter-spacing:0;font-weight:400;
+  color:var(--text);font-size:14px;line-height:1.6;
+}
+.checkbox-field input{width:18px;height:18px;padding:0;margin-top:2px}
+.form-legal{color:var(--muted-2);font-size:13px;line-height:1.7;text-align:center}
+.form-legal a{color:var(--accent)}
+
+.status-root{max-width:760px;margin:0 auto;display:grid;gap:18px}
+.status-panel{
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+  display:grid;gap:14px;
+}
+.status-order-id code{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.status-panel h2{font-size:28px;letter-spacing:-.02em}
+.status-detail{color:var(--muted);font-size:16px;line-height:1.75}
+.status-facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:6px 0}
+.status-facts div{display:grid;gap:2px}
+.status-facts dt{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2)}
+.status-facts dd{font-size:15px;color:var(--text);margin:0}
+.status-scope h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-2);margin-top:12px}
+.status-scope p{color:var(--muted);font-size:15px;line-height:1.7}
+.status-pay{
+  border:1px solid rgba(79,140,255,.35);border-radius:var(--radius-sm);
+  background:rgba(79,140,255,.07);padding:18px;display:grid;gap:10px;
+}
+.status-pay h3{font-size:17px}
+.status-pay p{color:var(--muted);font-size:14px;line-height:1.7}
+.status-pay .btn{justify-self:start}
+.status-stamps p{color:var(--muted);font-size:14px}
+.status-history{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.status-history li{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted)}
+.status-history strong{color:var(--text);font-weight:600}
+.status-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn.ghost:hover{color:var(--text);border-color:var(--line-2)}
+.status-link-fallback{display:grid;gap:6px}
+.status-link-fallback span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2)}
+.status-link-fallback input{
+  width:100%;padding:10px 12px;border:1px solid var(--line-2);border-radius:10px;
+  background:rgba(255,255,255,.04);color:var(--text);font-family:var(--font-mono);font-size:12px;
+}
+
+.callout{
+  border:1px solid var(--line);border-radius:var(--radius-sm);
+  background:rgba(255,255,255,.03);padding:20px;margin:26px 0;display:grid;gap:10px;
+}
+.callout.accent{border-color:rgba(79,140,255,.35);background:rgba(79,140,255,.07)}
+.callout h3{margin:0;font-size:17px}
+.steps-list{margin:12px 0 12px 20px;display:grid;gap:10px}
+.proof-note{
+  grid-column:1 / -1;color:var(--muted-2);font-size:13px;line-height:1.6;
+  text-align:center;max-width:620px;margin:8px auto 0;
+}
+.not-published-note{font-size:12px;color:var(--muted-2)}
+
+@media(max-width:768px){
+  .form-grid{grid-template-columns:1fr}
+  .status-facts{grid-template-columns:1fr}
+  .status-panel{padding:20px}
 }
