@@ -3,10 +3,21 @@
  *
  * Every public number on this site and every report it hands out has to come
  * from a file whose SHA-256 was recorded when the snapshot was approved. This
- * module is the only way a page reads one. It fetches the manifest, checks that
- * it says `approved` and names the provenance commit the site is pinned to,
- * then re-hashes each file it is asked for before returning a single byte of it
- * to the caller.
+ * module is the only way a page reads one.
+ *
+ * The first thing it does is prove the manifest is the pinned one. It fetches
+ * the raw bytes, hashes them, and compares that digest to
+ * `ACE_APPROVED_PIN.MANIFEST_SHA256` -- before parsing a field, before reading a
+ * state, before trusting a provenance commit. Only then does it parse, re-derive
+ * the canonical serialization to confirm the bytes it hashed are the canonical
+ * ones, and apply the state / provenance / path / digest rules. Every artifact it
+ * later hands out is re-hashed against that manifest.
+ *
+ * Checking the contents without checking the identity would only prove the
+ * document is well-formed. A manifest rebuilt from any tree would be well-formed.
+ * The pin is what makes the rest of the checks mean "the approved snapshot", and
+ * moving it is a reviewed one-line commit -- see `ace-approved-pin.js` for what
+ * that does and does not defend against.
  *
  * It fails closed, always. There is no fallback to the raw leaderboard JSON, no
  * "render what we have", no cached last-known-good: if verification cannot be
@@ -25,6 +36,7 @@
   'use strict';
 
   var CONFIG = window.ACE_CONFIG;
+  var PIN = window.ACE_APPROVED_PIN;
   var MANIFEST_VERSION = 1;
   var APPROVED_STATE = 'approved';
   var REQUIRED_ROLES = ['leaderboard_llm', 'leaderboard_agent'];
@@ -83,7 +95,7 @@
     if (!COMMIT_RE.test(String(provenance.commit || ''))) {
       throw VerificationError('provenance commit is not a git sha');
     }
-    if (provenance.commit !== CONFIG.APPROVED_PROVENANCE_COMMIT) {
+    if (provenance.commit !== PIN.PROVENANCE_COMMIT) {
       /* Right shape, wrong snapshot: some other tree's manifest, or this one
        * rebuilt against a commit nobody pinned the site to. */
       throw VerificationError('provenance commit is not the approved snapshot');
@@ -130,6 +142,60 @@
     return manifest;
   }
 
+  /* The manifest's canonical serialization, byte-for-byte what
+   * `tools/ace_artifacts.py::canonical_bytes` writes: keys sorted, two-space
+   * indent, non-ASCII left alone, one trailing newline.
+   *
+   * Re-deriving it here is how the digest keeps meaning one document. Hashing
+   * the received bytes alone would let a reformatted manifest be re-pinned and
+   * accepted; requiring the received bytes to *be* the canonical bytes means the
+   * pin identifies contents, not a formatting accident.
+   *
+   * Anything the builder cannot emit -- a float, a NaN, an undefined -- throws
+   * rather than being serialized on a guess, because a guess that differs from
+   * Python's would fail closed later anyway, with a worse error. */
+  function canonicalJson(value, indent) {
+    var pad = indent || '';
+    var inner = pad + '  ';
+    var i;
+    var parts;
+
+    if (value === null) return 'null';
+    var type = typeof value;
+    if (type === 'boolean') return value ? 'true' : 'false';
+    if (type === 'number') {
+      if (!isFinite(value) || Math.floor(value) !== value) {
+        throw VerificationError('manifest holds a number we cannot canonicalize');
+      }
+      return String(value);
+    }
+    if (type === 'string') return JSON.stringify(value);
+    if (Array.isArray(value)) {
+      if (!value.length) return '[]';
+      parts = [];
+      for (i = 0; i < value.length; i += 1) {
+        parts.push(inner + canonicalJson(value[i], inner));
+      }
+      return '[\n' + parts.join(',\n') + '\n' + pad + ']';
+    }
+    if (type === 'object') {
+      var keys = Object.keys(value).sort();
+      if (!keys.length) return '{}';
+      parts = [];
+      for (i = 0; i < keys.length; i += 1) {
+        parts.push(
+          inner + JSON.stringify(keys[i]) + ': ' + canonicalJson(value[keys[i]], inner)
+        );
+      }
+      return '{\n' + parts.join(',\n') + '\n' + pad + '}';
+    }
+    throw VerificationError('manifest holds a value we cannot canonicalize');
+  }
+
+  function canonicalBytesText(manifest) {
+    return canonicalJson(manifest, '') + '\n';
+  }
+
   function loadManifest() {
     if (manifestPromise) return manifestPromise;
     manifestPromise = fetch(CONFIG.APPROVED_MANIFEST_PATH, { cache: 'no-cache' })
@@ -137,9 +203,36 @@
         if (!response.ok) {
           throw VerificationError('manifest request failed: ' + response.status);
         }
-        return response.json();
+        /* Bytes, not `response.json()`: the digest is over what arrived. */
+        return response.arrayBuffer();
       })
-      .then(validateManifest)
+      .then(function (buffer) {
+        var pinned = PIN && String(PIN.MANIFEST_SHA256 || '');
+        if (!SHA256_RE.test(pinned)) {
+          throw VerificationError('no approved manifest digest is pinned');
+        }
+        return digestHex(buffer).then(function (actual) {
+          if (actual !== pinned) {
+            /* Could be a rebuild nobody approved, a draft copied over the
+             * snapshot, a stale cache, or a manifest from somewhere else. From
+             * here they are the same thing: not the approved manifest. */
+            throw VerificationError('manifest digest does not match the pin');
+          }
+          return new TextDecoder('utf-8').decode(buffer);
+        });
+      })
+      .then(function (text) {
+        var parsed;
+        try {
+          parsed = JSON.parse(text);
+        } catch (error) {
+          throw VerificationError('approved manifest is not valid JSON');
+        }
+        if (canonicalBytesText(parsed) !== text) {
+          throw VerificationError('manifest is not in its canonical form');
+        }
+        return validateManifest(parsed);
+      })
       .catch(function (error) {
         /* Do not cache the failure as a value: a transient network problem
          * should be retryable by reloading, and a real one fails again. */
@@ -301,6 +394,7 @@
   window.AceArtifacts = {
     UNAVAILABLE_MESSAGE: UNAVAILABLE_MESSAGE,
     isSafeRelativePath: isSafeRelativePath,
+    canonicalJson: canonicalJson,
     loadManifest: loadManifest,
     leaderboard: leaderboard,
     downloadReport: downloadReport,

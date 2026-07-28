@@ -25,6 +25,7 @@ UNAVAILABLE = "Published reports unavailable."
 
 MANIFEST_GLOB = "**/approved-artifacts.json"
 LEADERBOARD_GLOB = "**/ace-leaderboard.json"
+PIN_GLOB = "**/ace-approved-pin.js"
 
 
 def manifest() -> dict:
@@ -39,15 +40,52 @@ def expected_counts() -> dict:
     return artifacts.public_counts(leaderboard())
 
 
-def serve_manifest(site, mutated: dict) -> None:
+def pin_body(digest: str, commit: str = artifacts.PROVENANCE_COMMIT) -> str:
+    """The pin file, as the build tool writes it."""
+    return artifacts.render_pin(digest, commit)
+
+
+def serve_pin(site, digest: str, commit: str = artifacts.PROVENANCE_COMMIT) -> None:
+    site.page.route(
+        PIN_GLOB,
+        lambda route: route.fulfill(
+            status=200,
+            content_type="application/javascript",
+            body=pin_body(digest, commit),
+        ),
+    )
+
+
+def serve_manifest(site, mutated: dict, *, repin: bool = True) -> None:
+    """Serve a mutated manifest, canonically, and by default re-pin to it.
+
+    Re-pinning keeps each of the tests below about the thing it names. A draft
+    manifest should be refused because it says draft; if the pin also stopped
+    matching, the test would pass without the state check existing at all.
+    """
+    body = artifacts.canonical_bytes(mutated)
     site.page.route(
         MANIFEST_GLOB,
         lambda route: route.fulfill(
             status=200,
             content_type="application/json",
-            body=json.dumps(mutated),
+            body=body,
         ),
     )
+    if repin:
+        serve_pin(site, artifacts.sha256_bytes(body))
+
+
+def serve_raw_manifest(site, body: bytes, *, pin_to_body: bool = True) -> None:
+    """Serve exact bytes, for tests about the bytes rather than the contents."""
+    site.page.route(
+        MANIFEST_GLOB,
+        lambda route: route.fulfill(
+            status=200, content_type="application/json", body=body
+        ),
+    )
+    if pin_to_body:
+        serve_pin(site, artifacts.sha256_bytes(body))
 
 
 # -- the homepage, verifying -------------------------------------------------
@@ -324,3 +362,128 @@ def test_the_digest_quoted_in_the_report_is_the_served_manifest(site):
     )
     assert served
     assert served[0] == artifacts.canonical_bytes(manifest())
+
+
+# -- the pinned anchor ------------------------------------------------------
+#
+# Everything above proves the site checks the manifest's contents. These prove
+# the site checks that it is *this* manifest: the one whose digest was written
+# into `ace-approved-pin.js` when the snapshot was approved. Without that, a
+# consistent manifest built from any tree at the pinned commit would render,
+# and "verified" would only mean "internally consistent".
+
+
+def stale_pin_is_the_only_fault(site) -> dict:
+    """Replace an artifact and its manifest entry, correctly, and pin nothing.
+
+    The served pair is exactly what the build tool would have produced: the
+    digest describes the new bytes, the length is right, the state is approved,
+    the provenance commit is the pinned one. The only thing missing is somebody
+    deciding to move the anchor.
+    """
+    board = leaderboard()
+    for model in board["models"]:
+        if model.get("bare"):
+            model["bare"]["critical_exception_count"] = 0
+    body = json.dumps(board, indent=2).encode("utf-8")
+
+    replaced = manifest()
+    for entry in replaced["artifacts"]:
+        if entry["role"] == "leaderboard_llm":
+            entry["sha256"] = artifacts.sha256_bytes(body)
+            entry["bytes"] = len(body)
+
+    fetched: list[str] = []
+
+    def serve_board(route) -> None:
+        fetched.append(route.request.url)
+        route.fulfill(status=200, content_type="application/json", body=body)
+
+    site.page.route(LEADERBOARD_GLOB, serve_board)
+    serve_manifest(site, replaced, repin=False)
+    return {"fetched": fetched, "manifest": replaced}
+
+
+def test_a_replaced_manifest_and_artifact_render_nothing_until_the_pin_moves(site):
+    state = stale_pin_is_the_only_fault(site)
+    site.open("index.html")
+    assert UNAVAILABLE in wait_for_fail_closed(site)
+    assert site.text("#ace-count-systems") == "\u2014"
+    assert site.text("#ace-count-critical") == "\u2014"
+    assert not site.visible("#hero-card")
+    # A self-consistent manifest would have passed every other check, so this is
+    # the pin refusing it and nothing else.
+    artifacts.validate_manifest_shape(state["manifest"])
+
+
+def test_an_unpinned_manifest_is_refused_before_any_artifact_is_read(site):
+    """No fetch, no parse, no hashing: the anchor fails first or it is decoration."""
+    state = stale_pin_is_the_only_fault(site)
+    site.open("index.html")
+    assert UNAVAILABLE in wait_for_fail_closed(site)
+    assert state["fetched"] == [], state["fetched"]
+
+
+def test_the_reports_page_also_refuses_an_unpinned_manifest(site):
+    stale_pin_is_the_only_fault(site)
+    site.open("benchmark.html")
+    site.page.wait_for_selector("#model-grid .not-published")
+    assert UNAVAILABLE in site.page.text_content("#model-grid")
+    assert site.page.query_selector("#model-grid .model-card") is None
+
+
+def test_one_changed_character_of_prose_breaks_the_pin(site):
+    """The digest covers the whole manifest, not the fields the code reads."""
+    edited = manifest()
+    edited["provenance"] = dict(
+        edited["provenance"], basis=edited["provenance"]["basis"] + " "
+    )
+    serve_manifest(site, edited, repin=False)
+    site.open("index.html")
+    assert UNAVAILABLE in wait_for_fail_closed(site)
+
+
+def test_a_reformatted_manifest_breaks_the_pin(site):
+    """Same contents, different whitespace, different digest -- and refused."""
+    reformatted = json.dumps(manifest(), indent=4, sort_keys=True) + "\n"
+    serve_raw_manifest(site, reformatted.encode("utf-8"), pin_to_body=False)
+    site.open("index.html")
+    assert UNAVAILABLE in wait_for_fail_closed(site)
+
+
+def test_a_reformatted_manifest_is_refused_even_when_the_pin_is_moved_to_it(site):
+    """The browser canonicalizes exactly the way the builder does.
+
+    Pinning the reformatted bytes gets a document past the digest comparison, so
+    what refuses it here is the canonical-form check: the site accepts one
+    serialization of a given manifest, the same one `canonical_bytes` writes, so
+    the digest in the pin always means the same document.
+    """
+    reformatted = json.dumps(manifest(), indent=4, sort_keys=True) + "\n"
+    serve_raw_manifest(site, reformatted.encode("utf-8"), pin_to_body=True)
+    site.open("index.html")
+    assert UNAVAILABLE in wait_for_fail_closed(site)
+    assert site.text("#ace-count-systems") == "\u2014"
+
+
+def test_the_shipped_pin_matches_the_shipped_manifest(site):
+    """The one combination that must render: the files as committed."""
+    site.open("index.html")
+    site.page.wait_for_function(
+        "() => document.getElementById('ace-count-systems').textContent.trim() !== '\u2014'"
+    )
+    pinned = site.page.evaluate("() => window.ACE_APPROVED_PIN.MANIFEST_SHA256")
+    on_disk = (SITE_ROOT / artifacts.MANIFEST_NAME).read_bytes()
+    assert pinned == artifacts.sha256_bytes(on_disk)
+    assert site.page_errors == []
+
+
+def test_the_pin_is_not_reachable_for_a_page_to_edit(site):
+    """Frozen, so a later script cannot widen what counts as approved."""
+    site.open("index.html")
+    site.page.wait_for_selector("#hero-card:not([hidden])")
+    tampered = site.page.evaluate(
+        "() => { try { window.ACE_APPROVED_PIN.MANIFEST_SHA256 = 'x'; } catch (e) {}"
+        " return window.ACE_APPROVED_PIN.MANIFEST_SHA256; }"
+    )
+    assert tampered != "x"

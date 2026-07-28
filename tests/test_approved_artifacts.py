@@ -77,13 +77,34 @@ def tree(tmp_path: Path) -> Path:
 
 
 def build(tree: Path) -> dict:
+    """Build, write and pin, the way the `build` command does."""
     manifest = artifacts.build_manifest(tree)
-    (tree / artifacts.MANIFEST_NAME).write_bytes(artifacts.canonical_bytes(manifest))
+    artifacts.write_manifest(tree, manifest)
+    artifacts.write_pin(tree, manifest)
     return manifest
 
 
-def write(tree: Path, manifest: dict) -> None:
-    (tree / artifacts.MANIFEST_NAME).write_bytes(artifacts.canonical_bytes(manifest))
+def write(tree: Path, manifest: dict, *, repin: bool = True) -> None:
+    """Write a manifest and, unless a test is about the pin, re-pin to it.
+
+    Re-pinning by default keeps each test about the thing it is testing: a
+    manifest whose state says `draft` should fail because of the state, not
+    because the digest moved.
+    """
+    artifacts.write_manifest(tree, manifest)
+    if not repin:
+        return
+    try:
+        artifacts.write_pin(tree, manifest)
+    except artifacts.ManifestError:
+        # A manifest deliberately malformed in some other field still gets a pin
+        # over its digest, so the malformed field is what the test catches.
+        (tree / artifacts.PIN_NAME).write_text(
+            artifacts.render_pin(
+                artifacts.manifest_digest(manifest), artifacts.PROVENANCE_COMMIT
+            ),
+            "utf-8",
+        )
 
 
 def entry_for(manifest: dict, role: str) -> dict:
@@ -315,6 +336,122 @@ def test_a_digest_recorded_as_something_else_entirely_is_refused(tree: Path):
     write(tree, manifest)
     problems = artifacts.check_manifest(tree)
     assert any("sha256" in problem for problem in problems)
+
+
+# -- the pinned anchor ------------------------------------------------------
+
+def pin_text(tree: Path) -> str:
+    return (tree / artifacts.PIN_NAME).read_text("utf-8")
+
+
+def test_building_writes_a_pin_for_the_manifest_it_just_wrote(tree: Path):
+    manifest = artifacts.build_manifest(tree)
+    artifacts.write_manifest(tree, manifest)
+    artifacts.write_pin(tree, manifest)
+
+    pin = artifacts.read_pin(tree)
+    assert pin["manifest_sha256"] == artifacts.manifest_digest(manifest)
+    assert pin["provenance_commit"] == manifest["provenance"]["commit"]
+    # The pin is a small JavaScript file the browser loads before anything else.
+    assert "window.ACE_APPROVED_PIN" in pin_text(tree)
+
+
+def test_the_pin_file_is_written_deterministically(tree: Path):
+    manifest = artifacts.build_manifest(tree)
+    artifacts.write_pin(tree, manifest)
+    first = pin_text(tree)
+    artifacts.write_pin(tree, manifest)
+    assert pin_text(tree) == first
+
+
+def test_a_clean_tree_with_a_matching_pin_checks_out(tree: Path):
+    build(tree)
+    assert artifacts.check_manifest(tree) == []
+
+
+def test_a_replaced_artifact_without_a_pin_update_fails_the_check(tree: Path):
+    """The whole point of the anchor.
+
+    The manifest is rebuilt and is perfectly self-consistent: the new digest
+    describes the new file, the state says approved, the provenance commit is the
+    one the site is pinned to. Only the pin was not updated, and that alone is
+    enough to refuse the publication.
+    """
+    build(tree)
+    board = json.loads((tree / "ace-leaderboard.json").read_text("utf-8"))
+    board["models"][0]["bare"]["critical_exception_count"] = 0
+    (tree / "ace-leaderboard.json").write_text(json.dumps(board, indent=2), "utf-8")
+
+    rebuilt = artifacts.build_manifest(tree)
+    artifacts.write_manifest(tree, rebuilt)  # manifest updated, pin left alone
+
+    problems = artifacts.check_manifest(tree)
+    assert any("pin" in problem for problem in problems), problems
+
+
+def test_a_missing_pin_is_a_failure_not_a_default(tree: Path):
+    build(tree)
+    (tree / artifacts.PIN_NAME).unlink()
+    problems = artifacts.check_manifest(tree)
+    assert any("pin" in problem for problem in problems), problems
+
+
+def test_a_pin_that_is_not_a_digest_is_refused(tree: Path):
+    build(tree)
+    (tree / artifacts.PIN_NAME).write_text(
+        pin_text(tree).replace(artifacts.read_pin(tree)["manifest_sha256"], "nope"),
+        "utf-8",
+    )
+    problems = artifacts.check_manifest(tree)
+    assert any("pin" in problem for problem in problems), problems
+
+
+def test_a_pin_naming_another_commit_is_refused(tree: Path):
+    build(tree)
+    text = pin_text(tree).replace(artifacts.PROVENANCE_COMMIT, "1" * 40)
+    (tree / artifacts.PIN_NAME).write_text(text, "utf-8")
+    problems = artifacts.check_manifest(tree)
+    assert any("commit" in problem for problem in problems), problems
+
+
+def test_a_reformatted_manifest_is_refused_even_though_it_parses_equal(tree: Path):
+    """The digest is over the canonical bytes, so formatting is part of identity.
+
+    This is what lets the browser hash the bytes it received instead of trusting
+    a serializer to agree with Python's about whitespace.
+    """
+    manifest = build(tree)
+    (tree / artifacts.MANIFEST_NAME).write_text(
+        json.dumps(manifest, indent=4, sort_keys=True) + "\n", "utf-8"
+    )
+    problems = artifacts.check_manifest(tree)
+    assert any("canonical" in problem or "pin" in problem for problem in problems), (
+        problems
+    )
+
+
+def test_the_pin_is_checked_against_the_bytes_on_disk(tree: Path):
+    build(tree)
+    raw = (tree / artifacts.MANIFEST_NAME).read_bytes()
+    assert artifacts.read_pin(tree)["manifest_sha256"] == hashlib.sha256(raw).hexdigest()
+
+
+def test_re_pinning_is_an_explicit_command(tree: Path, capsys):
+    """Republishing is `build`, it is loud, and nothing else moves the anchor."""
+    build(tree)
+    before = artifacts.read_pin(tree)["manifest_sha256"]
+    (tree / "reports" / "ACE_Report_model-a.pdf").write_bytes(b"%PDF-1.7\nrevised\n")
+
+    assert artifacts.main(["check", "--root", str(tree)]) == 1
+    assert "ACE_Report_model-a.pdf" in capsys.readouterr().out
+
+    assert artifacts.main(["build", "--root", str(tree)]) == 0
+    out = capsys.readouterr().out
+    assert "MOVED the pin" in out
+    assert before[:12] in out, "the diff a reviewer reads should name both digests"
+    assert artifacts.read_pin(tree)["manifest_sha256"] != before
+    assert artifacts.main(["check", "--root", str(tree)]) == 0
+    assert "pin" in capsys.readouterr().out
 
 
 # -- derived figures --------------------------------------------------------

@@ -495,16 +495,80 @@ def test_verification_failure_is_the_only_fallback():
     artifacts = read("ace-artifacts.js")
     assert "Published reports unavailable." in artifacts
     assert "manifest.state !== APPROVED_STATE" in artifacts
-    assert "provenance.commit !== CONFIG.APPROVED_PROVENANCE_COMMIT" in artifacts
+    assert "provenance.commit !== PIN.PROVENANCE_COMMIT" in artifacts
 
 
-def test_the_manifest_on_disk_is_the_approved_snapshot():
+# -- the approved publication anchor ---------------------------------------
+
+def pin_values() -> dict:
+    """The two constants the site is anchored to, read from the pin file."""
+    body = read("ace-approved-pin.js")
+    digest = re.search(r"MANIFEST_SHA256:\s*'([0-9a-f]{64})'", body)
+    commit = re.search(r"PROVENANCE_COMMIT:\s*'([0-9a-f]{40})'", body)
+    assert digest and commit, "the pin file must declare both constants"
+    return {"digest": digest.group(1), "commit": commit.group(1)}
+
+
+def test_the_pin_lives_alone_in_its_own_file():
+    """Updating the anchor should be a one-line diff nobody can miss."""
+    body = read("ace-approved-pin.js")
+    assert "window.ACE_APPROVED_PIN" in body
+    # Nothing else: no API base, no page list, no logic.
+    assert "fetch(" not in body
+    assert "function" not in body
+    declared = set(re.findall(r"^\s*([A-Z0-9_]+):", body, re.M))
+    assert declared == {"MANIFEST_SHA256", "PROVENANCE_COMMIT"}, declared
+
+
+def test_the_pin_matches_the_manifest_on_disk():
+    from tools import ace_artifacts as artifacts
+
+    pin = pin_values()
     manifest = json.loads(read("approved-artifacts.json"))
-    config = read("ace-config.js")
-    pinned = re.search(r"APPROVED_PROVENANCE_COMMIT:\s*'([0-9a-f]{40})'", config)
-    assert pinned
     assert manifest["state"] == "approved"
-    assert manifest["provenance"]["commit"] == pinned.group(1)
+    assert manifest["provenance"]["commit"] == pin["commit"]
+    assert artifacts.manifest_digest(manifest) == pin["digest"]
+    # The served bytes are the canonical bytes, because the digest is over them.
+    assert (SITE_ROOT / "approved-artifacts.json").read_bytes() == (
+        artifacts.canonical_bytes(manifest)
+    )
+
+
+def test_the_provenance_commit_is_declared_once():
+    """The pin file is the only place either constant is written down."""
+    for path in text_files():
+        if path.name in ("ace-approved-pin.js", "ace_artifacts.py"):
+            continue
+        body = path.read_text("utf-8", errors="replace")
+        assert "APPROVED_PROVENANCE_COMMIT" not in body, relative(path)
+
+
+def test_the_browser_verifies_the_digest_before_it_parses_anything():
+    """Order matters: an unpinned manifest is never handed to a parser's rules.
+
+    Structural validation of an arbitrary document tells you the document is
+    well-formed, not that it is the approved one. The digest check is what makes
+    the rest of the checks meaningful, so it happens first.
+    """
+    body = read("ace-artifacts.js")
+    loader = body[body.index("function loadManifest()"):body.index("function toHex(")]
+
+    # Raw bytes, hashed and compared, then parsed, then the contents judged.
+    assert loader.index("arrayBuffer()") < loader.index("PIN.MANIFEST_SHA256")
+    assert loader.index("PIN.MANIFEST_SHA256") < loader.index("JSON.parse")
+    assert loader.index("JSON.parse") < loader.index("validateManifest(")
+
+    # And the bytes that were hashed have to be the canonical ones, so the pinned
+    # digest names one document rather than one formatting of it.
+    assert loader.index("canonicalBytesText") < loader.index("validateManifest(")
+    assert "canonicalJson" in body
+
+
+def test_the_anchor_documents_what_it_does_not_defend_against():
+    """A pin in the same repository is not a defence against owning the repo."""
+    pin = read("ace-approved-pin.js").lower()
+    assert "accidental" in pin or "unapproved" in pin
+    assert "compromise" in pin or "compromised" in pin
 
 
 # -- terms and security copy -----------------------------------------------
