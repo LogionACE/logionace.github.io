@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluation request status - LogionACE</title>
+  <meta name="description" content="Check the status of a LogionACE evaluation request using the status link issued when it was submitted.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=20260616-scrollfix2">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <div class="nav-drop">
+        <span class="nav-trigger">Product</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper">Whitepaper<span class="nav-desc">Full research paper</span></a>
+        </div></div>
+      </div>
+      <a href="evaluation">Evaluation</a>
+      <div class="nav-drop">
+        <span class="nav-trigger">Company</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="company">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+        </div></div>
+      </div>
+      <a href="#contact" class="nav-cta">Request evaluation</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <section class="page-hero narrow">
+    <p class="eyebrow">Request status</p>
+    <h1>Your evaluation request.</h1>
+    <p>This page reads the request your status link identifies. Keep the link private &mdash; it is what authenticates you here.</p>
+  </section>
+  <section class="section compact">
+    <div class="narrow-body">
+      <div id="ace-status-root" class="status-root">
+        <p id="ace-status-live" class="form-live" role="status" aria-live="polite"></p>
+
+        <div id="ace-status-error" class="form-error-summary" role="alert" hidden>
+          <p id="ace-status-error-text"></p>
+          <p class="field-help">Need this link resent? Email
+            <a href="mailto:info@logionace.com">info@logionace.com</a> with your
+            organisation name and we will find the request.</p>
+        </div>
+
+        <div id="ace-status-panel" class="status-panel" hidden>
+          <p class="eyebrow">Evaluation request</p>
+          <p class="status-order-id"><code id="ace-status-order-id"></code></p>
+          <h2 id="ace-status-label"></h2>
+          <p id="ace-status-detail" class="status-detail"></p>
+
+          <dl class="status-facts">
+            <div><dt>Requested</dt><dd id="ace-status-created"></dd></div>
+            <div><dt>Last update</dt><dd id="ace-status-updated"></dd></div>
+            <div><dt>Evaluation</dt><dd id="ace-status-package"></dd></div>
+            <div id="ace-status-amount-row" hidden>
+              <dt>Approved amount</dt><dd id="ace-status-amount"></dd>
+            </div>
+            <div><dt>Results</dt><dd id="ace-status-visibility"></dd></div>
+            <div><dt>Environment</dt><dd id="ace-status-sandbox"></dd></div>
+          </dl>
+
+          <div id="ace-scope-block" class="status-scope" hidden>
+            <h3>Approved scope</h3>
+            <div id="ace-scope-access-row" hidden>
+              <h4>How we will access the system</h4>
+              <p id="ace-scope-access"></p>
+            </div>
+            <div id="ace-scope-sandbox-policy-row" hidden>
+              <h4>Sandbox and data policy</h4>
+              <p id="ace-scope-sandbox-policy"></p>
+            </div>
+            <div id="ace-scope-delivery-row" hidden>
+              <h4>Delivery assumptions</h4>
+              <p id="ace-scope-delivery"></p>
+            </div>
+          </div>
+
+          <div id="ace-pay-block" class="status-pay" hidden>
+            <h3>Approved quote ready for payment</h3>
+            <p>The amount below is the approved quote for the scope above:
+              <strong id="ace-pay-amount"></strong>. Payment is handled by Stripe;
+              we never see or store your card details.</p>
+            <a id="ace-pay-button" class="btn primary" rel="noopener" hidden>Pay securely with Stripe</a>
+            <p class="field-help">Paying does not start the evaluation. Confirmation
+              reaches us through a signed notification from Stripe, which can take a
+              moment to arrive; this page will show payment as confirmed once it does.
+              We then arrange secure access to the system being evaluated.</p>
+          </div>
+
+          <div id="ace-stamps-block" class="status-stamps" hidden>
+            <p id="ace-stamp-paid" hidden></p>
+            <p id="ace-stamp-delivered" hidden></p>
+            <p id="ace-stamp-cancelled" hidden></p>
+            <p id="ace-stamp-refunded" hidden></p>
+          </div>
+
+          <div id="ace-status-history-block" hidden>
+            <h3>History</h3>
+            <ol id="ace-status-history" class="status-history"></ol>
+          </div>
+
+          <div class="status-actions">
+            <button id="ace-status-refresh" type="button" class="btn outline">Check for updates</button>
+            <button id="ace-status-copy" type="button" class="btn ghost">Copy status link</button>
+          </div>
+          <p id="ace-status-autorefresh-note" class="field-help" hidden>
+            Automatic checks have stopped so this page is not left polling. Use
+            &ldquo;Check for updates&rdquo; whenever you want the latest state.
+          </p>
+          <label class="status-link-fallback" hidden>
+            <span>Your status link</span>
+            <input id="ace-status-link-fallback" type="text" readonly hidden>
+          </label>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h3>Never send us a credential by email or web form</h3>
+        <p>API keys, tokens, passwords and private keys are exchanged through a secure
+          handoff after the scope is approved and paid for. If anything asks you to
+          paste a key into this website, it is not us. See
+          <a href="access.html">access and security</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">Independent AI Compliance Evaluation for Enterprise.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="benchmark">Reports</a>
+      <a href="evaluation">Evaluation</a>
+      <a href="methodology">Methodology</a>
+      <a href="whitepaper">Whitepaper</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="company">About</a>
+      <a href="trust">Trust &amp; Security</a>
+      <a href="evaluation#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy">Privacy Policy</a>
+      <a href="terms">Terms of Service</a>
+      <a href="methodology#limitations">Limitations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+</footer>
+<script src="ace-config.js"></script>
+<script src="ace-session.js"></script>
+<script src="ace-status.js"></script>
+<script src="ace-nav.js"></script>
+</body>
+</html>

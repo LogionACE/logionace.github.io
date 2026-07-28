@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request received - LogionACE</title>
+  <meta name="description" content="Your LogionACE evaluation request has been received. Keep your status link to follow it.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=20260616-scrollfix2">
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <div class="nav-drop">
+        <span class="nav-trigger">Product</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="whitepaper">Whitepaper<span class="nav-desc">Full research paper</span></a>
+        </div></div>
+      </div>
+      <a href="evaluation">Evaluation</a>
+      <div class="nav-drop">
+        <span class="nav-trigger">Company</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="company">About<span class="nav-desc">Team and mission</span></a>
+          <a href="trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+        </div></div>
+      </div>
+      <a href="#contact" class="nav-cta">Request evaluation</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <section class="page-hero narrow">
+    <p class="eyebrow">Request received</p>
+    <h1>Thank you &mdash; we have your request.</h1>
+    <p>Nothing is payable yet. We review the scope and reply with a fixed quote; payment happens only after you approve it.</p>
+  </section>
+  <section class="section compact">
+    <div class="narrow-body">
+      <div class="callout accent">
+        <h3>Your request reference</h3>
+        <p class="status-order-id"><code id="ace-submitted-order-id">&mdash;</code></p>
+        <p>Save the link below. It is the only way to check this request, so treat it
+          like a password: anyone holding it can see this order's status.</p>
+        <div class="status-actions">
+          <a class="btn primary" id="ace-submitted-status-link" data-ace-status-link href="order-status.html">Open status page</a>
+          <button class="btn outline" type="button" id="ace-submitted-copy">Copy status link</button>
+        </div>
+        <p id="ace-submitted-live" class="form-live" role="status" aria-live="polite"></p>
+        <label class="status-link-fallback" hidden>
+          <span>Your status link</span>
+          <input id="ace-submitted-link-fallback" type="text" readonly hidden>
+        </label>
+        <p id="ace-submitted-missing" class="form-error-summary" role="alert" hidden>
+          This page did not receive a status link. If you have just submitted a request,
+          check your email, or contact
+          <a href="mailto:info@logionace.com">info@logionace.com</a> and we will resend it.
+        </p>
+      </div>
+
+      <h2>What happens next</h2>
+      <ol class="steps-list">
+        <li><strong>We read it.</strong> Usually within two business days.</li>
+        <li><strong>We scope it and quote it.</strong> You get the access we would need,
+          the sandbox and data policy, delivery assumptions, and a fixed price.</li>
+        <li><strong>You approve, then pay.</strong> A payment link appears on your status
+          page once the quote is approved. Until then there is nothing to pay.</li>
+        <li><strong>We arrange access.</strong> Credentials are exchanged securely after
+          payment is confirmed. The evaluation does not start automatically.</li>
+      </ol>
+
+      <div class="callout">
+        <h3>Never send us a credential by email or web form</h3>
+        <p>API keys, tokens, passwords and private keys are exchanged through a secure
+          handoff after the scope is approved and paid for. If anything asks you to
+          paste a key into this website, it is not us. See
+          <a href="access.html">access and security</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">Independent AI Compliance Evaluation for Enterprise.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="benchmark">Reports</a>
+      <a href="evaluation">Evaluation</a>
+      <a href="methodology">Methodology</a>
+      <a href="whitepaper">Whitepaper</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="company">About</a>
+      <a href="trust">Trust &amp; Security</a>
+      <a href="evaluation#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="privacy">Privacy Policy</a>
+      <a href="terms">Terms of Service</a>
+      <a href="methodology#limitations">Limitations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+</footer>
+<script src="ace-config.js"></script>
+<script src="ace-session.js"></script>
+<script src="ace-submitted.js"></script>
+<script src="ace-nav.js"></script>
+</body>
+</html>
