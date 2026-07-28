@@ -70,19 +70,48 @@
     <h2>6. Confidentiality</h2>
     <p>Both parties agree to treat confidential information received during an evaluation engagement with reasonable care. Specific confidentiality obligations, including scope and duration, are governed by a separate Non-Disclosure Agreement (NDA) executed prior to or at the start of an engagement.</p>
 
-    <h2>7. Payment Terms</h2>
-    <p>Evaluation services are provided on a prepaid basis. Specific payment terms, including fees, milestones, and refund policies, are outlined in the evaluation agreement executed between the parties prior to the start of work.</p>
+    <h2>7. Requests, Scope and Quotes</h2>
+    <p>Submitting a request through this website asks us to scope an evaluation. It is not an order, it does not create an engagement, and it does not oblige either party to proceed. Nothing is payable at that point.</p>
+    <p>We respond with a written scope and a fixed quote covering the access required, the sandbox and data-handling policy, delivery assumptions and the price. A payment link is issued only for a scope and quote that has been approved. The approved quote is the amount payable; any figure shown elsewhere on this website is indicative pricing, not a quote.</p>
+    <p>If the system, the environment, the access method or the requirements change after a quote is approved, the original scope no longer describes the work. We will re-scope and issue a revised quote rather than absorb or improvise the difference, and no additional work is performed until the revised quote is approved.</p>
 
-    <h2>8. Governing Law</h2>
+    <h2>8. Payment and Confirmation</h2>
+    <p>Evaluation services are prepaid: work on an approved scope begins after payment for that scope is confirmed. Payments are processed by Stripe. We do not receive or store your card details.</p>
+    <p>Payment is confirmed when we receive a verified notification from our payment provider &mdash; not when your browser returns to this website from a payment page. Confirmation is usually immediate but may be delayed. During that interval your order status page will continue to show payment as pending; this reflects what we have verified, not a dispute of your payment. You will not be charged twice for one approved quote.</p>
+    <p>Payment does not start an evaluation automatically. There is no self-service evaluation on this website. Once payment is confirmed, a member of our team arranges access with you and schedules the work.</p>
+
+    <h2>9. Refunds and Inability to Proceed</h2>
+    <p>Before work begins on a paid scope, a cancellation is refunded in full.</p>
+    <p>If we cannot access the system to be evaluated &mdash; access is not granted, the environment is unavailable or unstable, credentials do not work, or the described endpoint does not behave as described &mdash; we will tell you what is blocking us and give you a reasonable opportunity to resolve it. If it cannot be resolved, we refund the fee for the work not performed, less any evaluation work already carried out and documented at that point.</p>
+    <p>Once an evaluation has run and a report has been delivered, fees are not refundable on the basis of the result. An unfavourable result is a finding, not a defect in the service. Where a report is incomplete because of a failure on our side, we will either complete it or refund the affected portion.</p>
+    <p>Nothing in this section limits any non-waivable statutory right you may have.</p>
+
+    <h2>10. Your Authority and Credentials</h2>
+    <p>By submitting a request you confirm that you are authorised to have the system evaluated and to arrange the access the evaluation requires. If the system belongs to a third party, obtaining their permission is your responsibility. We rely on that confirmation and are not in a position to verify it.</p>
+    <p>Do not send credentials through this website, through this form, or by email. Keys, tokens and passwords are exchanged through a secure handoff once an approved scope is paid for. You remain responsible for issuing evaluation-specific, revocable credentials, for limiting their scope, and for revoking them when the engagement ends. Evaluation environments should not contain production personal data.</p>
+
+    <h2>11. Precedence</h2>
+    <p>Where a signed engagement agreement, master services agreement, statement of work or non-disclosure agreement exists between you and LogionOS, Inc., that document governs the engagement and takes precedence over these Terms to the extent of any conflict. These Terms govern your use of this website and any engagement not covered by such an agreement.</p>
+
+    <h2>12. Governing Law</h2>
     <p>These Terms of Service are governed by and construed in accordance with the laws of the State of Delaware, United States of America, without regard to its conflict of law principles.</p>
 
-    <h2>9. Contact</h2>
+    <h2>13. Contact</h2>
     <p>For questions about these terms:</p>
     <p><a href="mailto:legal@logionace.com">legal@logionace.com</a></p>
 
-    <h2>10. Changes to These Terms</h2>
+    <h2>14. Changes to These Terms</h2>
     <p>We may update these Terms of Service from time to time. Changes will be posted on this page with an updated effective date. Continued use of our services after changes constitutes acceptance of the revised terms.</p>
-    <p>Please also review our <a href="privacy">Privacy Policy</a>.</p>
+    <p>Please also review our <a href="privacy.html">Privacy Policy</a> and our
+      <a href="access.html">access and security</a> page.</p>
+
+    <h2>15. Status of This Document</h2>
+    <p>These Terms describe how we intend to operate and are published so that a
+      customer can read them before submitting anything. They have not yet completed
+      final legal review: Joanna must review and approve this document, and the refund
+      and liability clauses in particular, before the payment flow it describes is
+      enabled in production. Until then, any engagement is governed by a signed
+      agreement between the parties.</p>
 
   </section>
 </main>
@@ -114,39 +143,6 @@
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
-<script>
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var links=document.querySelector('.nav-links');
-  if(!btn||!links) return;
-  btn.addEventListener('click',function(){
-    var open=links.classList.toggle('nav-open');
-    btn.classList.toggle('active',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
-    trigger.addEventListener('click',function(e){
-      if(window.innerWidth<=768){
-        e.preventDefault();
-        this.parentElement.classList.toggle('drop-open');
-      }
-    });
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      links.classList.remove('nav-open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    });
-  });
-})();
-</script>
+<script src="ace-nav.js"></script>
 </body>
 </html>

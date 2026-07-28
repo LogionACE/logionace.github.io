@@ -1,2 +1,2 @@
-.DS_Store
-serve.py
+.pytest_cache/
+__pycache__/

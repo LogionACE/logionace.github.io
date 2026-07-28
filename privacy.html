@@ -42,32 +42,56 @@
 <main>
   <section class="page-hero narrow">
     <h1>Privacy Policy</h1>
-    <p>Effective: June 15, 2026</p>
+    <p>Effective: July 28, 2026</p>
   </section>
   <section class="section compact" style="max-width:840px;margin-left:auto;margin-right:auto;">
 
     <p>LogionOS, Inc. (operating as LogionACE) is committed to protecting your privacy. This policy explains what information we collect, how we use it, and what rights you have.</p>
 
     <h2>1. Information We Collect</h2>
-    <p>We collect limited information through two channels:</p>
+    <p>We collect what you type into the evaluation request form, and nothing else:</p>
     <ul>
-      <li><strong>Whitepaper download form</strong> &mdash; work email address and company name, provided voluntarily when you request a copy of our whitepaper.</li>
-      <li><strong>Website analytics</strong> &mdash; anonymous, cookie-free analytics data such as page views, referral sources, and device type. We do not use tracking cookies or third-party advertising pixels.</li>
+      <li><strong>Evaluation request form</strong> &mdash; your name and work email, your
+        organisation, a description of the system to be evaluated and how it can be
+        reached, the evaluation you are asking about, and any notes you add. The form
+        does not accept credentials, and we do not ask for any.</li>
+      <li><strong>Payment records</strong> &mdash; if you pay for an approved scope, our
+        payment provider holds the payment details. We store a reference to the payment
+        and never see or store your card number.</li>
+      <li><strong>Server logs</strong> &mdash; ordinary request logs kept by the service
+        that receives the form, for security and debugging. Your status link is designed
+        so that its token stays out of them.</li>
     </ul>
+    <p>We do not run analytics, we do not set tracking cookies, and no third-party
+      advertising or analytics script is loaded by this website. The whitepaper is a
+      direct download and asks for nothing. Our pages do load a web font hosted by
+      Google Fonts, which means Google sees the request your browser makes for it; we
+      intend to serve those fonts ourselves.</p>
 
     <h2>2. How We Use Information</h2>
     <p>We use the information we collect to:</p>
     <ul>
-      <li>Deliver the requested whitepaper to your email address.</li>
-      <li>Follow up regarding evaluation consulting, only when relevant to your expressed interest.</li>
-      <li>Improve our website, content, and services based on aggregated, anonymous usage patterns.</li>
+      <li>Scope and quote the evaluation you asked about, and reply to you.</li>
+      <li>Administer an engagement you have approved, including payment and delivery.</li>
+      <li>Keep the service secure, and meet our legal and accounting obligations.</li>
     </ul>
+    <p>We do not use your evaluation data to train models, and we do not use your request
+      details for unrelated marketing.</p>
 
     <h2>3. Data Sharing</h2>
-    <p>We do not sell, rent, or share your personal information with third parties for marketing purposes. Form submissions are processed through Formspree, Inc., a U.S.-based form handling service, solely for the purpose of delivering your submission to us. We may also disclose information when required by law, regulation, or valid legal process.</p>
+    <p>We do not sell, rent, or share your personal information with third parties for
+      marketing purposes. Requests submitted through this website go directly to our own
+      service; no third-party form handler is involved. Payments are processed by Stripe,
+      Inc. as an independent processor. We host our website and API with infrastructure
+      providers acting on our instructions. We may also disclose information when required
+      by law, regulation, or valid legal process.</p>
 
     <h2>4. Data Retention</h2>
-    <p>Personal information collected through our forms is retained for a maximum of 24 months. Evaluation logs and test artifacts are automatically purged after 90 days. You may request deletion of your data at any time by contacting us at the email below.</p>
+    <p>Request and engagement records are retained for a maximum of 24 months, and longer
+      only where an accounting or legal obligation requires it. Evaluation logs and test
+      artifacts are automatically purged after 90 days. Delivered reports and their
+      evidence packages are retained so that we can reissue them to you. You may request
+      deletion of your data at any time by contacting us at the email below.</p>
 
     <h2>5. Data Security</h2>
     <p>We protect your data using industry-standard measures, including TLS encryption for data in transit and role-based access controls for stored data. No method of transmission or storage is 100% secure, but we take reasonable steps to safeguard your information.</p>
@@ -123,39 +147,6 @@
   </div>
   <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
 </footer>
-<script>
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.15});
-document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-(function(){
-  var btn=document.querySelector('.nav-hamburger');
-  var links=document.querySelector('.nav-links');
-  if(!btn||!links) return;
-  btn.addEventListener('click',function(){
-    var open=links.classList.toggle('nav-open');
-    btn.classList.toggle('active',open);
-    btn.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  document.querySelectorAll('.nav-drop>.nav-trigger').forEach(function(trigger){
-    trigger.addEventListener('click',function(e){
-      if(window.innerWidth<=768){
-        e.preventDefault();
-        this.parentElement.classList.toggle('drop-open');
-      }
-    });
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      links.classList.remove('nav-open');
-      btn.classList.remove('active');
-      btn.setAttribute('aria-expanded','false');
-      document.body.style.overflow='';
-    });
-  });
-})();
-</script>
+<script src="ace-nav.js"></script>
 </body>
 </html>
