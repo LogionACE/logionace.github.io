@@ -1,0 +1,79 @@
+{
+  "artifacts": [
+    {
+      "bytes": 10575,
+      "path": "ace-leaderboard.json",
+      "role": "leaderboard_llm",
+      "sha256": "009a99bedd8cbb5c27c3438944fa127385f4c6c918da63fb4c0dcb5deb19f1b1"
+    },
+    {
+      "bytes": 2489,
+      "path": "agent-leaderboard.json",
+      "role": "leaderboard_agent",
+      "sha256": "3f55e33ecfdc8ce33cad1c739aad8627a35af7f6209bbb46cd931cbdbd6fc9bd"
+    },
+    {
+      "bytes": 1372376,
+      "path": "reports/ACE_Evaluation_Report_DeepSeek-V4-Pro.pdf",
+      "role": "report",
+      "sha256": "fd09e1d82973a4538704ed53261ad62d241a42e07524390775a57c17cd91ec8b"
+    },
+    {
+      "bytes": 2364563,
+      "path": "reports/ACE_Evaluation_Report_Fable-5.pdf",
+      "role": "report",
+      "sha256": "227b84858d8527bdcc8d18b6157feeba1d2f6c2bf5fa1de19b936999d4ff8f5b"
+    },
+    {
+      "bytes": 1610960,
+      "path": "reports/ACE_Evaluation_Report_GPT-4o.pdf",
+      "role": "report",
+      "sha256": "74dcc9177aeadf4cccb79eb843c61362740ad84bd957cf5709def969e086bb36"
+    },
+    {
+      "bytes": 2421101,
+      "path": "reports/ACE_Evaluation_Report_GPT-5.5.pdf",
+      "role": "report",
+      "sha256": "8975c5a8e3021f0ecd263d1efc74cf08a00046a381beb7c9b8d4abc2cf98b848"
+    },
+    {
+      "bytes": 2457858,
+      "path": "reports/ACE_Evaluation_Report_Gemini-3.1-Pro.pdf",
+      "role": "report",
+      "sha256": "c54b40b51954db1be037a6adf7d6a7aa202f35c0e3ebb1a4139fa24d19ff9754"
+    },
+    {
+      "bytes": 1553551,
+      "path": "reports/ACE_Evaluation_Report_Grok-4.3.pdf",
+      "role": "report",
+      "sha256": "8f894792d026a328ff5bd3c4715c397689684d5ae035113d440e76f0e9f5067c"
+    },
+    {
+      "bytes": 1440327,
+      "path": "reports/ACE_Evaluation_Report_Llama-4-Maverick.pdf",
+      "role": "report",
+      "sha256": "b08b5f721daab02260abe69bc796a5802b2e2f9c4cb12013b82d4a6e7daba85e"
+    },
+    {
+      "bytes": 2437275,
+      "path": "reports/ACE_Evaluation_Report_Opus-4.8.pdf",
+      "role": "report",
+      "sha256": "cfea26ecf969091ab7739fcf6ec84b521b760f8603d35e52a6e0897910a24d49"
+    },
+    {
+      "bytes": 1558356,
+      "path": "reports/ACE_Evaluation_Report_Qwen3.7-Max.pdf",
+      "role": "report",
+      "sha256": "01eecceb523af8dad61a7206f097e6a02b63d44185d1419eb954aa83a1261ae7"
+    }
+  ],
+  "manifest_version": 1,
+  "protocol": "ACE Protocol v1.1 (2026-06)",
+  "provenance": {
+    "basis": "The files published on GitHub main at this commit are treated as the historical approved snapshot. The commit is the approver of record; no individual signed these artifacts off.",
+    "commit": "b8a00c8ce38c27152837380f50c2c817aa639dd6",
+    "kind": "git_commit",
+    "repository": "logionace.github.io"
+  },
+  "state": "approved"
+}
