@@ -199,13 +199,23 @@ def test_the_site_never_talks_to_stripe_directly():
 
 # -- the API base -----------------------------------------------------------
 
+#: `ace-config.js` is where the site reads the base from. The cross-repository
+#: contract also states it, because that is the value the three repositories
+#: agreed on -- and `test_cross_repo_contract.py` asserts the two agree. No
+#: page or script may add a third.
+API_BASE_DECLARED_IN = [
+    "ace-config.js",
+    "contracts/ace-cross-repo-contract.v1.json",
+]
+
+
 def test_the_api_base_is_declared_exactly_once():
     hits = [
         relative(path)
         for path in text_files()
         if API_PLACEHOLDER in path.read_text("utf-8", errors="replace")
     ]
-    assert hits == ["ace-config.js"], hits
+    assert sorted(hits) == sorted(API_BASE_DECLARED_IN), hits
 
 
 def test_every_api_call_builds_its_url_from_the_config():

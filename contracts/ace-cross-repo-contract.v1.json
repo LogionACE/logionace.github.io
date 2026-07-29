@@ -1,0 +1,332 @@
+{
+  "approved_artifacts": {
+    "artifact_entry_fields": [
+      "bytes",
+      "path",
+      "role",
+      "sha256"
+    ],
+    "canonical_json": {
+      "ensure_ascii": false,
+      "indent": 2,
+      "sort_keys": true,
+      "trailing_newline": true
+    },
+    "manifest_path": "approved-artifacts.json",
+    "manifest_sha256": "aafc0e619d9feece7edb4bce415c73d9100646f322636593fb0c36d42e905814",
+    "pin_file": "ace-approved-pin.js",
+    "provenance_commit": "b8a00c8ce38c27152837380f50c2c817aa639dd6",
+    "roles": [
+      "leaderboard_llm",
+      "leaderboard_agent",
+      "report"
+    ],
+    "state": "approved"
+  },
+  "as_of": "2026-07-28",
+  "contract_version": "ace-cross-repo-contract/v1",
+  "customer_status_projection": {
+    "fields": [
+      "order_id",
+      "status",
+      "created_at",
+      "updated_at",
+      "requested_package",
+      "quoted_package",
+      "amount_cents",
+      "currency",
+      "visibility",
+      "sandbox_required",
+      "access_method",
+      "sandbox_policy_summary",
+      "delivery_assumptions",
+      "payment_url",
+      "paid_at",
+      "refunded_at",
+      "cancelled_at",
+      "delivered_at",
+      "history"
+    ],
+    "never_exposed": [
+      "status_token_digest",
+      "idempotency_key",
+      "internal_notes",
+      "operator",
+      "endpoint_descriptor",
+      "stripe_object_id",
+      "stripe_reference_id",
+      "stripe_charge_id"
+    ],
+    "payment_url_only_while": "payment_pending"
+  },
+  "identifiers": {
+    "order_id_prefix": "aceord_",
+    "run_id_prefix": "acerun_",
+    "sha256_pattern": "^[0-9a-f]{64}$"
+  },
+  "intake": {
+    "enums": {
+      "industry": [
+        "financial_services",
+        "healthcare",
+        "legal",
+        "government",
+        "education",
+        "technology",
+        "retail",
+        "manufacturing",
+        "media",
+        "telecom",
+        "other"
+      ],
+      "mcp_transport": [
+        "none",
+        "stdio",
+        "http_streamable",
+        "sse",
+        "websocket",
+        "other"
+      ],
+      "requested_package": [
+        "public",
+        "private",
+        "custom",
+        "founder_program",
+        "undecided"
+      ],
+      "system_type": [
+        "model_endpoint",
+        "ai_agent",
+        "workflow",
+        "deployed_product",
+        "other"
+      ],
+      "visibility": [
+        "public",
+        "private"
+      ]
+    },
+    "fields": [
+      "contact_name",
+      "contact_email",
+      "company_name",
+      "company_domain",
+      "system_type",
+      "system_name",
+      "endpoint_descriptor",
+      "mcp_transport",
+      "sandbox_required",
+      "industry",
+      "visibility",
+      "requested_package",
+      "data_authorization",
+      "notes"
+    ],
+    "max_lengths": {
+      "company_domain": 253,
+      "company_name": 160,
+      "contact_email": 254,
+      "contact_name": 120,
+      "endpoint_descriptor": 400,
+      "notes": 2000,
+      "system_name": 160
+    }
+  },
+  "note": "One agreement between three repositories that deploy separately: the ACE automation, the LogionOS orders API and the public website. Every value here is asserted against real code in all three suites. Change it in one commit per repository, or the copies stop matching and the contract check fails.",
+  "order_states": {
+    "evaluation_may_start_from": [
+      "credentials_ready"
+    ],
+    "flow": [
+      "submitted",
+      "scoped",
+      "approved",
+      "payment_pending",
+      "paid",
+      "credentials_ready",
+      "running",
+      "draft_ready",
+      "delivered"
+    ],
+    "off_flow": [
+      "cancelled",
+      "refunded"
+    ],
+    "terminal": [
+      "cancelled",
+      "refunded"
+    ],
+    "webhook_may_produce": [
+      "paid",
+      "refunded"
+    ]
+  },
+  "packages": {
+    "amount_ceiling_cents": 100000000,
+    "floor_currency": "usd",
+    "floors_cents": {
+      "custom": 6000000,
+      "founder_program": 0,
+      "private": 4000000,
+      "public": 2500000
+    },
+    "quotable": [
+      "public",
+      "private",
+      "custom",
+      "founder_program"
+    ],
+    "website_display_prices": {
+      "custom": "$60,000+",
+      "founder": "$0",
+      "private": "$40,000+",
+      "public": "$25,000"
+    },
+    "website_option_to_package": {
+      "custom": "custom",
+      "founder": "founder_program",
+      "private": "private",
+      "public": "public"
+    }
+  },
+  "run_monitor": {
+    "admin_only_fields": [
+      "run_id",
+      "manifest_hash",
+      "run_state",
+      "stopped_reason",
+      "current_case",
+      "total_cases",
+      "subject_calls",
+      "judge_calls",
+      "input_tokens",
+      "output_tokens",
+      "invalid_count",
+      "invalid_rate_ppm",
+      "estimated_cost_micros",
+      "estimated_cost_usd",
+      "draft_state",
+      "review_state",
+      "reviewer_note",
+      "reviewed_at",
+      "reviewed_by",
+      "approved_artifact_hash",
+      "operator",
+      "version",
+      "superseded_at",
+      "superseded_by_run_id",
+      "supersedes_run_id"
+    ],
+    "approval_requires": [
+      "reviewer",
+      "approved_artifact_hash",
+      "draft_state_ready"
+    ],
+    "counter_ceilings": {
+      "current_case": 1000000,
+      "estimated_cost_micros": 1000000000000,
+      "input_tokens": 100000000000,
+      "invalid_count": 1000000,
+      "judge_calls": 10000000,
+      "output_tokens": 100000000000,
+      "subject_calls": 10000000,
+      "total_cases": 1000000
+    },
+    "cumulative_counters": [
+      "current_case",
+      "subject_calls",
+      "judge_calls",
+      "input_tokens",
+      "output_tokens",
+      "invalid_count",
+      "estimated_cost_micros"
+    ],
+    "draft_states": [
+      "none",
+      "building",
+      "ready",
+      "approved"
+    ],
+    "immutable_counters": [
+      "total_cases"
+    ],
+    "open_run_request_fields": [
+      "manifest_hash",
+      "total_cases",
+      "expected_order_status"
+    ],
+    "progress_request_fields": [
+      "counters",
+      "draft_state",
+      "expected_order_status",
+      "expected_version",
+      "manifest_hash",
+      "run_state",
+      "stopped_reason"
+    ],
+    "review_actions": [
+      "start",
+      "request_changes",
+      "approve",
+      "reject"
+    ],
+    "review_request_fields": [
+      "action",
+      "approved_artifact_hash",
+      "expected_version",
+      "note",
+      "reviewer"
+    ],
+    "review_states": [
+      "none",
+      "requested",
+      "in_progress",
+      "changes_requested",
+      "approved",
+      "rejected"
+    ],
+    "routes": {
+      "open_run": "POST /v1/ace/admin/orders/{order_id}/run",
+      "read_order": "GET /v1/ace/admin/orders/{order_id}",
+      "read_run": "GET /v1/ace/admin/runs/{run_id}",
+      "record_review": "POST /v1/ace/admin/runs/{run_id}/review",
+      "replace_run": "POST /v1/ace/admin/orders/{order_id}/run/replace",
+      "report_progress": "POST /v1/ace/admin/runs/{run_id}/progress"
+    },
+    "run_states": [
+      "pending",
+      "running",
+      "stopped",
+      "completed"
+    ],
+    "stop_reasons": [
+      "operator_stopped",
+      "budget_guard",
+      "invalid_rate_guard",
+      "subject_unreachable",
+      "judge_unavailable",
+      "sandbox_unavailable",
+      "harness_error",
+      "manifest_replaced",
+      "scope_change"
+    ],
+    "terminal_run_states": [
+      "completed",
+      "stopped"
+    ]
+  },
+  "transport": {
+    "admin_base_url_env": "ACE_ADMIN_BASE_URL",
+    "admin_key_env": "ACE_ADMIN_KEY",
+    "admin_key_header": "X-Admin-Key",
+    "admin_operator_header": "X-Admin-Operator",
+    "api_base": "https://logionos-api.onrender.com",
+    "checkout_cancel_path": "payment-cancelled.html",
+    "checkout_success_path": "payment-success.html",
+    "idempotency_header": "Idempotency-Key",
+    "orders_path": "/v1/ace/orders",
+    "status_token_header": "X-ACE-Status-Token",
+    "tls_required_except_loopback": true,
+    "website_origin": "https://logionace.com"
+  }
+}
