@@ -567,6 +567,24 @@ button{font:inherit}
 /* === WHITEPAPER / BENCHMARK SHOWCASE === */
 
 /* Hero */
+/* The whitepaper is a dated record, not a live view, and has to read as one
+   before the reader reaches the first number. The notice takes the hero's
+   clearance under the fixed nav, so the hero loses it. */
+.wp-archive-notice{padding:140px 22px 0}
+.wp-archive-inner{
+  max-width:880px;margin:0 auto;display:grid;gap:10px;
+  border:1px solid rgba(255,176,32,.35);border-radius:var(--radius-sm);
+  background:rgba(255,176,32,.07);padding:20px 24px;
+  color:var(--muted);font-size:14px;line-height:1.65;
+}
+.wp-archive-inner p{margin:0}
+.wp-archive-label{
+  font-family:var(--font-mono);font-size:12px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--warn);
+}
+.wp-archive-inline{font-size:13px;color:var(--muted-2);margin-top:12px}
+.wp-archive-notice + .wp-hero{padding-top:44px}
+
 .wp-hero{
   padding:168px 22px 80px;
   background:
