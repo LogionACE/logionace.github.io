@@ -245,10 +245,29 @@ def test_the_reports_page_lists_verified_models(site):
     assert UNAVAILABLE not in site.page.text_content("#model-grid")
 
 
-def test_a_report_download_is_verified_before_it_is_handed_over(site):
+@pytest.mark.parametrize(
+    ("label", "filename"),
+    [
+        ("gpt-5.6-sol", "ACE_Evaluation_Report_GPT-5.6-Sol.pdf"),
+        ("kimi-k3", "ACE_Evaluation_Report_Kimi-K3.pdf"),
+    ],
+)
+def test_each_new_report_download_is_verified_before_it_is_handed_over(
+    site,
+    label,
+    filename,
+):
+    requested = []
+    site.page.route(
+        f"**/reports/{filename}",
+        lambda route: (requested.append(route.request.url), route.continue_())[-1],
+    )
     site.open("benchmark.html")
     site.page.wait_for_selector("#model-grid .model-card")
-    site.page.click("#model-grid .model-card")
+    site.page.fill("#report-search", label)
+    card = site.page.locator(f'[data-model-label="{label}"]')
+    assert card.count() == 1
+    card.click()
     site.page.wait_for_selector("#report-panel .btn.primary")
 
     button = site.page.query_selector("#report-panel button.btn.primary")
@@ -256,7 +275,9 @@ def test_a_report_download_is_verified_before_it_is_handed_over(site):
     with site.page.expect_download() as download:
         button.click()
     saved = download.value
-    assert saved.suggested_filename.endswith(".pdf")
+    assert saved.suggested_filename == filename
+    assert len(requested) == 1
+    assert requested[0].endswith(f"/reports/{filename}")
     assert "Verified against the approved manifest" in site.page.text_content(
         "#report-panel"
     )
