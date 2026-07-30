@@ -694,3 +694,9 @@ def test_the_payment_pages_do_not_claim_fulfilment_from_a_redirect():
     assert "does not start the evaluation" in success or "payment does not start" in success
     for claim in ("your evaluation has started", "evaluation is now running"):
         assert claim not in success
+
+
+def test_the_cancelled_page_does_not_invent_a_payment_outcome():
+    cancelled = read("payment-cancelled.html").lower()
+    assert "cannot confirm whether a charge was completed" in cancelled
+    assert "no charge was made" not in cancelled

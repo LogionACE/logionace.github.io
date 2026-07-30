@@ -599,7 +599,7 @@ def test_the_success_page_reflects_confirmation_once_the_webhook_lands(site):
     assert "Payment confirmed:" in site.text("#ace-stamp-paid")
 
 
-def test_the_cancelled_page_explains_that_nothing_was_charged(site):
+def test_the_cancelled_page_defers_payment_truth_to_order_status(site):
     site.api(
         site.orders_url(f"/{SAMPLE_ORDER_ID}"),
         payload=order_response(
@@ -613,7 +613,8 @@ def test_the_cancelled_page_explains_that_nothing_was_charged(site):
     site.open("payment-cancelled.html", site.status_fragment())
     site.page.wait_for_selector("#ace-status-panel:not([hidden])")
     copy = site.page.text_content("main").lower()
-    assert "no charge was made" in copy
+    assert "cannot confirm whether a charge was completed" in copy
+    assert "no charge was made" not in copy
     assert site.visible("#ace-pay-button"), "the approved quote is still payable"
 
 

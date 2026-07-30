@@ -273,13 +273,14 @@ def build_pages(nav: str, footer: str) -> dict[str, str]:
 
     pages["payment-cancelled.html"] = dict(
         title="Payment cancelled",
-        description="A LogionACE payment attempt was cancelled. The request is unchanged.",
+        description="Return from the payment page and verify the LogionACE order status.",
         robots="noindex, nofollow",
         eyebrow="Payment cancelled",
-        heading="Payment cancelled &mdash; nothing has changed.",
+        heading="You returned from the payment page.",
         intro=(
-            "You left the payment page without completing it. No charge was made and "
-            "your evaluation request is exactly as it was."
+            "This page alone cannot confirm whether a charge was completed. The order "
+            "status below is updated only after LogionACE receives and verifies "
+            "Stripe&rsquo;s signed notification."
         ),
         body="""      <div class="callout">
         <h3>Where this leaves you</h3>
