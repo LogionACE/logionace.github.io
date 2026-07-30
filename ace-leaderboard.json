@@ -3,6 +3,65 @@
   "generated_at": "2026-06-12T23:34:07Z",
   "models": [
     {
+      "label": "gpt-5.6-sol",
+      "vendor": "OpenAI",
+      "evaluated_at": "2026-07-22T04:10:46Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 95.1,
+        "grade": "A",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 87.8,
+            "grade": "B"
+          },
+          "RF": {
+            "score": 95.6,
+            "grade": "A"
+          },
+          "MR": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "AG": {
+            "score": 100.0,
+            "grade": "A"
+          },
+          "TA": {
+            "score": 83.8,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 97.8,
+        "critical_exception_count": 5,
+        "reproducibility_summary": {
+          "failed_cases": 23,
+          "reproduced_cases": 17,
+          "not_reproduced_cases": 6,
+          "inconclusive_cases": 0
+        },
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 95.1,
+            "grade": "A"
+          },
+          "ACE-FIN": {
+            "overall": 94.3,
+            "grade": "A"
+          },
+          "ACE-HLTH": {
+            "overall": 94.1,
+            "grade": "A"
+          }
+        }
+      }
+    },
+    {
       "label": "gemini-3.1-pro",
       "vendor": "Google",
       "evaluated_at": "2026-06-12T19:40:24Z",
@@ -157,6 +216,65 @@
           "ACE-HLTH": {
             "overall": 90.5,
             "grade": "A"
+          }
+        }
+      }
+    },
+    {
+      "label": "kimi-k3",
+      "vendor": "Moonshot AI",
+      "evaluated_at": "2026-07-22T09:49:59Z",
+      "status": "evaluated",
+      "bare": {
+        "overall": 87.4,
+        "grade": "B",
+        "verdict": "ACE Not Ready",
+        "domains": {
+          "DP": {
+            "score": 79.0,
+            "grade": "C"
+          },
+          "RF": {
+            "score": 87.4,
+            "grade": "B"
+          },
+          "MR": {
+            "score": 88.1,
+            "grade": "B"
+          },
+          "AG": {
+            "score": 84.8,
+            "grade": "B"
+          },
+          "TA": {
+            "score": 88.7,
+            "grade": "B"
+          },
+          "CI": {
+            "score": 100.0,
+            "grade": "A"
+          }
+        },
+        "helpfulness_retention": 97.8,
+        "critical_exception_count": 11,
+        "reproducibility_summary": {
+          "failed_cases": 37,
+          "reproduced_cases": 18,
+          "not_reproduced_cases": 19,
+          "inconclusive_cases": 0
+        },
+        "profiles": {
+          "ACE-GEN": {
+            "overall": 87.4,
+            "grade": "B"
+          },
+          "ACE-FIN": {
+            "overall": 86.2,
+            "grade": "B"
+          },
+          "ACE-HLTH": {
+            "overall": 86.1,
+            "grade": "B"
           }
         }
       }

@@ -480,6 +480,22 @@ def test_the_committed_manifest_describes_the_committed_site():
     assert problems == [], problems
 
 
+def test_new_reports_exist_but_are_not_approved_before_the_pin_moves():
+    paths = {
+        "reports/ACE_Evaluation_Report_GPT-5.6-Sol.pdf",
+        "reports/ACE_Evaluation_Report_Kimi-K3.pdf",
+    }
+    manifest = artifacts.load_manifest(SITE_ROOT)
+    approved = {entry["path"] for entry in manifest["artifacts"]}
+
+    assert paths.isdisjoint(approved)
+    assert all((SITE_ROOT / path).is_file() for path in paths)
+
+    problems = artifacts.check_manifest(SITE_ROOT)
+    for path in paths:
+        assert any(path in problem and "not declared" in problem for problem in problems)
+
+
 def test_the_committed_manifest_is_pinned_to_the_baseline_commit():
     manifest = artifacts.load_manifest(SITE_ROOT)
     assert manifest["provenance"]["commit"] == artifacts.PROVENANCE_COMMIT

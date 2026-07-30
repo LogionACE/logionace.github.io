@@ -497,6 +497,23 @@ def test_the_homepage_states_no_count_of_its_own():
         assert rendered.strip() in ("&mdash;", "-", ""), f"{name} is hard-coded"
 
 
+def test_new_model_reports_have_card_and_download_mappings():
+    board = json.loads(read("ace-leaderboard.json"))
+    labels = {row["label"] for row in board["models"]}
+    assert {"gpt-5.6-sol", "kimi-k3"} <= labels
+
+    benchmark = read("ace-benchmark.js")
+    assert "'gpt-5.6-sol': 'ACE_Evaluation_Report_GPT-5.6-Sol.pdf'" in benchmark
+    assert "'kimi-k3': 'ACE_Evaluation_Report_Kimi-K3.pdf'" in benchmark
+    assert "'gpt-5.6-sol': 'GPT-5.6 Sol'" in benchmark
+    assert "'kimi-k3': 'Kimi K3'" in benchmark
+    assert "button.setAttribute('data-model-label', model.label)" in benchmark
+
+    home = read("ace-home.js")
+    assert "'gpt-5.6-sol': 'GPT-5.6 Sol'" in home
+    assert "'kimi-k3': 'Kimi K3'" in home
+
+
 #: Numbers the homepage is allowed to contain: the step numbering, the delivery
 #: window, and the copyright year. Everything else a reader would take for an
 #: evaluation result, and a result belongs in the verified artifact.

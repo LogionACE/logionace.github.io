@@ -38,6 +38,8 @@
    * that a report exists; the manifest decides whether it does, and the button
    * is not rendered unless the manifest lists the file. */
   var REPORT_FILE = {
+    'gpt-5.6-sol': 'ACE_Evaluation_Report_GPT-5.6-Sol.pdf',
+    'kimi-k3': 'ACE_Evaluation_Report_Kimi-K3.pdf',
     'gpt-5.5': 'ACE_Evaluation_Report_GPT-5.5.pdf',
     'gemini-3.1-pro': 'ACE_Evaluation_Report_Gemini-3.1-Pro.pdf',
     'opus-4.8': 'ACE_Evaluation_Report_Opus-4.8.pdf',
@@ -50,6 +52,8 @@
   };
 
   var DISPLAY_NAME = {
+    'gpt-5.6-sol': 'GPT-5.6 Sol',
+    'kimi-k3': 'Kimi K3',
     'gpt-5.5': 'GPT-5.5',
     'gpt-4o': 'GPT-4o',
     'gemini-3.1-pro': 'Gemini 3.1 Pro',
@@ -228,6 +232,7 @@
     var active = state.selected && state.selected.label === model.label;
     var button = el('button', 'model-card' + (active ? ' active' : ''));
     button.type = 'button';
+    button.setAttribute('data-model-label', model.label);
     button.appendChild(el('span', 'model-logo wordmark', wordmark(companyOf(model))));
     button.appendChild(el('strong', null, displayLabel(model)));
     button.appendChild(el('span', null, companyOf(model)));

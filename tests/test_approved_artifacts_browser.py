@@ -308,6 +308,27 @@ def test_a_report_the_manifest_does_not_list_is_not_offered(site):
     assert all((SITE_ROOT / path).is_file() for path in dropped)
 
 
+def test_new_model_cards_request_reports_until_the_reports_are_approved(site):
+    report_paths = {
+        "reports/ACE_Evaluation_Report_GPT-5.6-Sol.pdf",
+        "reports/ACE_Evaluation_Report_Kimi-K3.pdf",
+    }
+    candidate = artifacts.build_manifest(SITE_ROOT)
+    candidate["artifacts"] = [
+        entry for entry in candidate["artifacts"] if entry["path"] not in report_paths
+    ]
+    serve_manifest(site, candidate)
+    site.open("benchmark.html")
+
+    for label in ("gpt-5.6-sol", "kimi-k3"):
+        site.page.fill("#report-search", label)
+        card = site.page.locator(f'[data-model-label="{label}"]')
+        card.click()
+        assert "ACE Not Ready" in site.page.text_content("#report-panel")
+        assert site.page.get_by_role("link", name="Request report").is_visible()
+        assert site.page.get_by_role("button", name="Download report").count() == 0
+
+
 def test_the_reports_page_fails_closed_on_a_draft_manifest(site):
     draft = manifest()
     draft["state"] = "draft"

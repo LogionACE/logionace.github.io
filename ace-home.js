@@ -28,6 +28,8 @@
   var CAROUSEL_INTERVAL_MS = 10000;
 
   var DISPLAY_NAME = {
+    'gpt-5.6-sol': 'GPT-5.6 Sol',
+    'kimi-k3': 'Kimi K3',
     'gpt-5.5': 'GPT-5.5',
     'gpt-4o': 'GPT-4o',
     'gemini-3.1-pro': 'Gemini 3.1 Pro',
