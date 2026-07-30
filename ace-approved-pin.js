@@ -16,6 +16,6 @@
  * resist a compromised repository, where the same commit would move the pin.
  */
 window.ACE_APPROVED_PIN = Object.freeze({
-  MANIFEST_SHA256: 'aafc0e619d9feece7edb4bce415c73d9100646f322636593fb0c36d42e905814',
-  PROVENANCE_COMMIT: 'b8a00c8ce38c27152837380f50c2c817aa639dd6'
+  MANIFEST_SHA256: '88bbb455855ff706272a7735a624c99fbdf23fe5c60d0d35d428592aefd5dc91',
+  PROVENANCE_COMMIT: '63851e6519e63c3410979f09a69018efb8bf27f6'
 });

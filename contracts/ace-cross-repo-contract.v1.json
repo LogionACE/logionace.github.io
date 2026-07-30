@@ -13,9 +13,9 @@
       "trailing_newline": true
     },
     "manifest_path": "approved-artifacts.json",
-    "manifest_sha256": "aafc0e619d9feece7edb4bce415c73d9100646f322636593fb0c36d42e905814",
+    "manifest_sha256": "88bbb455855ff706272a7735a624c99fbdf23fe5c60d0d35d428592aefd5dc91",
     "pin_file": "ace-approved-pin.js",
-    "provenance_commit": "b8a00c8ce38c27152837380f50c2c817aa639dd6",
+    "provenance_commit": "63851e6519e63c3410979f09a69018efb8bf27f6",
     "roles": [
       "leaderboard_llm",
       "leaderboard_agent",
@@ -23,7 +23,7 @@
     ],
     "state": "approved"
   },
-  "as_of": "2026-07-28",
+  "as_of": "2026-07-30",
   "contract_version": "ace-cross-repo-contract/v1",
   "customer_status_projection": {
     "fields": [

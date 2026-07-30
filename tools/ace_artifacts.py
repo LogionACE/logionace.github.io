@@ -67,7 +67,7 @@ APPROVED_STATE = "approved"
 
 #: The commit whose published tree is the approved snapshot. Recorded as
 #: provenance rather than a human approver, because no human approved it.
-PROVENANCE_COMMIT = "b8a00c8ce38c27152837380f50c2c817aa639dd6"
+PROVENANCE_COMMIT = "63851e6519e63c3410979f09a69018efb8bf27f6"
 PROVENANCE_REPOSITORY = "logionace.github.io"
 
 #: The public leaderboards. `role` is what the site is allowed to use the file

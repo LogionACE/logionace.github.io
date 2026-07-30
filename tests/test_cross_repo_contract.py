@@ -27,7 +27,7 @@ import pytest
 from conftest import SITE_ROOT, read
 
 CONTRACT_PATH = SITE_ROOT / "contracts" / "ace-cross-repo-contract.v1.json"
-CONTRACT_SHA256 = "6c4e39f429aeaa2825da8e9c5a560bf70afb89ed110e94668d8c557aff1133f3"
+CONTRACT_SHA256 = "a50225a29993fdb5fe26c5991af92932a53e30eef3ecd37ace39a2b2e2e05874"
 
 
 @pytest.fixture(scope="module")

@@ -1,10 +1,10 @@
 {
   "artifacts": [
     {
-      "bytes": 10575,
+      "bytes": 13268,
       "path": "ace-leaderboard.json",
       "role": "leaderboard_llm",
-      "sha256": "009a99bedd8cbb5c27c3438944fa127385f4c6c918da63fb4c0dcb5deb19f1b1"
+      "sha256": "6a7d2a498613390747bf33ad496aa89b64b6d162b65e3ebe56bbe584c710a278"
     },
     {
       "bytes": 2489,
@@ -37,6 +37,12 @@
       "sha256": "8975c5a8e3021f0ecd263d1efc74cf08a00046a381beb7c9b8d4abc2cf98b848"
     },
     {
+      "bytes": 681030,
+      "path": "reports/ACE_Evaluation_Report_GPT-5.6-Sol.pdf",
+      "role": "report",
+      "sha256": "9e28902df8ac03e78974b48f61b06ebdb3e1815d0a4d7a0ba4f61db4adde2786"
+    },
+    {
       "bytes": 2457858,
       "path": "reports/ACE_Evaluation_Report_Gemini-3.1-Pro.pdf",
       "role": "report",
@@ -47,6 +53,12 @@
       "path": "reports/ACE_Evaluation_Report_Grok-4.3.pdf",
       "role": "report",
       "sha256": "8f894792d026a328ff5bd3c4715c397689684d5ae035113d440e76f0e9f5067c"
+    },
+    {
+      "bytes": 725609,
+      "path": "reports/ACE_Evaluation_Report_Kimi-K3.pdf",
+      "role": "report",
+      "sha256": "25bff2ee9b395366a0d12b2a18bd4fec68d8d2dcb831c4bf14ca61d349c5e954"
     },
     {
       "bytes": 1440327,
@@ -71,7 +83,7 @@
   "protocol": "ACE Protocol v1.1 (2026-06)",
   "provenance": {
     "basis": "The files published on GitHub main at this commit are treated as the historical approved snapshot. The commit is the approver of record; no individual signed these artifacts off.",
-    "commit": "b8a00c8ce38c27152837380f50c2c817aa639dd6",
+    "commit": "63851e6519e63c3410979f09a69018efb8bf27f6",
     "kind": "git_commit",
     "repository": "logionace.github.io"
   },

@@ -499,8 +499,32 @@ def test_the_homepage_states_no_count_of_its_own():
 
 def test_new_model_reports_have_card_and_download_mappings():
     board = json.loads(read("ace-leaderboard.json"))
-    labels = {row["label"] for row in board["models"]}
+    models = board["models"]
+    labels = {row["label"] for row in models}
     assert {"gpt-5.6-sol", "kimi-k3"} <= labels
+    by_label = {row["label"]: row for row in models}
+    assert {
+        label: {
+            "overall": by_label[label]["bare"]["overall"],
+            "grade": by_label[label]["bare"]["grade"],
+            "verdict": by_label[label]["bare"]["verdict"],
+        }
+        for label in ("gpt-5.6-sol", "kimi-k3")
+    } == {
+        "gpt-5.6-sol": {
+            "overall": 95.1,
+            "grade": "A",
+            "verdict": "ACE Not Ready",
+        },
+        "kimi-k3": {
+            "overall": 87.4,
+            "grade": "B",
+            "verdict": "ACE Not Ready",
+        },
+    }
+    scores = [row["bare"]["overall"] for row in models]
+    assert scores == sorted(scores, reverse=True)
+    assert models[0]["label"] == "gpt-5.6-sol"
 
     benchmark = read("ace-benchmark.js")
     assert "'gpt-5.6-sol': 'ACE_Evaluation_Report_GPT-5.6-Sol.pdf'" in benchmark
