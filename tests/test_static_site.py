@@ -522,9 +522,22 @@ def test_new_model_reports_have_card_and_download_mappings():
             "verdict": "ACE Not Ready",
         },
     }
-    scores = [row["bare"]["overall"] for row in models]
-    assert scores == sorted(scores, reverse=True)
-    assert models[0]["label"] == "gpt-5.6-sol"
+    assert [
+        (row["label"], row["bare"]["overall"])
+        for row in models
+    ] == [
+        ("gpt-5.6-sol", 95.1),
+        ("gemini-3.1-pro", 94.7),
+        ("gpt-5.5", 93.1),
+        ("fable-5", 91.5),
+        ("kimi-k3", 87.4),
+        ("opus-4.8", 87.2),
+        ("gpt-4o", 84.9),
+        ("grok-4.3", 84.9),
+        ("qwen3.7-max", 84.5),
+        ("deepseek-v4-pro", 75.9),
+        ("llama-4-maverick", 56.5),
+    ]
 
     benchmark = read("ace-benchmark.js")
     assert "'gpt-5.6-sol': 'ACE_Evaluation_Report_GPT-5.6-Sol.pdf'" in benchmark
