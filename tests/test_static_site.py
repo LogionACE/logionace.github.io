@@ -81,6 +81,12 @@ EXPECTED_PRICES = {
 }
 
 
+def test_company_page_lists_the_full_logionace_team():
+    company = read("company.html")
+    for name in ("Chris Ma", "Jun Chen", "Joanna Luo", "Zino T.", "Louis Lee"):
+        assert name in company, f"{name} is missing from company.html"
+
+
 def test_the_price_list_is_exactly_the_published_one():
     config = read("ace-config.js")
     for package, price in EXPECTED_PRICES.items():
@@ -696,18 +702,18 @@ def test_the_terms_cover_the_payment_flow(clause):
     assert clause.lower() in read("terms.html").lower(), clause
 
 
-def test_no_public_page_names_a_person_or_admits_to_being_unreviewed():
+def test_no_public_page_identifies_an_individual_as_a_reviewer_or_admits_to_being_unreviewed():
     """Internal process belongs in internal documents.
 
-    Naming the reviewer tells a customer who to pressure, and publishing "this
-    has not been reviewed yet" invites them to argue the terms do not bind. The
-    requirement itself is not dropped: it lives in the task report and in the
-    backend's paid-launch checklist, where it gates the launch.
+    Team biographies are public company information. Reviewer attribution tells
+    a customer who to pressure, and publishing "this has not been reviewed yet"
+    invites them to argue the terms do not bind.
     """
     for page in PUBLIC_PAGES + CUSTOMER_FLOW_PAGES:
         body = read(page)
-        assert "Joanna" not in body, page
         lowered = body.lower()
+        for reviewer_attribution in ("reviewed by joanna", "joanna reviewed"):
+            assert reviewer_attribution not in lowered, f"{page}: {reviewer_attribution}"
         for admission in ("legal review", "not yet completed",
                           "have not yet completed", "pending review",
                           "status of this document"):
