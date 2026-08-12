@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-12",
+  "updated_at": "2026-08-13",
   "publications": [
     {
       "id": "ace-272-benchmark-paper",
@@ -23,6 +23,28 @@
       "links": {
         "results": "benchmark.html",
         "methodology": "methodology.html"
+      }
+    },
+    {
+      "id": "ace-v1-1-whitepaper",
+      "title": "ACE Benchmark v1.1 Technical Whitepaper",
+      "type": "whitepaper",
+      "date": "2026-06",
+      "abstract": "The frozen technical record of the June 2026 ACE benchmark round, including methodology, scoring, results, and representative cases.",
+      "authors": [
+        "LogionACE"
+      ],
+      "topics": [
+        "enterprise AI trust",
+        "benchmark methodology",
+        "model evaluation"
+      ],
+      "version": "1.1",
+      "status": "archived",
+      "links": {
+        "page": "research.html#whitepaper",
+        "pdf": "ACE_Whitepaper_v1.1.pdf",
+        "results": "benchmark.html"
       }
     }
   ]

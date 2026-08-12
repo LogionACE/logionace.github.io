@@ -379,9 +379,9 @@
 
     var actions = el('div', 'report-actions');
     actions.appendChild(downloadButton(model));
-    var whitepaper = el('a', 'btn outline', 'Read whitepaper');
-    whitepaper.href = 'whitepaper.html';
-    actions.appendChild(whitepaper);
+    var research = el('a', 'btn outline', 'Explore ACE Research');
+    research.href = 'research.html';
+    actions.appendChild(research);
     card.appendChild(actions);
 
     card.appendChild(el('p', 'report-note',
