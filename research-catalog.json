@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-12",
+  "publications": [
+    {
+      "id": "ace-272-benchmark-paper",
+      "title": "ACE-272: A Retrospective Benchmark of Enterprise Trust Risks in Language-Model Endpoints",
+      "type": "deep-paper",
+      "date": null,
+      "abstract": "A retrospective study of nine language-model endpoints evaluated across six enterprise trust domains, with explicit scope, scoring, and attribution limits.",
+      "authors": [
+        "Chris Ma",
+        "Joanna Luo"
+      ],
+      "topics": [
+        "enterprise AI trust",
+        "benchmark methodology",
+        "endpoint evaluation",
+        "reliability"
+      ],
+      "version": "draft-1",
+      "status": "in-preparation",
+      "links": {
+        "results": "benchmark.html",
+        "methodology": "methodology.html"
+      }
+    }
+  ]
+}
