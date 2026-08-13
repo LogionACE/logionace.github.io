@@ -77,6 +77,35 @@
   </section>
 </main>
 
+<div class="report-lead-modal" id="report-lead-modal" hidden>
+  <div class="report-lead-overlay" data-report-lead-close></div>
+  <section class="report-lead-card" role="dialog" aria-modal="true"
+           aria-labelledby="report-lead-title">
+    <button class="report-lead-close" type="button" data-report-lead-close
+            aria-label="Close report request form">&times;</button>
+    <p class="eyebrow">Public report</p>
+    <h2 id="report-lead-title">Download the evaluation report.</h2>
+    <p>Enter your work details so our team can send relevant evaluation updates and respond to your request.</p>
+    <form id="report-lead-form">
+      <label for="report-lead-name">Name</label>
+      <input id="report-lead-name" name="name" type="text" autocomplete="name" required>
+
+      <label for="report-lead-email">Work email</label>
+      <input id="report-lead-email" name="email" type="email" autocomplete="email" required>
+
+      <label for="report-lead-company">Company</label>
+      <input id="report-lead-company" name="company" type="text" autocomplete="organization" required>
+
+      <input id="report-lead-report" name="report" type="hidden">
+      <input name="source" type="hidden" value="public_report_download">
+
+      <p class="report-lead-error" id="report-lead-error" role="alert" hidden></p>
+      <button class="btn primary" id="report-lead-submit" type="submit">Submit and download</button>
+      <p class="report-lead-privacy">We use these details to deliver the requested report and follow up about relevant LogionACE evaluation services. See our <a href="privacy.html">Privacy Policy</a>.</p>
+    </form>
+  </section>
+</div>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div>

@@ -412,6 +412,46 @@ button{font:inherit}
 .report-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
 .disabled-link{opacity:.55;cursor:not-allowed;pointer-events:none}
 .report-note{color:var(--muted-2);font-size:12px;line-height:1.6;margin-top:12px}
+.report-lead-modal{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.report-lead-modal[hidden]{display:none}
+.report-lead-overlay{
+  position:absolute;inset:0;background:rgba(2,4,7,.78);
+  backdrop-filter:blur(7px);
+}
+.report-lead-card{
+  position:relative;z-index:1;width:min(460px,100%);
+  max-height:calc(100vh - 48px);overflow:auto;
+  padding:32px;border:1px solid var(--line-2);border-radius:22px;
+  background:var(--panel);box-shadow:0 24px 80px rgba(0,0,0,.55);
+}
+.report-lead-card h2{margin:10px 34px 8px 0;font-size:28px;line-height:1.12;letter-spacing:-.04em}
+.report-lead-card>p:not(.eyebrow){color:var(--muted);font-size:14px;line-height:1.65}
+.report-lead-close{
+  position:absolute;right:17px;top:13px;border:0;background:transparent;
+  color:var(--muted);font-size:28px;line-height:1;cursor:pointer;
+}
+.report-lead-close:hover{color:var(--text)}
+.report-lead-card form{display:grid;gap:9px;margin-top:24px}
+.report-lead-card label{
+  margin-top:5px;color:var(--muted);font-size:12px;font-weight:650;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+.report-lead-card input{
+  width:100%;padding:12px 14px;border:1px solid var(--line-2);
+  border-radius:10px;background:rgba(255,255,255,.04);
+  color:var(--text);font:inherit;
+}
+.report-lead-card input:focus{outline:0;border-color:var(--accent)}
+.report-lead-card .btn{width:100%;margin-top:10px}
+.report-lead-error{
+  padding:11px 12px;border:1px solid rgba(255,93,108,.35);border-radius:10px;
+  background:rgba(255,93,108,.08);color:var(--text);font-size:13px;line-height:1.5;
+}
+.report-lead-privacy{color:var(--muted-2);font-size:11px;line-height:1.55;text-align:center}
+.report-lead-privacy a{color:var(--muted)}
 
 /* === COMPANY === */
 .team-placeholder{

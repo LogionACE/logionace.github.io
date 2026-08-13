@@ -9,15 +9,18 @@
  * cannot prove is worse than an empty page -- the reader cannot tell which one
  * they are looking at.
  *
- * Report downloads go through the same gate. There used to be a lead-capture
- * form in front of them that wrote a name, email and company to localStorage;
- * that is gone. Published means published, and the visitor's details are not
- * the price of reading an evaluation we call public.
+ * Report bytes still go through the approved-manifest gate. Before a download,
+ * the visitor submits a minimal sales contact form to the LogionOS API. Contact
+ * data is never written to browser storage; the report is released only after
+ * the lead endpoint accepts the submission and the artifact hash verifies.
  */
 (function () {
   'use strict';
 
   var ARTIFACTS = window.AceArtifacts;
+  var CONFIG = window.ACE_CONFIG;
+  var pendingDownload = null;
+  var returnFocus = null;
 
   var CATEGORY_ROLES = {
     llm: 'leaderboard_llm',
@@ -110,6 +113,11 @@
 
   function byId(id) {
     return document.getElementById(id);
+  }
+
+  function valueOf(id) {
+    var input = byId(id);
+    return input ? String(input.value || '').trim() : '';
   }
 
   function gradeClass(grade) {
@@ -271,6 +279,102 @@
     return pill;
   }
 
+  function setLeadError(message) {
+    var error = byId('report-lead-error');
+    if (!error) return;
+    error.textContent = message || '';
+    error.hidden = !message;
+  }
+
+  function closeLeadForm() {
+    var modal = byId('report-lead-modal');
+    if (modal) modal.hidden = true;
+    document.body.style.overflow = '';
+    pendingDownload = null;
+    if (returnFocus) returnFocus.focus();
+    returnFocus = null;
+  }
+
+  function openLeadForm(path, filename, reportLabel, button, note) {
+    var modal = byId('report-lead-modal');
+    var report = byId('report-lead-report');
+    var form = byId('report-lead-form');
+    if (!modal || !report || !form) return;
+
+    pendingDownload = {
+      path: path,
+      filename: filename,
+      reportLabel: reportLabel,
+      button: button,
+      note: note
+    };
+    returnFocus = button;
+    report.value = reportLabel + ' — ' + filename;
+    setLeadError('');
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var first = byId('report-lead-name');
+    if (first) first.focus();
+  }
+
+  function submitLead(event) {
+    event.preventDefault();
+    var leadForm = byId('report-lead-form');
+    var submit = byId('report-lead-submit');
+    if (!leadForm || !pendingDownload || !submit) return;
+
+    var request = pendingDownload;
+    var payload = {
+      name: valueOf('report-lead-name'),
+      email: valueOf('report-lead-email'),
+      company: valueOf('report-lead-company'),
+      report: request.reportLabel + ' — ' + request.filename,
+      source: 'public_report_download'
+    };
+
+    submit.disabled = true;
+    submit.textContent = 'Recording request...';
+    setLeadError('');
+
+    fetch(CONFIG.API_BASE + CONFIG.REPORT_LEADS_PATH, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error('lead_submission_failed');
+      }
+      closeLeadForm();
+      leadForm.reset();
+      return ARTIFACTS.downloadReport(request.path, request.filename).then(function () {
+        request.button.disabled = false;
+        request.button.textContent = 'Download report';
+        request.note.hidden = false;
+        request.note.textContent = 'Request recorded, report verified and downloaded.';
+      }).catch(function (error) {
+        if (window.console && window.console.warn) {
+          window.console.warn('report verification failed:', error);
+        }
+        request.button.disabled = true;
+        request.button.textContent = 'Download unavailable';
+        request.note.hidden = false;
+        request.note.textContent = ARTIFACTS.UNAVAILABLE_MESSAGE +
+          ' This file did not match the approved manifest, so we have not served it.';
+      });
+    }).catch(function (error) {
+      if (window.console && window.console.warn) {
+        window.console.warn('report lead submission failed:', error);
+      }
+      setLeadError('We could not record your request. Please check your connection or email info@logionace.com.');
+      submit.disabled = false;
+      submit.textContent = 'Submit and download';
+      return;
+    });
+  }
+
   function downloadButton(model) {
     var filename = REPORT_FILE[model.label];
     var path = filename ? 'reports/' + filename : '';
@@ -289,24 +393,7 @@
     note.hidden = true;
 
     button.addEventListener('click', function () {
-      button.disabled = true;
-      button.textContent = 'Verifying...';
-      note.hidden = false;
-      note.textContent = 'Checking this file against the approved manifest.';
-
-      ARTIFACTS.downloadReport(path, filename).then(function () {
-        button.disabled = false;
-        button.textContent = 'Download report';
-        note.textContent = 'Verified against the approved manifest and downloaded.';
-      }).catch(function (error) {
-        if (window.console && window.console.warn) {
-          window.console.warn('report verification failed:', error);
-        }
-        button.disabled = true;
-        button.textContent = 'Download unavailable';
-        note.textContent = ARTIFACTS.UNAVAILABLE_MESSAGE +
-          ' This file did not match the approved manifest, so we have not served it.';
-      });
+      openLeadForm(path, filename, displayLabel(model), button, note);
     });
 
     var wrapper = document.createDocumentFragment();
@@ -488,6 +575,17 @@
         render();
       });
     }
+
+    var leadForm = byId('report-lead-form');
+    if (leadForm) leadForm.addEventListener('submit', submitLead);
+    var closers = document.querySelectorAll('[data-report-lead-close]');
+    for (var j = 0; j < closers.length; j += 1) {
+      closers[j].addEventListener('click', closeLeadForm);
+    }
+    document.addEventListener('keydown', function (event) {
+      var modal = byId('report-lead-modal');
+      if (event.key === 'Escape' && modal && !modal.hidden) closeLeadForm();
+    });
 
     loadCategory('llm');
   }

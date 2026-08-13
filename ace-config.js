@@ -15,6 +15,7 @@ window.ACE_CONFIG = Object.freeze({
   API_BASE: 'https://logionos-api.onrender.com',
 
   ORDERS_PATH: '/v1/ace/orders',
+  REPORT_LEADS_PATH: '/v1/ace/report-leads',
 
   /*
    * Free hosting tiers idle. The first request after an idle period can take

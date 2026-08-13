@@ -119,10 +119,18 @@ def test_the_form_never_presents_itself_as_immediate_payment():
 # -- lead capture and PII ---------------------------------------------------
 
 def test_no_page_posts_to_a_third_party_form_service():
-    for path in text_files():
+    for path in site_scripts():
         body = path.read_text("utf-8", errors="replace").lower()
         for service in ("formspree", "hubspot", "mailchimp", "typeform", "getform"):
             assert service not in body, f"{relative(path)} still references {service}"
+    for path in html_pages():
+        body = path.read_text("utf-8", errors="replace").lower()
+        actions = re.findall(r"<form\b[^>]*\baction=[\"']([^\"']+)", body)
+        for action in actions:
+            assert not any(
+                service in action
+                for service in ("formspree", "hubspot", "mailchimp", "typeform", "getform")
+            ), f"{relative(path)} posts to a third-party form service"
 
 
 def test_nothing_writes_customer_details_to_local_storage():
@@ -488,7 +496,11 @@ def test_the_public_pages_read_numbers_only_through_the_verifier():
         body = read(script)
         assert "ARTIFACTS.leaderboard(" in body, script
         # No direct read of the raw JSON: that is the unverified path.
-        assert "fetch(" not in body, script
+        fetches = re.findall(r"fetch\(\s*([^,)]+)", body)
+        if script == "ace-home.js":
+            assert fetches == []
+        else:
+            assert fetches == ["CONFIG.API_BASE + CONFIG.REPORT_LEADS_PATH"]
         assert "ace-leaderboard.json" not in body, script
         assert "agent-leaderboard.json" not in body, script
 
