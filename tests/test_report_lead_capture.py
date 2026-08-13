@@ -50,6 +50,11 @@ class ReportLeadCaptureTests(unittest.TestCase):
         self.assertNotIn("localStorage", lead_code)
         self.assertNotIn("sessionStorage", lead_code)
 
+    def test_privacy_discloses_report_confirmation_processor(self):
+        privacy = (ROOT / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn("Google Workspace", privacy)
+        self.assertIn("requester confirmation", privacy)
+
 
 if __name__ == "__main__":
     unittest.main()
