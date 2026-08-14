@@ -10,9 +10,9 @@
  * they are looking at.
  *
  * Report bytes still go through the approved-manifest gate. Before a download,
- * the visitor submits a minimal sales contact form to the LogionOS API. Contact
- * data is never written to browser storage; the report is released only after
- * the lead endpoint accepts the submission and the artifact hash verifies.
+ * the visitor submits a minimal sales contact form. Contact data is sent to the
+ * LogionOS API without blocking the download and is never written to browser
+ * storage; the report is released only after the artifact hash verifies.
  */
 (function () {
   'use strict';
@@ -333,8 +333,31 @@
     };
 
     submit.disabled = true;
-    submit.textContent = 'Recording request...';
+    submit.textContent = 'Preparing download...';
     setLeadError('');
+
+    request.button.disabled = true;
+    request.button.textContent = 'Preparing download...';
+    ARTIFACTS.downloadReport(request.path, request.filename).then(function () {
+      request.button.disabled = false;
+      request.button.textContent = 'Download report';
+      request.note.hidden = false;
+      request.note.textContent = 'Report verified and downloaded.';
+    }).catch(function (error) {
+      if (window.console && window.console.warn) {
+        window.console.warn('report verification failed:', error);
+      }
+      request.button.disabled = true;
+      request.button.textContent = 'Download unavailable';
+      request.note.hidden = false;
+      request.note.textContent = ARTIFACTS.UNAVAILABLE_MESSAGE +
+        ' This file did not match the approved manifest, so we have not served it.';
+    });
+
+    closeLeadForm();
+    leadForm.reset();
+    submit.disabled = false;
+    submit.textContent = 'Submit and download';
 
     fetch(CONFIG.API_BASE + CONFIG.REPORT_LEADS_PATH, {
       method: 'POST',
@@ -342,36 +365,17 @@
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      keepalive: true
     }).then(function (response) {
       if (!response.ok) {
         throw new Error('lead_submission_failed');
       }
-      closeLeadForm();
-      leadForm.reset();
-      return ARTIFACTS.downloadReport(request.path, request.filename).then(function () {
-        request.button.disabled = false;
-        request.button.textContent = 'Download report';
-        request.note.hidden = false;
-        request.note.textContent = 'Request recorded, report verified and downloaded.';
-      }).catch(function (error) {
-        if (window.console && window.console.warn) {
-          window.console.warn('report verification failed:', error);
-        }
-        request.button.disabled = true;
-        request.button.textContent = 'Download unavailable';
-        request.note.hidden = false;
-        request.note.textContent = ARTIFACTS.UNAVAILABLE_MESSAGE +
-          ' This file did not match the approved manifest, so we have not served it.';
-      });
+      return response;
     }).catch(function (error) {
       if (window.console && window.console.warn) {
         window.console.warn('report lead submission failed:', error);
       }
-      setLeadError('We could not record your request. Please check your connection or email info@logionace.com.');
-      submit.disabled = false;
-      submit.textContent = 'Submit and download';
-      return;
     });
   }
 
