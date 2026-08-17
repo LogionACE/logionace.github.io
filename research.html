@@ -5,12 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACE Research - LogionACE</title>
   <meta name="description" content="ACE Research publishes benchmark papers, research notes, methods, and integrity policies for enterprise AI trust evaluation.">
+  <link rel="canonical" href="https://logionace.com/research.html">
+  <meta property="og:title" content="ACE-272 Historical Retrospective Paper | ACE Research">
+  <meta property="og:description" content="Published ACE-272 historical retrospective (272-case cohort): not the current 350-case benchmark, with preregistered dual-rater agreement pending.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://logionace.com/research.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="alternate" type="application/json" href="research-catalog.json" title="ACE Research catalog">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": "ACE-272 Benchmark Paper",
+    "headline": "A Retrospective Benchmark of Enterprise Trust Risks in Language-Model Endpoints",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Chris Ma"
+      },
+      {
+        "@type": "Person",
+        "name": "Joanna Luo"
+      }
+    ],
+    "datePublished": "2026-08-18",
+    "isPartOf": "ACE Research",
+    "url": "https://logionace.com/research.html",
+    "encoding": {
+      "@type": "MediaObject",
+      "contentUrl": "https://logionace.com/ACE-272-paper.pdf"
+    },
+    "description": "Published historical retrospective 272-case cohort paper. Not a current 350-case benchmark; preregistered dual-rater agreement pending."
+  }
+  </script>
 </head>
 <body class="research-page">
 <a class="skip-link" href="#main-content">Skip to research</a>
@@ -62,14 +93,15 @@
       <div class="research-feature-copy">
         <div class="research-publication-meta">
           <span>Deep Paper</span>
-          <span class="research-status">In preparation</span>
+          <span class="research-status">Published · 2026-08-18</span>
         </div>
         <h2 id="featured-title">ACE-272 Benchmark Paper</h2>
         <p class="research-paper-title">A Retrospective Benchmark of Enterprise Trust Risks in Language-Model Endpoints</p>
-        <p class="research-abstract">A bounded study of nine historical endpoint evaluations, with explicit scoring, denominator, reliability, and attribution limits.</p>
+        <p class="research-abstract">A bounded report on a historical, retrospective 272-case cohort across nine endpoint evaluations, with explicit scoring, denominator, reliability, and attribution limits.</p>
+        <p class="research-abstract">This publication is not a current 350-case benchmark. The preregistered dual-rater agreement is still in progress, so this release does not claim validated manual agreement.</p>
         <p class="research-authors">Chris Ma · Joanna Luo</p>
         <div class="research-actions">
-          <a class="btn primary" href="benchmark.html">View benchmark results</a>
+          <a class="btn primary" href="ACE-272-paper.pdf" download>Download paper</a>
           <a class="btn outline" href="methodology.html">Read methodology</a>
         </div>
       </div>
@@ -153,7 +185,7 @@
     <div class="research-integrity-grid">
       <article>
         <h3>Publication safety</h3>
-        <p>Private prompts, holdout cases, and non-public evidence remain outside public research artifacts.</p>
+        <p>Private prompts, holdout IDs, and raw responses remain non-public and are excluded from public research artifacts.</p>
       </article>
       <article>
         <h3>Versioned corrections</h3>

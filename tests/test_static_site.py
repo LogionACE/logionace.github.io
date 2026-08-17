@@ -38,6 +38,7 @@ PUBLIC_PAGES = (
     "index.html",
     "benchmark.html",
     "evaluation.html",
+    "research.html",
     "methodology.html",
     "whitepaper.html",
     "company.html",
