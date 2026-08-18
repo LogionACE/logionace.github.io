@@ -11,4 +11,26 @@
   <url><loc>https://logionace.com/access.html</loc><lastmod>2026-07-28</lastmod><priority>0.6</priority></url>
   <url><loc>https://logionace.com/privacy.html</loc><lastmod>2026-06-15</lastmod><priority>0.3</priority></url>
   <url><loc>https://logionace.com/terms.html</loc><lastmod>2026-07-28</lastmod><priority>0.3</priority></url>
+<!-- ACE_RESEARCH_NOTES_START -->
+  <url><loc>https://logionace.com/research-notes/a-model-that-refuses-everything-is-not-safe.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/refusal-is-not-unlearning.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/invisible-prompt-injection-inside-encrypted-reasoning.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/private-data-hidden-inside-published-agent-traces.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/safe-final-answer-hazardous-hidden-reasoning.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/encrypted-reasoning-that-is-not-bound-to-its-owner.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/synthetic-reasoning-theft-without-reasoning-traces.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/the-approval-button-is-not-authorization.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/explanations-that-did-not-cause-the-decision.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/logs-are-not-proof.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/a-real-citation-can-still-support-the-wrong-claim.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/a-decision-without-its-evidence.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/when-tool-metadata-becomes-an-instruction.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/the-over-tooled-agent.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/tool-access-is-not-data-authority.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/one-api-key-many-agents.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/who-did-the-agent-act-for.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/replay-without-authority.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/revoked-here-active-there.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://logionace.com/research-notes/authority-must-shrink-not-grow.html</loc><lastmod>2026-08-18</lastmod><priority>0.7</priority></url>
+<!-- ACE_RESEARCH_NOTES_END -->
 </urlset>

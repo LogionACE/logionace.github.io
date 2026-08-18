@@ -1,0 +1,102 @@
+[
+  {
+    "id": "ACE-RN-2026-001",
+    "text": "Authority Must Shrink, Not Grow: A child agent can receive a credential whose effective resource, action, audience, tenant, time, or budget scope is broader than the authority its parent was allowed to delegate Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/authority-must-shrink-not-grow.html"
+  },
+  {
+    "id": "ACE-RN-2026-002",
+    "text": "Revoked Here, Active There: A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/revoked-here-active-there.html"
+  },
+  {
+    "id": "ACE-RN-2026-003",
+    "text": "Replay Without Authority: A bearer artifact can be copied from an authorized exchange and replayed by a different process, session, audience, or time window without re-establishing the authority that justified the original use Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/replay-without-authority.html"
+  },
+  {
+    "id": "ACE-RN-2026-004",
+    "text": "Who Did the Agent Act For?: An action can identify the immediate workload yet fail to preserve the human or service principal, delegation purpose, and actor chain on whose behalf the agent acted Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/who-did-the-agent-act-for.html"
+  },
+  {
+    "id": "ACE-RN-2026-005",
+    "text": "One API Key, Many Agents: Multiple agents using one API key collapse distinct software identities, tasks, principals, and authority boundaries into a single credential holder Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/one-api-key-many-agents.html"
+  },
+  {
+    "id": "ACE-RN-2026-006",
+    "text": "Tool Access Is Not Data Authority: A tool being visible, schema-valid, and technically able to reach a record does not prove that the current principal authorized this concrete resource, parameter, purpose, and destination Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/tool-access-is-not-data-authority.html"
+  },
+  {
+    "id": "ACE-RN-2026-007",
+    "text": "The Over-Tooled Agent: An agent can expose too many tools, overly broad tool functions, or credentials whose effective permission closure exceeds the current task Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/the-over-tooled-agent.html"
+  },
+  {
+    "id": "ACE-RN-2026-008",
+    "text": "When Tool Metadata Becomes an Instruction: Tool descriptions, annotations, schemas, and returned metadata can contain attacker-controlled text that the model interprets as instructions rather than untrusted data Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/when-tool-metadata-becomes-an-instruction.html"
+  },
+  {
+    "id": "ACE-RN-2026-009",
+    "text": "A Decision Without Its Evidence: A record that stores only approve or deny and a free-text reason cannot prove which inputs, policy version, alternatives, evidence artifacts, and authorized approver existed at decision time Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/a-decision-without-its-evidence.html"
+  },
+  {
+    "id": "ACE-RN-2026-010",
+    "text": "A Real Citation Can Still Support the Wrong Claim: A DOI, URL, or paper can be real while the cited span does not entail the atomic claim, applies to a different population or date, or supports only a weaker qualified statement Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/a-real-citation-can-still-support-the-wrong-claim.html"
+  },
+  {
+    "id": "ACE-RN-2026-011",
+    "text": "Logs Are Not Proof: Ordinary logs can omit relevant events, accept mutable free text, lack actor or policy context, and be rewritten by the same system whose conduct they are meant to establish Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/logs-are-not-proof.html"
+  },
+  {
+    "id": "ACE-RN-2026-012",
+    "text": "Explanations That Did Not Cause the Decision: A plausible explanation generated after an answer can be insensitive to the factors that actually changed the model's decision and therefore cannot be treated as a causal record Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/explanations-that-did-not-cause-the-decision.html"
+  },
+  {
+    "id": "ACE-RN-2026-013",
+    "text": "The Approval Button Is Not Authorization: A click records an interface event but does not prove that the reviewer was authorized, saw the final action and evidence, understood the scope, or that the backend enforced the approved object Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/the-approval-button-is-not-authorization.html"
+  },
+  {
+    "id": "ACE-RN-2026-014",
+    "text": "Synthetic Reasoning Theft Without Reasoning Traces: A black-box API can transfer useful reasoning capability through final answers and summaries even when it never returns the victim's private chain of thought Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/synthetic-reasoning-theft-without-reasoning-traces.html"
+  },
+  {
+    "id": "ACE-RN-2026-015",
+    "text": "Encrypted Reasoning That Is Not Bound to Its Owner: An opaque reasoning block can preserve confidentiality at rest yet remain replayable across users, sessions, or compatible models if it is not bound to owner and context Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/encrypted-reasoning-that-is-not-bound-to-its-owner.html"
+  },
+  {
+    "id": "ACE-RN-2026-016",
+    "text": "Safe Final Answer, Hazardous Hidden Reasoning: A final answer can look compliant while intermediate reasoning contains harmful instructions, deceptive intent, privacy-sensitive content, or a plan that later tool actions execute Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/safe-final-answer-hazardous-hidden-reasoning.html"
+  },
+  {
+    "id": "ACE-RN-2026-017",
+    "text": "Private Data Hidden Inside Published Agent Traces: A clean final response can coexist with personal or confidential data in tool arguments, observations, memory, errors, metadata, attachments, or intermediate agent messages Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/private-data-hidden-inside-published-agent-traces.html"
+  },
+  {
+    "id": "ACE-RN-2026-018",
+    "text": "Invisible Prompt Injection Inside Encrypted Reasoning: Encrypted, encoded, hidden, or dynamically assembled content can carry instructions that are invisible to a human reviewer but become executable context when an agent decodes or consumes it Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/invisible-prompt-injection-inside-encrypted-reasoning.html"
+  },
+  {
+    "id": "ACE-RN-2026-019",
+    "text": "Refusal Is Not Unlearning: A model's refusal to answer a probe is behavioral output evidence; it does not prove removal from parameters, adapters, retrieval stores, caches, memories, checkpoints, or derivative datasets Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/refusal-is-not-unlearning.html"
+  },
+  {
+    "id": "ACE-RN-2026-020",
+    "text": "A Model That Refuses Everything Is Not Safe: A system can score well on a one-sided harmful-prompt test by refusing every request while remaining unusable and leaving tool misuse, privacy leakage, or adversarial bypass untested Read the full ACE Research Note.",
+    "url": "https://logionace.com/research-notes/a-model-that-refuses-everything-is-not-safe.html"
+  }
+]

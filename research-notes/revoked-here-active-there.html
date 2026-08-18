@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revoked Here, Active There | ACE Research</title>
+  <meta name="description" content="A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Revoked Here, Active There | ACE Research">
+  <meta property="og:description" content="A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://logionace.com/research-notes/revoked-here-active-there.html">
+  <link rel="canonical" href="https://logionace.com/research-notes/revoked-here-active-there.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "identifier": "ACE-RN-2026-002",
+  "name": "Revoked Here, Active There",
+  "headline": "Revoked Here, Active There",
+  "datePublished": "2026-08-18",
+  "version": "1.0",
+  "author": {
+    "@type": "Person",
+    "name": "Chris Ma"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ACE Research"
+  },
+  "url": "https://logionace.com/research-notes/revoked-here-active-there.html",
+  "isPartOf": "ACE Research Notes",
+  "description": "A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline"
+}
+  </script>
+</head>
+<body class="research-note-page" data-note-id="ACE-RN-2026-002">
+  <a class="skip-link" href="#note-content">Skip to note</a>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="../logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <div class="nav-drop">
+        <span class="nav-trigger">Product</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="../benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="../methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="../research">Research<span class="nav-desc">Papers, notes, and methods</span></a>
+        </div></div>
+      </div>
+      <a href="../evaluation">Evaluation</a>
+      <div class="nav-drop">
+        <span class="nav-trigger">Company</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="../company">About<span class="nav-desc">Team and mission</span></a>
+          <a href="../trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+        </div></div>
+      </div>
+      <a href="#contact" class="nav-cta">Request evaluation</a>
+    </div>
+  </div>
+</nav>
+  <section class="rn-print-cover" aria-hidden="true">
+    <div class="rn-print-arcs"></div>
+    <div class="rn-print-top">
+      <div class="rn-print-brand">
+        <img src="../logo.svg" alt="">
+        <p class="rn-print-brand-name">Logion<span>ACE</span></p>
+      </div>
+      <p class="rn-print-series">ACE Research</p>
+    </div>
+    <div class="rn-print-middle">
+      <p class="rn-print-type">ACE Research Note</p>
+      <p class="rn-print-heading">Revoked Here, Active There</p>
+      <p class="rn-print-version">ACE-RN-2026-002 · Version 1.0</p>
+      <p class="rn-print-preview">Template Preview</p>
+    </div>
+    <dl class="rn-print-meta">
+      <div><dt>Author</dt><dd>Chris Ma</dd></div>
+      <div><dt>Published</dt><dd>2026-08-18</dd></div>
+      <div><dt>Version</dt><dd>1.0</dd></div>
+      <div class="rn-print-meta-scope"><dt>Research scope</dt><dd>Delegated authority containment · Decision evidence completeness</dd></div>
+    </dl>
+    <p class="rn-print-footer">LogionACE — powered by LogionOS &nbsp;|&nbsp; © 2026 LogionOS &nbsp;|&nbsp; Published as part of the ACE Research series.</p>
+  </section>
+  <main id="note-content">
+    <header class="rn-header">
+      <p class="rn-series">ACE Research Note · ACE-RN-2026-002</p>
+      <h1>Revoked Here, Active There</h1>
+      <p class="rn-preview-state">Published</p>
+      <dl class="rn-metadata">
+        <div><dt>Published</dt><dd>2026-08-18</dd></div>
+        <div><dt>Version</dt><dd>1.0</dd></div>
+        <div><dt>Author</dt><dd>Chris Ma</dd></div>
+        <div class="rn-metadata-scope">
+          <dt>Research scope</dt>
+          <dd>Delegated authority containment · Decision evidence completeness<small><span class="rn-control-id">DRAFT-DAC-01</span> · <span class="rn-control-id">DRAFT-DEC-01</span></small></dd>
+        </div>
+      </dl>
+      <div class="rn-actions">
+        <a class="btn primary" href="ACE-RN-2026-002.pdf">Download PDF</a>
+        <button type="button" data-copy-citation class="btn outline">Copy citation</button>
+      </div>
+    </header>
+
+    <div class="rn-layout">
+      <nav class="rn-toc" aria-label="In this note">
+        <p>In this note</p>
+        <a href="#problem-definition">I · Problem</a>
+        <a href="#mitigation-direction">II · Mitigation</a>
+        <a href="#research-agenda">III · Research</a>
+        <a href="#references">References</a>
+      </nav>
+
+      <aside class="rn-record">
+        <p class="rn-record-label">Publication record</p>
+        <dl>
+          <div><dt>Status</dt><dd>Published</dd></div>
+          <div><dt>Version</dt><dd>1.0</dd></div>
+          <div>
+            <dt>Primary research area</dt>
+            <dd>
+              Delegated authority containment
+              <span class="rn-control-id">DRAFT-DAC-01</span>
+            </dd>
+          </div>
+        </dl>
+        <a href="ACE-RN-2026-002.pdf">Download PDF <span>↘</span></a>
+        <p class="rn-citation-text" tabindex="-1">Ma, Chris. “Revoked Here, Active There.” ACE Research Note ACE-RN-2026-002, v1.0, 2026.</p>
+      </aside>
+
+      <article class="rn-article">
+        <section id="problem-definition">
+          <p class="rn-part">Part I</p>
+          <h2>Problem Definition</h2>
+          <div class="rn-source-list">
+          <div class="rn-source">
+            <span>External Research</span>
+            <p>OAuth revocation standardizes the client-to-issuer request, while token introspection explicitly permits caching that trades liveness for performance and creates a stale-acceptance window <a class="rn-cite" href="#ref-R1">[R1]</a> <a class="rn-cite" href="#ref-R2">[R2]</a>.</p>
+          </div>
+          <div class="rn-source">
+            <span>ACE Observation</span>
+            <p>ACE Observation: a feature name, successful request, or user-interface state is not sufficient unless the tested system can reproduce the control behavior and its evidence.</p>
+          </div>
+          </div>
+          <p>A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline <a class="rn-cite" href="#ref-R1">[R1]</a> <a class="rn-cite" href="#ref-R2">[R2]</a>.</p>
+          <p>This note treats revoked here, active there as a bounded control question. It does not infer universal product behavior from a paper, standard, interface screenshot, or single test. A demonstrated result applies only to the cited configuration; an authoritative source defines a requirement or design direction but does not certify an implementation. ACE therefore asks whether the tested system can produce the required behavior and evidence under declared versions, policies, topology, identities, and failure conditions.</p>
+          <p>The operational distinction is between a claim and a control that can be re-performed. The positive control is: A valid short-lived child credential is accepted at all healthy enforcement points before revocation. The adversarial condition is: The root grant is revoked during a regional partition after verifier caches have been warmed as active. A useful result must show both that authorized work remains possible and that the prohibited path is stopped before an irreversible side effect. Missing fields are classified as insufficient evidence, not silently converted into a pass.</p>
+          <h3 class="rn-subheading">Real-world impact</h3>
+          <ul>
+            <li>A terminated user or compromised agent may retain access in the region with stale state.</li>
+            <li>A dashboard can show revoked while the data plane continues to authorize side effects.</li>
+            <li>A control claim without versioned evidence can mislead procurement, audit, incident response, and system owners.</li>
+            <li>Failing closed without a positive control can conceal a denial-of-service design rather than demonstrate trustworthy behavior.</li>
+          </ul>
+        </section>
+
+        <section id="mitigation-direction">
+          <p class="rn-part">Part II</p>
+          <h2>Mitigation Direction</h2>
+          <div class="rn-mitigation-grid">
+          <div class="rn-mitigation-row">
+            <h3>Pre-training</h3>
+            <span class="rn-evidence rn-evidence-not-applicable">not applicable</span>
+            <p>Not applicable</p>
+          </div>
+          <div class="rn-mitigation-row">
+            <h3>Post-training</h3>
+            <span class="rn-evidence rn-evidence-not-applicable">not applicable</span>
+            <p>Not applicable</p>
+          </div>
+          <div class="rn-mitigation-row">
+            <h3>Reasoning training</h3>
+            <span class="rn-evidence rn-evidence-not-applicable">not applicable</span>
+            <p>Not applicable</p>
+          </div>
+          <div class="rn-mitigation-row">
+            <h3>Runtime / architecture</h3>
+            <span class="rn-evidence rn-evidence-research-proposed">research proposed</span>
+            <p>Combine issuer revocation, bounded introspection caches, short credential lifetime, descendant invalidation, and explicit handling of active executions <a class="rn-cite" href="#ref-R1">[R1]</a> <a class="rn-cite" href="#ref-R2">[R2]</a> <a class="rn-cite" href="#ref-R3">[R3]</a>.</p>
+          </div>
+          </div>
+
+          <h3 class="rn-subheading">Research-backed direction</h3>
+          <ol class="rn-directions">
+          <li>
+            <span class="rn-direction-number">01</span>
+            <div>
+              <span class="rn-evidence rn-evidence-research-proposed">research proposed</span>
+              <p>Set cache lifetime from resource sensitivity and the declared revocation service level; disable caching where stale acceptance is unacceptable <a class="rn-cite" href="#ref-R2">[R2]</a>.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rn-direction-number">02</span>
+            <div>
+              <span class="rn-evidence rn-evidence-research-proposed">research proposed</span>
+              <p>Bound residual validity with short-lived credentials whose cached state never outlives their expiry <a class="rn-cite" href="#ref-R2">[R2]</a> <a class="rn-cite" href="#ref-R3">[R3]</a>.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rn-direction-number">03</span>
+            <div>
+              <span class="rn-evidence rn-evidence-research-proposed">research proposed</span>
+              <p>Separate issuer acknowledgement, propagation completion, and active-workflow termination in the evidence record <a class="rn-cite" href="#ref-R4">[R4]</a>.</p>
+            </div>
+          </li>
+          </ol>
+
+          <h3 class="rn-subheading">LogionOS engineering mapping</h3>
+          <p class="rn-boundary-note">Implementation hypotheses only. No production validation is claimed.</p>
+          <ol class="rn-directions">
+          <li>
+            <span class="rn-direction-number">01</span>
+            <div>
+              <span class="rn-evidence rn-evidence-implementation-hypothesis">implementation hypothesis</span>
+              <p>Add a versioned policy object for revoked here, active there and keep its decision inputs outside model-writable context.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rn-direction-number">02</span>
+            <div>
+              <span class="rn-evidence rn-evidence-implementation-hypothesis">implementation hypothesis</span>
+              <p>Generate a signed technical receipt linking actor, request, policy version, decision, enforcement point, and observed outcome.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rn-direction-number">03</span>
+            <div>
+              <span class="rn-evidence rn-evidence-implementation-hypothesis">implementation hypothesis</span>
+              <p>Export missing evidence explicitly as insufficient evidence and limit every claim to the tested configuration.</p>
+            </div>
+          </li>
+          </ol>
+
+          <div class="rn-technical-callout" id="acceptance-test">
+            <p class="rn-callout-label">ACE Acceptance Test</p>
+            <h3>Determine whether the tested configuration prevents and evidences the failure described by “Revoked Here, Active There”.</h3>
+            <h4>Setup</h4>
+            <p>Use a synthetic, non-production environment with fixed versions and isolated credentials. Prepare one authorized case and one adversarial case. Authorized: A valid short-lived child credential is accepted at all healthy enforcement points before revocation. Adversarial: The root grant is revoked during a regional partition after verifier caches have been warmed as active.</p>
+            <h4>Procedure</h4>
+          <ol>
+            <li>Run the positive control: A valid short-lived child credential is accepted at all healthy enforcement points before revocation.</li>
+            <li>Run the adversarial case: The root grant is revoked during a regional partition after verifier caches have been warmed as active.</li>
+            <li>Repeat with missing identity, stale policy, unavailable evidence service, and replayed artifacts.</li>
+            <li>Capture the pre-enforcement decision, downstream execution result, timestamps, versions, and correlation identifiers.</li>
+            <li>Re-perform the decision from the exported evidence package without relying on mutable production state.</li>
+          </ol>
+            <h4>Pass criteria</h4>
+          <ul>
+            <li>The legitimate control succeeds under the declared policy and scope.</li>
+            <li>Every prohibited variant is denied or quarantined before an irreversible side effect.</li>
+            <li>The evidence identifies the tested configuration, actor, authority, request, policy, decision, and outcome.</li>
+            <li>Unknown, stale, or missing mandatory evidence never produces a demonstrated result.</li>
+            <li>The result is reported only for the tested versions, topology, policy, and threat model.</li>
+          </ul>
+          </div>
+
+          <div class="rn-technical-callout" id="required-evidence">
+            <p class="rn-callout-label">Required Evidence</p>
+            <h3>What the tested configuration must produce</h3>
+          <ul class="rn-evidence-list">
+            <li>Test identifier and configuration hash</li>
+            <li>System, model, agent, tool, and policy versions</li>
+            <li>Originating principal and current actor</li>
+            <li>Request, resource, action, and concrete argument digest</li>
+            <li>Policy inputs, decision, reason code, and enforcement point</li>
+            <li>Execution result, side effects, timestamps, and correlation identifier</li>
+            <li>Issuer commit time</li>
+            <li>Per-enforcement-point observed version</li>
+            <li>Cache age and introspection result</li>
+            <li>Active execution stop or quarantine action</li>
+          </ul>
+          </div>
+        </section>
+
+        <section id="research-agenda">
+          <p class="rn-part">Part III</p>
+          <h2>Consequences and Research Agenda</h2>
+          <h3 class="rn-subheading">Consequences</h3>
+          <ul>
+            <li>A terminated user or compromised agent may retain access in the region with stale state.</li>
+            <li>A dashboard can show revoked while the data plane continues to authorize side effects.</li>
+            <li>A failed acceptance test requires the related capability claim to remain not demonstrated or insufficient evidence.</li>
+            <li>A passing test supports only the declared configuration and does not establish universal safety.</li>
+          </ul>
+          <h3 class="rn-subheading">Second-order effects</h3>
+          <ul>
+            <li>Stronger enforcement can increase latency, state, operational dependencies, and legitimate denials.</li>
+            <li>More evidence can increase privacy and retention exposure unless raw content is minimized and access-controlled.</li>
+            <li>A detector or policy service can become a new failure point and must have explicit fail behavior.</li>
+            <li>Attackers may adapt to published checks, so the public test direction should be paired with private regression variants.</li>
+          </ul>
+          <h3 class="rn-subheading">Limitations</h3>
+          <ul>
+            <li>Several cited AI-agent and reasoning-security sources are preprints or bounded experiments; they are identified as such in the references.</li>
+            <li>The proposed ACE acceptance test has not yet been run across all incumbent and AI-native implementations.</li>
+            <li>Cryptographic integrity proves that an artifact was not altered after commitment; it does not prove that the artifact was true, complete, or correctly interpreted.</li>
+            <li>Legal and contractual applicability remains deployment- and jurisdiction-specific.</li>
+          </ul>
+          <h3 class="rn-subheading">Open research questions</h3>
+          <ol class="rn-questions">
+            <li>What revocation deadline is required for each resource class?</li>
+            <li>What fail mode is acceptable when event and introspection channels both fail?</li>
+            <li>Which evidence fields are mandatory for a demonstrated result, and which may be not applicable?</li>
+            <li>How should continuous regression detect policy, model, tool, and provider drift after the initial test?</li>
+          </ol>
+        </section>
+
+        <section id="references">
+          <p class="rn-part">Sources</p>
+          <h2>References</h2>
+          <ol class="rn-references">
+          <li id="ref-R1">
+            <span class="rn-ref-id">[R1]</span>
+            <div>
+              <a href="https://www.rfc-editor.org/rfc/rfc7009.html" rel="noopener">RFC 7009: OAuth 2.0 Token Revocation</a>
+              <p>published · authoritative-standard</p>
+            </div>
+          </li>
+          <li id="ref-R2">
+            <span class="rn-ref-id">[R2]</span>
+            <div>
+              <a href="https://www.rfc-editor.org/rfc/rfc7662.html" rel="noopener">RFC 7662: OAuth 2.0 Token Introspection</a>
+              <p>published · authoritative-standard</p>
+            </div>
+          </li>
+          <li id="ref-R3">
+            <span class="rn-ref-id">[R3]</span>
+            <div>
+              <a href="https://www.rfc-editor.org/rfc/rfc6750.html" rel="noopener">RFC 6750: OAuth 2.0 Bearer Token Usage</a>
+              <p>published · authoritative-standard</p>
+            </div>
+          </li>
+          <li id="ref-R4">
+            <span class="rn-ref-id">[R4]</span>
+            <div>
+              <a href="https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final" rel="noopener">NIST SP 800-53 Rev. 5</a>
+              <p>published · authoritative-standard</p>
+            </div>
+          </li>
+          </ol>
+        </section>
+
+        <section id="publication-record">
+          <p class="rn-part">Record</p>
+          <h2>Publication Record</h2>
+          <h3 class="rn-subheading">Recommended citation</h3>
+          <p class="rn-citation-text" tabindex="-1">Ma, Chris. “Revoked Here, Active There.” ACE Research Note ACE-RN-2026-002, v1.0, 2026.</p>
+          <h3 class="rn-subheading">Corrections</h3>
+          <p class="rn-empty-record">No corrections recorded.</p>
+          <h3 class="rn-subheading">Organizational disclosure</h3>
+          <p>ACE Research and LogionOS share organizational affiliation. LogionOS mappings in this note are implementation hypotheses, not independently validated product claims.</p>
+          <h3 class="rn-subheading">Evidence boundary</h3>
+          <p>This note synthesizes cited public research and defines an ACE acceptance direction. It does not report a completed cross-vendor experiment unless explicitly stated, and it contains no private ACE prompts, holdout identifiers, customer data, or raw model responses.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="../logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">Independent AI Compliance Evaluation for Enterprise.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="../benchmark">Reports</a>
+      <a href="../evaluation">Evaluation</a>
+      <a href="../methodology">Methodology</a>
+      <a href="../research">Research</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="../company">About</a>
+      <a href="../trust">Trust &amp; Security</a>
+      <a href="../evaluation#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="../privacy">Privacy Policy</a>
+      <a href="../terms">Terms of Service</a>
+      <a href="../methodology#limitations">Limitations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+</footer>
+  <script src="../research-note.js"></script>
+  <script src="../ace-nav.js"></script>
+</body>
+</html>

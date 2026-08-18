@@ -1,0 +1,382 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://logionace.com/schemas/research-note.schema.json",
+  "title": "ACE Research Note",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "slug",
+    "title",
+    "date",
+    "version",
+    "status",
+    "author",
+    "primary_control",
+    "secondary_controls",
+    "topics",
+    "parts",
+    "references",
+    "recommended_citation",
+    "corrections",
+    "organizational_disclosure",
+    "evidence_boundary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^ACE-RN-[0-9]{4}-[0-9]{3}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*\\.[0-9]+$"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "published"
+      ]
+    },
+    "author": {
+      "const": "Chris Ma"
+    },
+    "primary_control": {
+      "type": "string",
+      "minLength": 1
+    },
+    "secondary_controls": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "parts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "problem",
+        "mitigation",
+        "research_agenda"
+      ],
+      "properties": {
+        "problem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sources",
+            "body",
+            "impact"
+          ],
+          "properties": {
+            "sources": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/sourceClaim"
+              }
+            },
+            "body": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/claim"
+              }
+            },
+            "impact": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            }
+          }
+        },
+        "mitigation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "layers",
+            "direction",
+            "logionos_direction",
+            "acceptance_test",
+            "required_evidence"
+          ],
+          "properties": {
+            "layers": {
+              "type": "array",
+              "minItems": 4,
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/direction"
+                  },
+                  {
+                    "required": [
+                      "name"
+                    ]
+                  }
+                ]
+              }
+            },
+            "direction": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/direction"
+              }
+            },
+            "logionos_direction": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/direction"
+                  },
+                  {
+                    "properties": {
+                      "evidence": {
+                        "const": "implementation-hypothesis"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "acceptance_test": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "objective",
+                "setup",
+                "procedure",
+                "pass_criteria"
+              ],
+              "properties": {
+                "objective": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "setup": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "procedure": {
+                  "$ref": "#/$defs/nonEmptyStrings"
+                },
+                "pass_criteria": {
+                  "$ref": "#/$defs/nonEmptyStrings"
+                }
+              }
+            },
+            "required_evidence": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            }
+          }
+        },
+        "research_agenda": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "consequences",
+            "second_order_effects",
+            "limitations",
+            "questions"
+          ],
+          "properties": {
+            "consequences": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "second_order_effects": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "limitations": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            },
+            "questions": {
+              "$ref": "#/$defs/nonEmptyStrings"
+            }
+          }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "recommended_citation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "organizational_disclosure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_boundary": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "referenceIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^R[0-9]+$"
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "reference_ids"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_ids": {
+          "$ref": "#/$defs/referenceIds"
+        }
+      }
+    },
+    "sourceClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "text",
+        "reference_ids"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "ACE Observation",
+            "External Research",
+            "Public Incident"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_ids": {
+          "$ref": "#/$defs/referenceIds"
+        }
+      }
+    },
+    "direction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence",
+        "text",
+        "reference_ids"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "enum": [
+            "evaluated",
+            "research-proposed",
+            "implementation-hypothesis",
+            "not-applicable"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_ids": {
+          "$ref": "#/$defs/referenceIds"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "source_type",
+        "publication_status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^R[0-9]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "source_type": {
+          "enum": [
+            "original-paper",
+            "authoritative-standard",
+            "primary-technical-source",
+            "secondary-summary"
+          ]
+        },
+        "publication_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -46,6 +46,536 @@
         "pdf": "ACE_Whitepaper_v1.1.pdf",
         "results": "benchmark.html"
       }
+    },
+    {
+      "id": "ACE-RN-2026-020",
+      "title": "A Model That Refuses Everything Is Not Safe",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A system can score well on a one-sided harmful-prompt test by refusing every request while remaining unusable and leaving tool misuse, privacy leakage, or adversarial bypass untested",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "over-refusal",
+        "helpfulness retention",
+        "safety evaluation"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "MR-3",
+      "secondary_controls": [
+        "RF"
+      ],
+      "source_sha256": "c8082c27a6502e98a3c23cb89bd69d62e28838c774172d3bd3daebd1facc04f5",
+      "links": {
+        "page": "research-notes/a-model-that-refuses-everything-is-not-safe.html",
+        "pdf": "research-notes/ACE-RN-2026-020.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-019",
+      "title": "Refusal Is Not Unlearning",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A model's refusal to answer a probe is behavioral output evidence; it does not prove removal from parameters, adapters, retrieval stores, caches, memories, checkpoints, or derivative datasets",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "machine unlearning",
+        "deletion verification",
+        "behavioral refusal"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DP-2",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "6f42f0f7fc9f0957ae48f3636e28fb5c8d5ff8b6b32a8db10b7bf11b8ca13e66",
+      "links": {
+        "page": "research-notes/refusal-is-not-unlearning.html",
+        "pdf": "research-notes/ACE-RN-2026-019.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-018",
+      "title": "Invisible Prompt Injection Inside Encrypted Reasoning",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "Encrypted, encoded, hidden, or dynamically assembled content can carry instructions that are invisible to a human reviewer but become executable context when an agent decodes or consumes it",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "indirect prompt injection",
+        "encrypted prompts",
+        "tool isolation"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "AG-5",
+      "secondary_controls": [
+        "CI-2",
+        "DRAFT-TDA-01"
+      ],
+      "source_sha256": "8a9ce95275f25d7ed5ec5441854662cb257d8718dd092b9507e384e74be914e5",
+      "links": {
+        "page": "research-notes/invisible-prompt-injection-inside-encrypted-reasoning.html",
+        "pdf": "research-notes/ACE-RN-2026-018.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-017",
+      "title": "Private Data Hidden Inside Published Agent Traces",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A clean final response can coexist with personal or confidential data in tool arguments, observations, memory, errors, metadata, attachments, or intermediate agent messages",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "trace privacy",
+        "data minimization",
+        "publication safety"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DP-2",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "fad540fb030095a5ce92461f2036a9ce79e3d49fd93905d9c211ab3c83349b1a",
+      "links": {
+        "page": "research-notes/private-data-hidden-inside-published-agent-traces.html",
+        "pdf": "research-notes/ACE-RN-2026-017.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-016",
+      "title": "Safe Final Answer, Hazardous Hidden Reasoning",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A final answer can look compliant while intermediate reasoning contains harmful instructions, deceptive intent, privacy-sensitive content, or a plan that later tool actions execute",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "hidden reasoning",
+        "safety evaluation",
+        "monitorability"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "MR-3",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "6931f9c1cd4ae717689e37bb10283d399db44c24d7f910ce79e7b78a739d6333",
+      "links": {
+        "page": "research-notes/safe-final-answer-hazardous-hidden-reasoning.html",
+        "pdf": "research-notes/ACE-RN-2026-016.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-015",
+      "title": "Encrypted Reasoning That Is Not Bound to Its Owner",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "An opaque reasoning block can preserve confidentiality at rest yet remain replayable across users, sessions, or compatible models if it is not bound to owner and context",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "encrypted reasoning",
+        "context binding",
+        "replay"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "TA-3",
+      "secondary_controls": [
+        "MR-3",
+        "DRAFT-AID-01"
+      ],
+      "source_sha256": "9ad1fbb8c35e390bf79e8d623bc40fed2c1e37bd23ac4bbc7ee5ae235a6c20e9",
+      "links": {
+        "page": "research-notes/encrypted-reasoning-that-is-not-bound-to-its-owner.html",
+        "pdf": "research-notes/ACE-RN-2026-015.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-014",
+      "title": "Synthetic Reasoning Theft Without Reasoning Traces",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A black-box API can transfer useful reasoning capability through final answers and summaries even when it never returns the victim's private chain of thought",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "reasoning extraction",
+        "model distillation",
+        "API security"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "MR-3",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "d2a7b6b353ec02dfcae62f953b1c73cd69fa9a1c95875dd51bba126aeee111b3",
+      "links": {
+        "page": "research-notes/synthetic-reasoning-theft-without-reasoning-traces.html",
+        "pdf": "research-notes/ACE-RN-2026-014.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-013",
+      "title": "The Approval Button Is Not Authorization",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A click records an interface event but does not prove that the reviewer was authorized, saw the final action and evidence, understood the scope, or that the backend enforced the approved object",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "human oversight",
+        "approval integrity",
+        "authorization"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-HITL-01",
+      "secondary_controls": [
+        "DRAFT-TDA-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "4668eae7c7910a09fbb032d70a1c9d38809a7994b33b4bf2e83225442529e079",
+      "links": {
+        "page": "research-notes/the-approval-button-is-not-authorization.html",
+        "pdf": "research-notes/ACE-RN-2026-013.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-012",
+      "title": "Explanations That Did Not Cause the Decision",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A plausible explanation generated after an answer can be insensitive to the factors that actually changed the model's decision and therefore cannot be treated as a causal record",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "explanation faithfulness",
+        "causal evidence",
+        "chain of thought"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DEC-01",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "0e15d427f07f638b5f91abb0ce9bc33beb4a1567755914904c38846f094a320a",
+      "links": {
+        "page": "research-notes/explanations-that-did-not-cause-the-decision.html",
+        "pdf": "research-notes/ACE-RN-2026-012.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-011",
+      "title": "Logs Are Not Proof",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "Ordinary logs can omit relevant events, accept mutable free text, lack actor or policy context, and be rewritten by the same system whose conduct they are meant to establish",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "audit logs",
+        "tamper evidence",
+        "provenance"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DEC-01",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "03ed0505497c8cec37967c9776860e32f125ba88fee1c569c02eba395ee80303",
+      "links": {
+        "page": "research-notes/logs-are-not-proof.html",
+        "pdf": "research-notes/ACE-RN-2026-011.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-010",
+      "title": "A Real Citation Can Still Support the Wrong Claim",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A DOI, URL, or paper can be real while the cited span does not entail the atomic claim, applies to a different population or date, or supports only a weaker qualified statement",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "citation entailment",
+        "source verification",
+        "decision evidence"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DEC-01",
+      "secondary_controls": [
+        "TA-3"
+      ],
+      "source_sha256": "fbdf7e981a79ccf9e667814ab98d7c1b882fdd0e6f3df7a1533cec24afabbf6c",
+      "links": {
+        "page": "research-notes/a-real-citation-can-still-support-the-wrong-claim.html",
+        "pdf": "research-notes/ACE-RN-2026-010.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-009",
+      "title": "A Decision Without Its Evidence",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A record that stores only approve or deny and a free-text reason cannot prove which inputs, policy version, alternatives, evidence artifacts, and authorized approver existed at decision time",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "decision evidence",
+        "provenance",
+        "auditability"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DEC-01",
+      "secondary_controls": [
+        "DRAFT-HITL-01"
+      ],
+      "source_sha256": "51b7e3e708057f0bbf278fd055912322a33984f7232a6fbe040e87c6236df37d",
+      "links": {
+        "page": "research-notes/a-decision-without-its-evidence.html",
+        "pdf": "research-notes/ACE-RN-2026-009.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-008",
+      "title": "When Tool Metadata Becomes an Instruction",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "Tool descriptions, annotations, schemas, and returned metadata can contain attacker-controlled text that the model interprets as instructions rather than untrusted data",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "tool poisoning",
+        "prompt injection",
+        "metadata integrity"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-TDA-01",
+      "secondary_controls": [
+        "CI-2",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "b38ee58eac57b2241ef59aecf7c8d258c460798fa4fcec0ed0e841a03b798be3",
+      "links": {
+        "page": "research-notes/when-tool-metadata-becomes-an-instruction.html",
+        "pdf": "research-notes/ACE-RN-2026-008.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-007",
+      "title": "The Over-Tooled Agent",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "An agent can expose too many tools, overly broad tool functions, or credentials whose effective permission closure exceeds the current task",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "least privilege",
+        "tool composition",
+        "excessive agency"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-TDA-01",
+      "secondary_controls": [
+        "AG-5",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "e61c6e45eef6c48f7ad0289d39b3865eb1e137091c30389db71c5017a0926ea3",
+      "links": {
+        "page": "research-notes/the-over-tooled-agent.html",
+        "pdf": "research-notes/ACE-RN-2026-007.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-006",
+      "title": "Tool Access Is Not Data Authority",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A tool being visible, schema-valid, and technically able to reach a record does not prove that the current principal authorized this concrete resource, parameter, purpose, and destination",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "tool authorization",
+        "data authority",
+        "confused deputy"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-TDA-01",
+      "secondary_controls": [
+        "DRAFT-AID-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "bfdd089e5f878ef155a9be51fc63309f6af061d39c9c4ccd6d483cdfe2079d0a",
+      "links": {
+        "page": "research-notes/tool-access-is-not-data-authority.html",
+        "pdf": "research-notes/ACE-RN-2026-006.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-005",
+      "title": "One API Key, Many Agents",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "Multiple agents using one API key collapse distinct software identities, tasks, principals, and authority boundaries into a single credential holder",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "shared credentials",
+        "workload identity",
+        "accountability"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-AID-01",
+      "secondary_controls": [
+        "DRAFT-DAC-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "3f421085d6d4578c17b2892cb9bce3ed398fce9a052df8b759ccecd4c77eb99f",
+      "links": {
+        "page": "research-notes/one-api-key-many-agents.html",
+        "pdf": "research-notes/ACE-RN-2026-005.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-004",
+      "title": "Who Did the Agent Act For?",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "An action can identify the immediate workload yet fail to preserve the human or service principal, delegation purpose, and actor chain on whose behalf the agent acted",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "principal attribution",
+        "agent identity",
+        "delegation"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-AID-01",
+      "secondary_controls": [
+        "DRAFT-DAC-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "d4b460ce1821fa826d8a7d9d6bb57385367690a3427ae1e7eaf30818e9ab203d",
+      "links": {
+        "page": "research-notes/who-did-the-agent-act-for.html",
+        "pdf": "research-notes/ACE-RN-2026-004.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-003",
+      "title": "Replay Without Authority",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A bearer artifact can be copied from an authorized exchange and replayed by a different process, session, audience, or time window without re-establishing the authority that justified the original use",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "replay resistance",
+        "proof of possession",
+        "delegation"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DAC-01",
+      "secondary_controls": [
+        "DRAFT-AID-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "a522ba94fe210952ccc28a25732324404e181632bb36309a3311c9e793198609",
+      "links": {
+        "page": "research-notes/replay-without-authority.html",
+        "pdf": "research-notes/ACE-RN-2026-003.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-002",
+      "title": "Revoked Here, Active There",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A revocation accepted by the issuer can remain invisible to a cached resource server, regional gateway, derived credential, or already-running agent after the declared containment deadline",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "revocation",
+        "distributed authorization",
+        "cache consistency"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DAC-01",
+      "secondary_controls": [
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "945734ae91dcf29146b9489e6ab8881884a6c4330ad65c4b706299efbdc1c9ad",
+      "links": {
+        "page": "research-notes/revoked-here-active-there.html",
+        "pdf": "research-notes/ACE-RN-2026-002.pdf"
+      }
+    },
+    {
+      "id": "ACE-RN-2026-001",
+      "title": "Authority Must Shrink, Not Grow",
+      "type": "research-note",
+      "date": "2026-08-18",
+      "abstract": "A child agent can receive a credential whose effective resource, action, audience, tenant, time, or budget scope is broader than the authority its parent was allowed to delegate",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "delegated authority",
+        "scope attenuation",
+        "AI agents"
+      ],
+      "version": "1.0",
+      "status": "published",
+      "primary_control": "DRAFT-DAC-01",
+      "secondary_controls": [
+        "DRAFT-TDA-01",
+        "DRAFT-DEC-01"
+      ],
+      "source_sha256": "dfc43f4d8792b75bc87fe128eb0241d5857079dd2b83708208466f861319cd65",
+      "links": {
+        "page": "research-notes/authority-must-shrink-not-grow.html",
+        "pdf": "research-notes/ACE-RN-2026-001.pdf"
+      }
     }
   ]
 }

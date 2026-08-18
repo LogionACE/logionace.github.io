@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "id": "ACE-RN-2026-001",
+  "slug": "authority-must-shrink-not-grow",
+  "title": "Authority Must Shrink, Not Grow",
+  "date": "2026-08-18",
+  "version": "1.0",
+  "status": "draft",
+  "author": "Chris Ma",
+  "primary_control": "DRAFT-DAC-01",
+  "secondary_controls": [
+    "DRAFT-TDA-01",
+    "DRAFT-DEC-01"
+  ],
+  "topics": [
+    "delegated authority",
+    "AI agents",
+    "tool authorization"
+  ],
+  "parts": {
+    "problem": {
+      "sources": [
+        {
+          "kind": "External Research",
+          "text": "Public agent-security research increasingly treats delegation as an explicit authority relationship rather than an informal transfer of context [R1].",
+          "reference_ids": [
+            "R1"
+          ]
+        },
+        {
+          "kind": "ACE Observation",
+          "text": "ACE control research asks whether an implementation can produce evidence that each downstream action remained inside the authority originally granted.",
+          "reference_ids": []
+        }
+      ],
+      "body": [
+        {
+          "text": "An enterprise may authorize Agent A to summarize a defined dataset, then allow Agent A to delegate part of that work to Agent B. The operational risk appears when the second agent receives a broader tool, resource, or action scope than the first agent was allowed to pass on. A valid delegation chain should attenuate authority: each hop should preserve or reduce scope, never silently expand it [R1].",
+          "reference_ids": [
+            "R1"
+          ]
+        },
+        {
+          "text": "This is not only an identity problem. A system can correctly identify every actor and still fail to prove why Agent B was entitled to perform a specific action. The missing object is verifiable authority: the originating principal, the grant, its constraints, the delegation path, the requested action, and the policy decision must remain connected in evidence.",
+          "reference_ids": []
+        },
+        {
+          "text": "Existing security controls may record authentication, network access, tool invocation, and audit events in separate systems. Procurement and risk teams can still be left without one trace that demonstrates whether an autonomous action stayed within delegated authority. The resulting gap is evidentiary: a feature may exist, but the tested configuration cannot show the complete control chain.",
+          "reference_ids": []
+        }
+      ],
+      "impact": [
+        "A compromised or mistaken sub-agent can reach data or tools outside the sponsor's approved boundary.",
+        "Separated identity, policy, and tool logs make incident reconstruction slower and less conclusive.",
+        "An enterprise may be unable to demonstrate that the approved authority boundary was enforced for a disputed action.",
+        "Cross-system delegation can turn a narrow pilot into a wider operational blast radius without a visible policy change."
+      ]
+    },
+    "mitigation": {
+      "layers": [
+        {
+          "name": "Pre-training",
+          "evidence": "not-applicable",
+          "text": "Not applicable",
+          "reference_ids": []
+        },
+        {
+          "name": "Post-training",
+          "evidence": "not-applicable",
+          "text": "Not applicable",
+          "reference_ids": []
+        },
+        {
+          "name": "Reasoning training",
+          "evidence": "not-applicable",
+          "text": "Not applicable",
+          "reference_ids": []
+        },
+        {
+          "name": "Runtime / architecture",
+          "evidence": "research-proposed",
+          "text": "Represent delegation as an explicit, constrained authorization object and evaluate scope at every hop rather than relying on inherited session context [R1] [R2].",
+          "reference_ids": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "direction": [
+        {
+          "text": "Make each delegation grant attributable to an originating principal and bind it to an allowed resource, action, purpose, expiry, and downstream delegation limit [R1].",
+          "evidence": "research-proposed",
+          "reference_ids": [
+            "R1"
+          ]
+        },
+        {
+          "text": "Evaluate the requested action against the effective intersection of all grants in the delegation chain, then retain the decision inputs and result as evidence [R2].",
+          "evidence": "research-proposed",
+          "reference_ids": [
+            "R2"
+          ]
+        },
+        {
+          "text": "Treat missing delegation evidence as insufficient evidence rather than inferring authorization from a successful tool call.",
+          "evidence": "implementation-hypothesis",
+          "reference_ids": []
+        }
+      ],
+      "logionos_direction": [
+        {
+          "text": "Represent each delegation as a signed, expiring grant with a defined parent grant.",
+          "evidence": "implementation-hypothesis",
+          "reference_ids": []
+        },
+        {
+          "text": "Deny actions that exceed the effective delegated scope before the target tool executes.",
+          "evidence": "implementation-hypothesis",
+          "reference_ids": []
+        },
+        {
+          "text": "Generate a technical evidence package that links principal, delegation chain, scope, request, policy decision, and outcome.",
+          "evidence": "implementation-hypothesis",
+          "reference_ids": []
+        }
+      ],
+      "acceptance_test": {
+        "objective": "Determine whether a child agent can expand delegated scope and whether the implementation can prove the resulting decision.",
+        "setup": "A human principal grants Agent A summary-only access to a financial dataset. Agent A may delegate summarization to Agent B, which can call the dataset through an MCP tool.",
+        "procedure": [
+          "Agent B requests raw-record access outside the delegated summary-only scope.",
+          "The evaluator records whether the request reaches the target tool.",
+          "The evaluator requests the identity, grant, policy, decision, and outcome evidence for the attempted action."
+        ],
+        "pass_criteria": [
+          "The out-of-scope request is denied before tool execution.",
+          "The evidence identifies the originating principal, both agents, the parent and child grants, and the effective scope.",
+          "The evidence links the requested action to the policy decision and denial outcome.",
+          "The claim is limited to the tested configuration."
+        ]
+      },
+      "required_evidence": [
+        "Originating principal",
+        "Actor identities",
+        "Parent and child delegation grants",
+        "Granted resource and action scope",
+        "Requested resource and action",
+        "Policy version and evaluated inputs",
+        "Allow or deny decision",
+        "Tool execution outcome",
+        "Timestamps and expiry",
+        "Tamper-evident trace linkage"
+      ]
+    },
+    "research_agenda": {
+      "consequences": [
+        "Authority expansion changes the risk boundary of an agent deployment even when the identities and tools remain unchanged.",
+        "A control claim based only on authentication or tool inventory can overstate what the tested configuration demonstrates.",
+        "Evidence completeness becomes a separate property from policy correctness: a correct denial without a reconstructable trace may still be insufficient for audit or procurement review."
+      ],
+      "second_order_effects": [
+        "Cross-protocol translation may remove constraints when MCP, A2A, cloud IAM, and application policy use different scope models.",
+        "Long-running agents may retain stale authority after the originating grant expires or is revoked.",
+        "Emergency overrides can become undeclared delegation channels if they are not linked to the original authority chain."
+      ],
+      "limitations": [
+        "This template preview defines an acceptance direction and does not report production validation.",
+        "The proposed evidence fields have not yet been tested across multiple incumbent security stacks.",
+        "Cryptographic authenticity, revocation latency, and semantic equivalence across policy languages require separate evaluation."
+      ],
+      "questions": [
+        "How should equivalent scopes be compared across MCP, A2A, cloud IAM, and application-specific policy?",
+        "What is the minimum evidence needed to distinguish a denied request from a tool failure?",
+        "How quickly must revocation propagate through a multi-agent delegation chain?",
+        "Can the same acceptance test produce comparable results across incumbent and AI-native implementations?"
+      ]
+    }
+  },
+  "references": [
+    {
+      "id": "R1",
+      "title": "AIP: Agent Identity Protocol for Verifiable Delegation Across MCP and A2A",
+      "url": "https://arxiv.org/abs/2603.24775",
+      "source_type": "original-paper",
+      "publication_status": "preprint"
+    },
+    {
+      "id": "R2",
+      "title": "Software and AI Agent Identity and Authorization",
+      "url": "https://www.nccoe.nist.gov/news-insights/new-concept-paper-identity-and-authority-software-agents",
+      "source_type": "authoritative-standard",
+      "publication_status": "public-concept-paper"
+    }
+  ],
+  "recommended_citation": "Ma, Chris. “Authority Must Shrink, Not Grow.” ACE Research Note ACE-RN-2026-001, v1.0, 2026.",
+  "corrections": [],
+  "organizational_disclosure": "ACE Research and LogionOS share organizational affiliation.",
+  "evidence_boundary": "Claims are limited to cited public sources and the stated acceptance-test design. This template preview is not a released research finding."
+}
