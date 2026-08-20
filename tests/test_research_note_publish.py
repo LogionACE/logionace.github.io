@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 
 from tools.research_notes.publish import (
+    _catalog_with_notes,
     catalog_entry,
     render_hub_entries,
     render_sitemap_entries,
@@ -47,6 +48,47 @@ def test_hub_entry_escapes_publication_text():
     hub = render_hub_entries([note])
     assert "<script>" not in hub
     assert "&lt;script&gt;alert(1)&lt;/script&gt;" in hub
+
+
+def test_research_hub_rendering_supports_limited_and_full_indexes():
+    notes = []
+    for number in range(1, 21):
+        note = published_note()
+        note["id"] = f"ACE-RN-2026-{number:03d}"
+        note["title"] = f"Evidence Note {number:03d}"
+        note["date"] = f"2026-08-{number:02d}"
+        notes.append(note)
+
+    limited = render_hub_entries(notes, limit=10)
+    complete = render_hub_entries(notes)
+
+    assert "ACE-RN-2026-020" in limited
+    assert "ACE-RN-2026-011" in limited
+    assert "ACE-RN-2026-010" not in limited
+    assert limited.count('class="research-note research-publication"') == 10
+    assert complete.count('class="research-note research-publication"') == 20
+
+
+def test_catalog_merge_sorts_all_publication_types_deterministically():
+    note = published_note()
+    catalog = {
+        "schema_version": 1,
+        "updated_at": "2026-08-18",
+        "publications": [
+            {
+                "id": "AFR-2026-001",
+                "type": "frontier-research",
+                "date": "2026-08-17",
+            }
+        ],
+    }
+
+    merged = _catalog_with_notes(catalog, [(FIXTURE, note)])
+
+    assert [item["id"] for item in merged["publications"]] == [
+        "ACE-RN-2026-001",
+        "AFR-2026-001",
+    ]
 
 
 def test_public_index_files_have_deterministic_note_markers():

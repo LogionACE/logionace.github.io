@@ -9,23 +9,87 @@ HTML_FILES = sorted(ROOT.glob("*.html"))
 
 
 class ResearchHubTests(unittest.TestCase):
-    def test_research_hub_contains_whitepaper(self):
+    def test_current_research_is_visible_before_historical_papers(self):
+        page = (ROOT / "research.html").read_text(encoding="utf-8")
+        self.assertIn(
+            '<h1 id="research-title">Defining what trustworthy AI must mean.</h1>',
+            page,
+        )
+        for section_id in (
+            "latest-update",
+            "frontier-research",
+            "evidence-notes",
+            "papers-archive",
+            "research-sponsorship",
+        ):
+            self.assertIn(f'id="{section_id}"', page)
+        self.assertLess(
+            page.index('id="latest-update"'),
+            page.index('id="papers-archive"'),
+        )
+        self.assertLess(
+            page.index('id="frontier-research"'),
+            page.index('id="papers-archive"'),
+        )
+        self.assertIn("Evidence Notes", page)
+        self.assertIn("And more", page)
+        self.assertIn('href="research-library.html"', page)
+
+    def test_landing_page_limits_frontier_research_and_evidence_notes(self):
+        page = (ROOT / "research.html").read_text(encoding="utf-8")
+        frontier = re.search(
+            r"<!-- ACE_FRONTIER_RESEARCH_START -->(.*?)"
+            r"<!-- ACE_FRONTIER_RESEARCH_END -->",
+            page,
+            re.S,
+        )
+        notes = re.search(
+            r"<!-- ACE_RESEARCH_NOTES_START -->(.*?)"
+            r"<!-- ACE_RESEARCH_NOTES_END -->",
+            page,
+            re.S,
+        )
+        self.assertIsNotNone(frontier)
+        self.assertIsNotNone(notes)
+        self.assertLessEqual(
+            frontier.group(1).count('class="research-frontier-card'),
+            3,
+        )
+        self.assertEqual(
+            notes.group(1).count('class="research-note research-publication"'),
+            10,
+        )
+
+    def test_institutional_sponsorship_preserves_research_independence(self):
+        page = (ROOT / "research.html").read_text(encoding="utf-8")
+        self.assertIn("Support ACE Research", page)
+        self.assertIn("institutional research sponsorship", page)
+        self.assertIn(
+            "Sponsors do not control ACE methods, findings, ratings, or publication decisions.",
+            page,
+        )
+        self.assertIn('href="evaluation.html#contact"', page)
+        self.assertIn("Discuss research sponsorship", page)
+        self.assertNotIn("sponsorship pricing", page.lower())
+
+    def test_research_hub_keeps_papers_and_archived_whitepaper_accessible(self):
         page = (ROOT / "research.html").read_text(encoding="utf-8")
         page_lower = page.lower()
         self.assertIn("<title>ACE Research - LogionACE</title>", page)
         self.assertEqual(page.count("<h1"), 1)
         for section_id in (
-            "featured",
+            "latest-update",
+            "frontier-research",
+            "evidence-notes",
+            "papers-archive",
             "whitepaper",
-            "research-notes",
-            "deep-papers",
-            "research-areas",
+            "research-programs",
             "methods-integrity",
         ):
             self.assertIn(f'id="{section_id}"', page)
         self.assertIn("ACE Benchmark v1.1 Technical Whitepaper", page)
         self.assertIn('href="ACE_Whitepaper_v1.1.pdf"', page)
-        self.assertIn("Archived research", page)
+        self.assertIn("Papers &amp; Archive", page)
         self.assertIn("June 2026", page)
         self.assertNotIn("In preparation", page)
         self.assertIn("Download paper", page)
@@ -37,17 +101,15 @@ class ResearchHubTests(unittest.TestCase):
         self.assertIn("private prompts", page_lower)
         self.assertIn("holdout ids", page_lower)
         self.assertIn("raw responses", page_lower)
-        featured_block = re.search(
-            r'<section class="research-section" id="featured".*?</section>',
+        archive_block = re.search(
+            r'<section class="research-section" id="papers-archive".*?</section>',
             page,
             re.S,
         )
-        self.assertIsNotNone(featured_block)
-        featured_html = featured_block.group(0)
-        self.assertIn('href="ACE-272-paper.pdf"', featured_html)
-        self.assertIn('href="methodology.html"', featured_html)
-        self.assertNotIn('href="benchmark.html"', featured_html)
-        self.assertNotIn("View benchmark results", featured_html)
+        self.assertIsNotNone(archive_block)
+        archive_html = archive_block.group(0)
+        self.assertIn('href="ACE-272-paper.pdf"', archive_html)
+        self.assertIn('href="benchmark.html"', archive_html)
 
     def test_research_hub_removes_download_gate_and_countdown(self):
         page = (ROOT / "research.html").read_text(encoding="utf-8").lower()
@@ -124,18 +186,18 @@ class ResearchHubTests(unittest.TestCase):
     def test_research_head_has_featured_share_metadata_and_canonical(self):
         page = (ROOT / "research.html").read_text(encoding="utf-8")
         self.assertIn(
-            '<meta property="og:title" content="ACE-272 Historical Retrospective Paper | ACE Research">',
+            '<meta property="og:title" content="ACE Research | Enterprise AI Trust">',
             page,
         )
         self.assertIn(
-            '<meta property="og:description" content="Published ACE-272 historical retrospective (272-case cohort): not the current 350-case benchmark, with preregistered dual-rater agreement pending.">',
+            '<meta property="og:description" content="Frontier reports, control evidence notes, benchmark papers, and methods for enterprise AI trust.">',
             page,
         )
-        self.assertIn('<meta property="og:type" content="article">', page)
+        self.assertIn('<meta property="og:type" content="website">', page)
         self.assertIn('<meta property="og:url" content="https://logionace.com/research.html">', page)
         self.assertIn('<link rel="canonical" href="https://logionace.com/research.html">', page)
 
-    def test_research_page_exposes_minimal_scholarly_article_jsonld(self):
+    def test_research_page_exposes_collection_jsonld(self):
         page = (ROOT / "research.html").read_text(encoding="utf-8")
         match = re.search(
             r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>',
@@ -145,19 +207,15 @@ class ResearchHubTests(unittest.TestCase):
         self.assertIsNotNone(match)
         data = json.loads(match.group(1))
         self.assertEqual(data["@context"], "https://schema.org")
-        self.assertEqual(data["@type"], "ScholarlyArticle")
-        self.assertEqual(data["name"], "ACE-272 Benchmark Paper")
-        self.assertEqual(data["headline"], "A Retrospective Benchmark of Enterprise Trust Risks in Language-Model Endpoints")
-        self.assertEqual(data["datePublished"], "2026-08-18")
-        self.assertEqual(data["isPartOf"], "ACE Research")
+        self.assertEqual(data["@type"], "CollectionPage")
+        self.assertEqual(data["name"], "ACE Research")
         self.assertEqual(data["url"], "https://logionace.com/research.html")
-        self.assertEqual(data["encoding"]["contentUrl"], "https://logionace.com/ACE-272-paper.pdf")
-        self.assertIn("author", data)
-        self.assertEqual([author["name"] for author in data["author"]], ["Chris Ma", "Joanna Luo"])
-        description_lower = data["description"].lower()
-        self.assertNotIn("arxiv.org", description_lower)
-        self.assertNotIn("peer reviewed", description_lower)
-        self.assertNotIn("dual-rater completed", description_lower)
+        self.assertEqual(data["mainEntity"]["@type"], "ItemList")
+        self.assertEqual(len(data["mainEntity"]["itemListElement"]), 3)
+        self.assertIn(
+            "frontier-research/beyond-identity-emerging-authority-layer.html",
+            data["mainEntity"]["itemListElement"][0]["url"],
+        )
 
 
 if __name__ == "__main__":

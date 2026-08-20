@@ -8,7 +8,7 @@ import json
 import re
 from html import escape
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from tools.research_notes.html import (
     CONTROL_LABELS,
@@ -21,6 +21,8 @@ from tools.research_notes.pdf import build_pdf
 
 START = "<!-- ACE_RESEARCH_NOTES_START -->"
 END = "<!-- ACE_RESEARCH_NOTES_END -->"
+LIBRARY_START = "<!-- ACE_RESEARCH_NOTES_LIBRARY_START -->"
+LIBRARY_END = "<!-- ACE_RESEARCH_NOTES_LIBRARY_END -->"
 
 
 class PublicationBuildError(RuntimeError):
@@ -53,7 +55,10 @@ def catalog_entry(note: dict[str, Any], source_bytes: bytes) -> dict[str, Any]:
     }
 
 
-def render_hub_entries(notes: list[dict[str, Any]]) -> str:
+def render_hub_entries(
+    notes: list[dict[str, Any]],
+    limit: Optional[int] = None,
+) -> str:
     if not notes:
         return """    <article class="research-note research-publication">
       <span class="research-status">Series established</span>
@@ -64,6 +69,8 @@ def render_hub_entries(notes: list[dict[str, Any]]) -> str:
 
     entries = []
     ordered = sorted(notes, key=lambda item: (item["date"], item["id"]), reverse=True)
+    if limit is not None:
+        ordered = ordered[:limit]
     for note in ordered:
         slug = note_slug(note)
         scope = CONTROL_LABELS.get(note["primary_control"], note["primary_control"])
@@ -93,9 +100,14 @@ def render_sitemap_entries(notes: list[dict[str, Any]]) -> str:
     )
 
 
-def replace_generated_block(text: str, body: str) -> str:
-    pattern = re.compile(rf"{re.escape(START)}.*?{re.escape(END)}", re.S)
-    replacement = f"{START}\n{body.rstrip()}\n{END}"
+def replace_generated_block(
+    text: str,
+    body: str,
+    start: str = START,
+    end: str = END,
+) -> str:
+    pattern = re.compile(rf"{re.escape(start)}.*?{re.escape(end)}", re.S)
+    replacement = f"{start}\n{body.rstrip()}\n{end}"
     updated, count = pattern.subn(replacement, text)
     if count != 1:
         raise PublicationBuildError("expected one ACE Research Notes generated block")
@@ -133,8 +145,8 @@ def _catalog_with_notes(
         if item.get("type") != "research-note"
     ]
     entries = [catalog_entry(note, path.read_bytes()) for path, note in loaded]
-    publications = retained + sorted(
-        entries,
+    publications = sorted(
+        retained + entries,
         key=lambda item: (item["date"], item["id"]),
         reverse=True,
     )
@@ -175,7 +187,17 @@ def build(root: Path = ROOT) -> list[Path]:
     research_path.write_text(
         replace_generated_block(
             research_path.read_text("utf-8"),
+            render_hub_entries(notes, limit=10),
+        ),
+        "utf-8",
+    )
+    library_path = root / "research-library.html"
+    library_path.write_text(
+        replace_generated_block(
+            library_path.read_text("utf-8"),
             render_hub_entries(notes),
+            LIBRARY_START,
+            LIBRARY_END,
         ),
         "utf-8",
     )
@@ -187,7 +209,7 @@ def build(root: Path = ROOT) -> list[Path]:
         ),
         "utf-8",
     )
-    written.extend((catalog_path, research_path, sitemap_path))
+    written.extend((catalog_path, research_path, library_path, sitemap_path))
     return written
 
 
@@ -211,8 +233,19 @@ def check(root: Path = ROOT) -> None:
         raise PublicationBuildError("research-catalog.json is stale")
 
     research = (root / "research.html").read_text("utf-8")
-    if research != replace_generated_block(research, render_hub_entries(notes)):
+    if research != replace_generated_block(
+        research,
+        render_hub_entries(notes, limit=10),
+    ):
         raise PublicationBuildError("research.html note entries are stale")
+    library = (root / "research-library.html").read_text("utf-8")
+    if library != replace_generated_block(
+        library,
+        render_hub_entries(notes),
+        LIBRARY_START,
+        LIBRARY_END,
+    ):
+        raise PublicationBuildError("research-library.html note entries are stale")
     sitemap = (root / "sitemap.xml").read_text("utf-8")
     if sitemap != replace_generated_block(sitemap, render_sitemap_entries(notes)):
         raise PublicationBuildError("sitemap.xml note entries are stale")
