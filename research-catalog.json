@@ -1,7 +1,31 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-18",
+  "updated_at": "2026-08-20",
   "publications": [
+    {
+      "id": "AFR-2026-001",
+      "title": "Beyond Identity: The Emerging Authority Layer for Autonomous AI Systems",
+      "type": "frontier-research",
+      "date": "2026-08-20",
+      "abstract": "Enterprise identity systems are beginning to recognize AI agents as distinct principals. NIST has placed software and AI agent identity and authorization on an explicit research agenda; Microsoft Entra documents agent identities with separate subject and actor semantics; and Okta documents agent-to-agent token exchange with configured delegation links [R1] [R2] [R3] [R6]. These are material signals, but they do not by themselves establish a settled architecture for autonomous authority. An identity can show which agent is present. A permission can show what a credential nominally permits. Neither alone proves on whose behalf a particular action is being taken, for what task, under which delegation chain, within what context and time window, or whether the action remains justified after conditions change. Recent research on authenticated delegation and authorization propagation treats these questions as distinct system problems rather than ordinary service-account administration [R21] [R23]. This Frontier Research report synthesizes those signals into an ACE hypothesis: autonomous systems may require an AI Authority Layer that evaluates effective authority as a contextual relationship among identity, principal, delegation, intent, scope, context, time, policy, and risk. The proposal is a conceptual model, not a standard, a claim of invention, or a production roadmap. Its purpose is to define falsifiable questions, evidence requirements, and research boundaries that can be reviewed as protocols and deployments mature.",
+      "authors": [
+        "Chris Ma"
+      ],
+      "topics": [
+        "AI authority",
+        "agent identity",
+        "delegated authorization",
+        "evidence"
+      ],
+      "series": "Autonomous Trust Systems",
+      "version": "1.0",
+      "status": "published",
+      "source_sha256": "631d9db79b20f028a2c501293656ae16c29e32cb5c8d278b4df7c818fb661252",
+      "links": {
+        "page": "frontier-research/beyond-identity-emerging-authority-layer.html",
+        "pdf": "frontier-research/AFR-2026-001.pdf"
+      }
+    },
     {
       "id": "ace-272-benchmark-paper",
       "title": "ACE-272: A Retrospective Benchmark of Enterprise Trust Risks in Language-Model Endpoints",
@@ -23,28 +47,6 @@
       "links": {
         "pdf": "ACE-272-paper.pdf",
         "methodology": "methodology.html"
-      }
-    },
-    {
-      "id": "ace-v1-1-whitepaper",
-      "title": "ACE Benchmark v1.1 Technical Whitepaper",
-      "type": "whitepaper",
-      "date": "2026-06",
-      "abstract": "The frozen technical record of the June 2026 ACE benchmark round, including methodology, scoring, results, and representative cases.",
-      "authors": [
-        "LogionACE"
-      ],
-      "topics": [
-        "enterprise AI trust",
-        "benchmark methodology",
-        "model evaluation"
-      ],
-      "version": "1.1",
-      "status": "archived",
-      "links": {
-        "page": "research.html#whitepaper",
-        "pdf": "ACE_Whitepaper_v1.1.pdf",
-        "results": "benchmark.html"
       }
     },
     {
@@ -575,6 +577,28 @@
       "links": {
         "page": "research-notes/authority-must-shrink-not-grow.html",
         "pdf": "research-notes/ACE-RN-2026-001.pdf"
+      }
+    },
+    {
+      "id": "ace-v1-1-whitepaper",
+      "title": "ACE Benchmark v1.1 Technical Whitepaper",
+      "type": "whitepaper",
+      "date": "2026-06",
+      "abstract": "The frozen technical record of the June 2026 ACE benchmark round, including methodology, scoring, results, and representative cases.",
+      "authors": [
+        "LogionACE"
+      ],
+      "topics": [
+        "enterprise AI trust",
+        "benchmark methodology",
+        "model evaluation"
+      ],
+      "version": "1.1",
+      "status": "archived",
+      "links": {
+        "page": "research.html#whitepaper",
+        "pdf": "ACE_Whitepaper_v1.1.pdf",
+        "results": "benchmark.html"
       }
     }
   ]

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title>Authority attenuation across multi-agent delegation</title>
+  <desc>A principal delegates bounded authority to Agent A. Agent A delegates a narrower task and resource scope to Agent B. Agent B delegates a still narrower operation to Agent C. Each hop preserves the principal and contributes evidence.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="1" stop-color="#101a30"/>
+    </linearGradient>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7995d8"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" rx="28" fill="url(#bg2)"/>
+  <text x="64" y="58" fill="#8fa3d9" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2.5">AUTHORITY ATTENUATION / CONCEPTUAL MODEL</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="64" y="116" width="224" height="128" rx="20" fill="#182440" stroke="#607ec5"/>
+    <text x="176" y="157" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">Principal</text>
+    <text x="176" y="187" text-anchor="middle" fill="#b4c1da" font-size="13">Task: reconcile invoices</text>
+    <text x="176" y="211" text-anchor="middle" fill="#b4c1da" font-size="13">Read + propose / 30 min</text>
+    <text x="176" y="231" text-anchor="middle" fill="#6f8cff" font-size="11">Originating authority</text>
+
+    <rect x="340" y="116" width="224" height="128" rx="20" fill="#15213a" stroke="#526da9"/>
+    <text x="452" y="157" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">Agent A</text>
+    <text x="452" y="187" text-anchor="middle" fill="#b4c1da" font-size="13">Orchestrate reconciliation</text>
+    <text x="452" y="211" text-anchor="middle" fill="#b4c1da" font-size="13">No payment execution</text>
+    <text x="452" y="231" text-anchor="middle" fill="#6f8cff" font-size="11">Delegable subset</text>
+
+    <rect x="616" y="116" width="224" height="128" rx="20" fill="#121d33" stroke="#455c91"/>
+    <text x="728" y="157" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">Agent B</text>
+    <text x="728" y="187" text-anchor="middle" fill="#b4c1da" font-size="13">Retrieve invoice records</text>
+    <text x="728" y="211" text-anchor="middle" fill="#b4c1da" font-size="13">Read-only / 15 min</text>
+    <text x="728" y="231" text-anchor="middle" fill="#6f8cff" font-size="11">Narrower resource scope</text>
+
+    <rect x="892" y="116" width="244" height="128" rx="20" fill="#101a2c" stroke="#394d78"/>
+    <text x="1014" y="157" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">Agent C / Tool</text>
+    <text x="1014" y="187" text-anchor="middle" fill="#b4c1da" font-size="13">Fetch named invoice IDs</text>
+    <text x="1014" y="211" text-anchor="middle" fill="#b4c1da" font-size="13">Single operation / 5 min</text>
+    <text x="1014" y="231" text-anchor="middle" fill="#6f8cff" font-size="11">Terminal authority</text>
+  </g>
+
+  <path d="M288 180 H328" stroke="#7995d8" stroke-width="2" marker-end="url(#arrow2)"/>
+  <path d="M564 180 H604" stroke="#7995d8" stroke-width="2" marker-end="url(#arrow2)"/>
+  <path d="M840 180 H880" stroke="#7995d8" stroke-width="2" marker-end="url(#arrow2)"/>
+  <g font-family="JetBrains Mono,monospace" font-size="11" fill="#91a4ca">
+    <text x="308" y="158" text-anchor="middle">delegate</text>
+    <text x="584" y="158" text-anchor="middle">attenuate</text>
+    <text x="860" y="158" text-anchor="middle">attenuate</text>
+  </g>
+
+  <path d="M176 274 V334 H1014 V274" fill="none" stroke="#32486f" stroke-width="2"/>
+  <circle cx="176" cy="274" r="5" fill="#6f8cff"/>
+  <circle cx="452" cy="334" r="5" fill="#6f8cff"/>
+  <circle cx="728" cy="334" r="5" fill="#6f8cff"/>
+  <circle cx="1014" cy="274" r="5" fill="#6f8cff"/>
+  <rect x="250" y="370" width="700" height="116" rx="20" fill="#0a1425" stroke="#2c436a"/>
+  <text x="600" y="406" text-anchor="middle" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="800">Preserved Trust Layer evidence</text>
+  <text x="600" y="435" text-anchor="middle" fill="#9eacc2" font-family="Inter,Arial,sans-serif" font-size="13">Principal / Agent identities / Delegation order / Scope change / Time / Policy decision</text>
+  <text x="600" y="461" text-anchor="middle" fill="#6f8cff" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700">A downstream grant must not silently exceed upstream delegable authority.</text>
+  <path d="M600 334 V358" stroke="#7995d8" stroke-width="2" marker-end="url(#arrow2)"/>
+</svg>

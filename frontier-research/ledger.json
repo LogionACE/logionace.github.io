@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "series": "ACE Frontier Research Prediction Ledger",
+  "predictions": [
+    {
+      "id": "AFR-2026-001-P01",
+      "report_id": "AFR-2026-001",
+      "statement": "By the 24-month review, at least two major enterprise identity platforms will expose a production mechanism that binds an AI agent authorization decision to a principal, a task or purpose, a constrained resource scope, and a bounded validity period in one inspectable evidence object.",
+      "confidence": "Moderate-High",
+      "review_horizons_months": [
+        6,
+        12,
+        24
+      ],
+      "supporting_signals": [
+        "NIST has placed software and AI agent identity and authorization on its formal research agenda.",
+        "Microsoft and Okta document agent-specific identity and delegated authorization mechanisms.",
+        "Multiple 2026 Internet-Drafts propose task-, operation-, or chain-aware agent authorization."
+      ],
+      "falsification_signals": [
+        "Major identity platforms retain only static agent identities and conventional OAuth scopes without task or purpose binding.",
+        "Enterprise customers reject task-bound authorization evidence as unnecessary operational overhead."
+      ],
+      "publication_date": "2026-08-20",
+      "reviews": []
+    },
+    {
+      "id": "AFR-2026-001-P02",
+      "report_id": "AFR-2026-001",
+      "statement": "By the 24-month review, at least one interoperable specification with active multi-vendor participation will define how authority is attenuated or re-evaluated across more than one agent-to-agent delegation hop.",
+      "confidence": "Moderate",
+      "review_horizons_months": [
+        6,
+        12,
+        24
+      ],
+      "supporting_signals": [
+        "Okta documents delegation chains for agent-to-agent connections.",
+        "Current Internet-Drafts discuss token exchange, identity chaining, operation authorization, and multi-hop delegation.",
+        "Recent research explicitly frames authorization propagation as a multi-agent infrastructure problem."
+      ],
+      "falsification_signals": [
+        "Interoperability work standardizes only transport authentication and leaves multi-hop authority entirely implementation-specific.",
+        "Production multi-agent deployments converge on single-hop service identities without preserving originating authority."
+      ],
+      "publication_date": "2026-08-20",
+      "reviews": []
+    },
+    {
+      "id": "AFR-2026-001-P03",
+      "report_id": "AFR-2026-001",
+      "statement": "By the 24-month review, enterprise agent assurance products will distinguish identity evidence, authorization evidence, and execution evidence instead of treating an access token or audit log as sufficient proof for all three claims.",
+      "confidence": "Moderate-High",
+      "review_horizons_months": [
+        6,
+        12,
+        24
+      ],
+      "supporting_signals": [
+        "NIST's agenda separates identity, authorization, logging, and security evaluation concerns.",
+        "Research on cryptographically verifiable authorization separates identity, request, policy, and execution bindings.",
+        "Trajectory-assurance research argues that individually allowed actions can compose into disallowed outcomes."
+      ],
+      "falsification_signals": [
+        "Enterprise assurance practice continues to accept authentication records alone as proof of authorized agent behavior.",
+        "No commercial or standards artifact adopts separate evidence categories for authorization and execution."
+      ],
+      "publication_date": "2026-08-20",
+      "reviews": []
+    },
+    {
+      "id": "AFR-2026-001-P04",
+      "report_id": "AFR-2026-001",
+      "statement": "By the 24-month review, at least one enterprise deployment pattern will require authority to be re-evaluated during an agent trajectory after a material change in risk, context, policy, or delegation state rather than only when credentials are issued.",
+      "confidence": "Moderate",
+      "review_horizons_months": [
+        6,
+        12,
+        24
+      ],
+      "supporting_signals": [
+        "Microsoft applies conditional access and lifecycle controls to agent identities.",
+        "Operation-authorization proposals bind decisions to specific actions and runtime-verifiable tokens.",
+        "Trajectory-assurance research identifies composed, state-dependent violations that per-action checks can miss."
+      ],
+      "falsification_signals": [
+        "Production systems rely on issuance-time authorization plus static expiration without runtime context re-evaluation.",
+        "Trajectory-level checks fail to demonstrate operational value beyond conventional per-request policy enforcement."
+      ],
+      "publication_date": "2026-08-20",
+      "reviews": []
+    }
+  ]
+}

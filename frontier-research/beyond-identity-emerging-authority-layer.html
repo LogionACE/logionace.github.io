@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Identity | ACE Frontier Research</title>
+  <meta name="description" content="Enterprise identity systems are beginning to recognize AI agents as distinct principals. NIST has placed software and AI agent identity and authorization on an explicit research agenda; Microsoft Entra documents agent identities with separate subject and actor semantics; and Okta documents agent-to-agent token exchange with configured delegation links">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Beyond Identity | ACE Frontier Research">
+  <meta property="og:description" content="Enterprise identity systems are beginning to recognize AI agents as distinct principals. NIST has placed software and AI agent identity and authorization on an explicit research agenda; Microsoft Entra documents agent identities with separate subject and actor semantics; and Okta documents agent-to-agent token exchange with configured delegation links">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://logionace.com/frontier-research/afr-2026-001.html">
+  <link rel="canonical" href="https://logionace.com/frontier-research/afr-2026-001.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../frontier-research.css?v=1.0">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "identifier": "AFR-2026-001",
+  "name": "Beyond Identity: The Emerging Authority Layer for Autonomous AI Systems",
+  "headline": "Beyond Identity",
+  "version": "1.0",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chris Ma"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "ACE Research"
+  },
+  "isPartOf": "ACE Frontier Research",
+  "description": "Enterprise identity systems are beginning to recognize AI agents as distinct principals. NIST has placed software and AI agent identity and authorization on an explicit research agenda; Microsoft Entra documents agent identities with separate subject and actor semantics; and Okta documents agent-to-agent token exchange with configured delegation links",
+  "url": "https://logionace.com/frontier-research/afr-2026-001.html",
+  "datePublished": "2026-08-20"
+}
+  </script>
+</head>
+<body class="frontier-research-page" data-report-id="AFR-2026-001">
+  <a class="skip-link" href="#afr-content">Skip to research</a>
+<nav class="site-nav">
+  <div class="nav-shell">
+    <a href="/" class="brand"><img src="../logo.svg" alt="LogionACE" width="30" height="30"><span>LogionACE</span></a>
+    <button class="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <div class="nav-drop">
+        <span class="nav-trigger">Product</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="../benchmark">Reports<span class="nav-desc">Public evaluation results</span></a>
+          <a href="../methodology">Methodology<span class="nav-desc">Controls, scoring, limitations</span></a>
+          <a href="../research">Research<span class="nav-desc">Papers, notes, and methods</span></a>
+        </div></div>
+      </div>
+      <a href="../evaluation">Evaluation</a>
+      <div class="nav-drop">
+        <span class="nav-trigger">Company</span>
+        <div class="nav-drop-menu"><div class="nav-drop-menu-inner">
+          <a href="../company">About<span class="nav-desc">Team and mission</span></a>
+          <a href="../trust">Trust &amp; Security<span class="nav-desc">Compliance and data handling</span></a>
+        </div></div>
+      </div>
+      <a href="#contact" class="nav-cta">Request evaluation</a>
+    </div>
+  </div>
+</nav>
+  <section class="afr-print-cover" aria-hidden="true">
+    <div class="afr-print-arcs"></div>
+    <div class="afr-print-top">
+      <div class="afr-print-brand">
+        <img src="../logo.svg" alt="">
+        <p>Logion<span>ACE</span></p>
+      </div>
+      <p class="afr-print-series">Autonomous Trust Systems</p>
+    </div>
+    <div class="afr-print-middle">
+      <p class="afr-print-type">ACE Frontier Research</p>
+      <p class="afr-print-heading">Beyond Identity</p>
+      <p class="afr-print-subtitle">The Emerging Authority Layer for Autonomous AI Systems</p>
+      <p class="afr-print-version">AFR-2026-001 · Version 1.0</p>
+      <p class="afr-print-preview">Draft for review</p>
+    </div>
+    <dl class="afr-print-meta">
+      <div><dt>Author</dt><dd>Chris Ma</dd></div>
+      <div aria-label="Evidence cutoff 19 August 2026"><dt>Evidence cutoff</dt><dd>19 August 2026</dd></div>
+      <div><dt>Research status</dt><dd>Emerging</dd></div>
+      <div><dt>Confidence</dt><dd>Moderate-High</dd></div>
+    </dl>
+    <p class="afr-print-footer">LogionACE — powered by LogionOS &nbsp;|&nbsp; © 2026 LogionOS &nbsp;|&nbsp; ACE Frontier Research</p>
+  </section>
+  <main id="afr-content">
+    <header class="afr-header">
+      <p class="afr-series">ACE Frontier Research · AFR-2026-001</p>
+      <h1>Beyond Identity</h1>
+      <p class="afr-subtitle">The Emerging Authority Layer for Autonomous AI Systems</p>
+      <p class="afr-preview-state">Published</p>
+      <dl class="afr-metadata">
+        <div><dt>Evidence cutoff</dt><dd>19 August 2026</dd></div>
+        <div><dt>Research status</dt><dd>Emerging</dd></div>
+        <div><dt>Confidence</dt><dd>Moderate-High</dd></div>
+        <div><dt>Author</dt><dd>Chris Ma</dd></div>
+        <div><dt>Version</dt><dd>1.0</dd></div>
+      </dl>
+      <div class="afr-actions">
+        <a class="btn primary" href="AFR-2026-001.pdf">Download PDF</a>
+        <button type="button" data-copy-citation class="btn outline">Copy citation</button>
+      </div>
+    </header>
+
+    <div class="afr-layout">
+      <nav class="afr-toc" aria-label="In this report">
+        <p>In this report</p>
+        <a href="#section-research-boundary">1. Research Boundary: A Synthesis, Not a Claim of Invention</a>
+        <a href="#section-identity-foundation">2. Identity Is Becoming Necessary Infrastructure</a>
+        <a href="#section-identity-authority-gap">3. The Gap Between Being Identified and Being Authorized to Act</a>
+        <a href="#section-six-concepts">4. Six Concepts That Should Not Be Collapsed</a>
+        <a href="#section-delegation-chain">5. Delegation Turns Authorization into a Chain Property</a>
+        <a href="#section-protocol-signals">6. Protocol Signals: Useful Components, No Settled Whole</a>
+        <a href="#section-contextual-authority">7. Authority Must Be Contextual, Temporal, and Revocable</a>
+        <a href="#section-trajectory-assurance">8. From Per-Action Authorization to Trajectory Assurance</a>
+        <a href="#section-evidence-layer">9. Evidence Is the Bridge from Policy Claim to Verifiable Action</a>
+        <a href="#section-conceptual-model">10. ACE Hypothesis: An AI Authority Layer</a>
+        <a href="#section-predictions-open-questions">11. Falsifiable Predictions and Open Research Questions</a>
+        <a href="#prediction-ledger">Ledger</a>
+        <a href="#references">References</a>
+      </nav>
+
+      <article class="afr-article">
+        <section class="afr-abstract" id="abstract">
+          <p class="afr-classification">Research Abstract</p>
+          <h2>Abstract</h2>
+          <p>Enterprise identity systems are beginning to recognize AI agents as distinct principals. NIST has placed software and AI agent identity and authorization on an explicit research agenda; Microsoft Entra documents agent identities with separate subject and actor semantics; and Okta documents agent-to-agent token exchange with configured delegation links <a class="afr-cite" href="#ref-R1">[R1]</a> <a class="afr-cite" href="#ref-R2">[R2]</a> <a class="afr-cite" href="#ref-R3">[R3]</a> <a class="afr-cite" href="#ref-R6">[R6]</a>. These are material signals, but they do not by themselves establish a settled architecture for autonomous authority. An identity can show which agent is present. A permission can show what a credential nominally permits. Neither alone proves on whose behalf a particular action is being taken, for what task, under which delegation chain, within what context and time window, or whether the action remains justified after conditions change. Recent research on authenticated delegation and authorization propagation treats these questions as distinct system problems rather than ordinary service-account administration <a class="afr-cite" href="#ref-R21">[R21]</a> <a class="afr-cite" href="#ref-R23">[R23]</a>. This Frontier Research report synthesizes those signals into an ACE hypothesis: autonomous systems may require an AI Authority Layer that evaluates effective authority as a contextual relationship among identity, principal, delegation, intent, scope, context, time, policy, and risk. The proposal is a conceptual model, not a standard, a claim of invention, or a production roadmap. Its purpose is to define falsifiable questions, evidence requirements, and research boundaries that can be reviewed as protocols and deployments mature.</p>
+        </section>
+      <section class="afr-section" id="section-research-boundary">
+        <p class="afr-classification afr-classification-observed-evidence">Observed Evidence</p>
+        <h2>1. Research Boundary: A Synthesis, Not a Claim of Invention</h2>
+        <p>The phrase AI Authority Layer is used here as a systematic abstraction over signals that already exist in identity engineering, authorization protocols, vendor products, standards discussions, and academic research. OAuth has long distinguished a resource owner, client, authorization server, resource server, scopes, and delegated access. Token Exchange adds subject and actor relationships; Rich Authorization Requests adds structured authorization details; Zero Trust rejects trust based only on network location <a class="afr-cite" href="#ref-R14">[R14]</a> <a class="afr-cite" href="#ref-R15">[R15]</a> <a class="afr-cite" href="#ref-R20">[R20]</a>. Agent-specific work now extends these foundations to non-human principals that plan, call tools, and delegate tasks. The ACE contribution in this report is therefore organizational: separate six concepts that are often collapsed—Identity, Authentication, Permission, Delegation, Authority, and Evidence—and ask what must be true for an autonomous action to be justified at runtime.</p>
+        <p>The evidence cutoff is 19 August 2026. Product documentation shows what vendors describe and expose, not what every customer configuration can prove. Internet-Drafts are works in progress; they may change, expire, or never become standards. The expired Agent Authorization Profile is retained only as a historical emerging signal, while active drafts are labeled as such <a class="afr-cite" href="#ref-R9">[R9]</a> <a class="afr-cite" href="#ref-R10">[R10]</a> <a class="afr-cite" href="#ref-R11">[R11]</a> <a class="afr-cite" href="#ref-R12">[R12]</a> <a class="afr-cite" href="#ref-R13">[R13]</a>. Preprints are evidence of research attention and proposed mechanisms, not evidence of broad deployment or operational effectiveness. Even the trajectory-assurance paper, which states acceptance to a forthcoming 2026 venue, remains bounded evidence for this report because the event had not occurred by the cutoff <a class="afr-cite" href="#ref-R24">[R24]</a>. This status discipline matters: convergence in vocabulary can indicate a forming problem without proving that one architecture will win.</p>
+        <p>The report also avoids a category mistake between legal authority and technical authorization. Organizations may use contracts, corporate roles, fiduciary duties, agency law, or regulation to determine who bears responsibility. A runtime system cannot resolve those doctrines merely by issuing a token. It can, however, preserve facts that legal, risk, and operational teams need: who initiated a task, which agent acted, what was delegated, which constraints applied, what decision was made, and what occurred. Authenticated-delegation research explicitly connects technical chains of authority with accountability while acknowledging unresolved legal adaptation <a class="afr-cite" href="#ref-R21">[R21]</a>. The AI Authority Layer hypothesis is limited to this technical and evidentiary role.</p>
+      </section>
+      <section class="afr-section" id="section-identity-foundation">
+        <p class="afr-classification afr-classification-observed-evidence">Observed Evidence</p>
+        <h2>2. Identity Is Becoming Necessary Infrastructure</h2>
+        <p>The first observable transition is from treating agents as anonymous application behavior to representing them as manageable identities. Microsoft Entra describes an agent identity as a special service principal created from an agent identity blueprint. Its documentation distinguishes autonomous agent tokens from interactive cases in which the token subject is a user and the actor is the agent identity. It also associates agent identities with sponsors, blueprints, tenant-local identifiers, lifecycle operations, and policy application <a class="afr-cite" href="#ref-R3">[R3]</a> <a class="afr-cite" href="#ref-R5">[R5]</a>. These design choices make an agent visible to existing administrative systems. They answer questions such as which account requested a token, what kind of agent was deployed, who sponsors it, and which tenant can govern it.</p>
+        <p>NIST&#x27;s AI Agent Standards Initiative and the NCCoE concept paper reinforce the same direction at an institutional level. NIST identifies agent authentication, identity infrastructure, authorization, security, and evaluation as active areas, while the NCCoE project focuses on applying identity and authorization approaches to enterprise software and AI agents <a class="afr-cite" href="#ref-R1">[R1]</a> <a class="afr-cite" href="#ref-R2">[R2]</a>. The OpenID Foundation&#x27;s 2025 whitepaper similarly frames agentic identity as a problem involving entities, delegation, interactions, and accountability rather than a simple login event <a class="afr-cite" href="#ref-R8">[R8]</a>. Together these sources support a bounded conclusion: distinct identity for agents is moving toward enterprise infrastructure. They do not establish that identity alone can govern an autonomous workflow. Instead, they provide the stable subject on which richer authority decisions may depend.</p>
+      </section>
+      <section class="afr-section" id="section-identity-authority-gap">
+        <p class="afr-classification afr-classification-emerging-problem">Emerging Problem</p>
+        <h2>3. The Gap Between Being Identified and Being Authorized to Act</h2>
+        <p>Authentication answers whether a presented identity can be verified. Permission describes a grant associated with an identity, role, token, capability, or policy relation. Authority is narrower and more situational: whether this agent may perform this action now, on behalf of this principal, for this purpose, with this resource, under this delegation history and current risk state. Microsoft documents delegated and application permissions for agent identities and blocks a set of high-privilege roles and Graph permissions <a class="afr-cite" href="#ref-R4">[R4]</a>. That is meaningful least-privilege engineering, but a static grant still cannot encode every fact that may determine whether a particular autonomous action is justified. A calendar-reading scope, for example, does not establish that a meeting change serves the user&#x27;s current task, remains within an approved time window, or may be delegated to a second agent.</p>
+        <p>The distinction becomes clearer when an agent has technically valid credentials but the action conflicts with the principal&#x27;s bounded intent. A service may accept the token because the issuer, audience, signature, and scope are valid. Yet the requested transfer amount, destination, data classification, task phase, or downstream recipient may fall outside the intended mandate. Rich Authorization Requests provides a standardized container for fine-grained authorization details, and Resource Indicators can restrict the target resource <a class="afr-cite" href="#ref-R15">[R15]</a> <a class="afr-cite" href="#ref-R17">[R17]</a>. Those are relevant building blocks, not a complete semantic answer. RFC 9396 explicitly leaves the meaning and comparison of authorization details to API-specific implementations. The emerging gap is therefore not merely a missing token field. It is the absence of a generally accepted way to bind delegated intent, policy, context, and evidence across an autonomous execution.</p>
+        <p>A second gap concerns the difference between capability and legitimacy. An agent may be technically capable of calling a payroll API and possess a token containing the required scope. The principal may nevertheless have authorized only a reconciliation task, not a payment. Conversely, a principal may express a legitimate task that the agent lacks permission to complete. Secure execution requires both conditions: the infrastructure grant must permit the operation, and the operation must remain within the delegated task under current policy. Agent Operation Authorization proposes separating a structured operation proposal from a token confirming a specific operation, while cryptographically verifiable authorization research formalizes the non-implication from authentication or delegation to authorization of a concrete request <a class="afr-cite" href="#ref-R11">[R11]</a> <a class="afr-cite" href="#ref-R25">[R25]</a>. These are proposed approaches, but the distinction they expose is independently testable.</p>
+        <figure class="afr-figure">
+          <img src="../frontier-research/assets/authority-layer.svg" alt="A human or organizational principal delegates to an agent identity. The proposed AI Authority Layer evaluates identity, delegation, intent, scope, context, time, policy, and risk before an allow, deny, step-up, or human-required decision reaches a tool, data source, or action. Evidence is produced alongside the decision.">
+          <figcaption><strong>Figure 1. Proposed AI Authority Layer</strong>Conceptual flow. The proposed layer consumes identity and delegation inputs, evaluates effective authority, and emits both a decision and evidence. It is not a protocol specification.</figcaption>
+        </figure>
+      </section>
+      <section class="afr-section" id="section-six-concepts">
+        <p class="afr-classification afr-classification-ace-hypothesis">ACE Hypothesis</p>
+        <h2>4. Six Concepts That Should Not Be Collapsed</h2>
+        <p>ACE proposes a six-part conceptual vocabulary. Identity is the persistent or session-bound representation of an agent. Authentication is the process that verifies possession or control of credentials associated with that identity. Permission is a rule or grant describing actions or resources the identity may access. Delegation records that a principal transfers a bounded ability to act to another entity. Authority is the effective, contextual justification for a specific action. Evidence is the artifact that allows another party to examine the identity, grant, decision, execution, and result. The categories overlap operationally but support different claims. A signed token may be authentication evidence and carry permissions; it is not automatically proof that the agent&#x27;s eventual tool call matched the principal&#x27;s task or that the action was executed as authorized.</p>
+        <p>Existing protocols illustrate why this separation is useful. OAuth Token Exchange defines subject and actor relationships and can represent delegation or impersonation semantics <a class="afr-cite" href="#ref-R14">[R14]</a>. W3C Verifiable Credentials provides a general data model for machine-verifiable credentials <a class="afr-cite" href="#ref-R19">[R19]</a>. DPoP can sender-constrain OAuth tokens to reduce replay by parties that do not possess the relevant key <a class="afr-cite" href="#ref-R18">[R18]</a>. Each mechanism strengthens a different part of the chain. None, used alone, guarantees that a model-generated action was within a task&#x27;s intent, that a sub-agent received attenuated authority, that policy was evaluated against current context, and that execution matched the approved request. The six-part vocabulary makes it possible to state exactly which claim an artifact supports and where evidence is still missing.</p>
+      </section>
+      <section class="afr-section" id="section-delegation-chain">
+        <p class="afr-classification afr-classification-emerging-problem">Emerging Problem</p>
+        <h2>5. Delegation Turns Authorization into a Chain Property</h2>
+        <p>In a single-hop workflow, a human may authorize Agent A to perform a bounded task. In a multi-agent workflow, Agent A asks Agent B to retrieve data, Agent B invokes a tool, and a later agent synthesizes or executes the result. The security question is no longer only whether each participant has a valid identity. The system must determine whether every transfer preserves the originating principal, narrows or preserves the allowed scope, respects the intended purpose, and remains valid in time and context. Okta documents delegation links identifying the users, applications, or agents that may authorize another agent, and its agent-to-agent connection documentation describes a recorded delegation chain in access tokens <a class="afr-cite" href="#ref-R6">[R6]</a> <a class="afr-cite" href="#ref-R7">[R7]</a>. This is concrete product evidence that delegated relationships are becoming inspectable objects.</p>
+        <p>Research treats the same issue as an architectural invariant. The authenticated-delegation position paper proposes agent-specific credentials and auditable chains built on OAuth and OpenID Connect <a class="afr-cite" href="#ref-R21">[R21]</a>. The authorization-propagation preprint argues that multi-agent systems must preserve authorization invariants as agents retrieve data, delegate tasks, and synthesize results across changing boundaries <a class="afr-cite" href="#ref-R23">[R23]</a>. An active individual Internet-Draft on agent-to-agent trust asks how authorization can propagate without escalation and adopts scope inheritance and provenance mechanisms as proposed design elements <a class="afr-cite" href="#ref-R13">[R13]</a>. These works differ in maturity and mechanism, but converge on one question: authority downstream should not silently become broader than authority upstream.</p>
+        <p>This report calls that property authority attenuation. For a delegation from A to B, B&#x27;s effective authority should be no greater than the intersection of A&#x27;s delegable authority, the explicit subtask, the receiving system&#x27;s policy, and the current context. Attenuation is not only fewer OAuth scopes. It may reduce accessible records, allowed operations, monetary limits, execution environments, geographic regions, delegation depth, validity duration, or the ability to trigger irreversible actions. Equality may be acceptable when the task requires the same bounded authority, but expansion should require a new authorization event by an entitled principal. Whether this property can be represented consistently across vendors is an open research and interoperability question.</p>
+        <figure class="afr-figure">
+          <img src="../frontier-research/assets/authority-attenuation.svg" alt="A principal delegates bounded authority to Agent A, which delegates a narrower subset to Agent B, which delegates a narrower task to Agent C. Each hop preserves the principal and evidence chain.">
+          <figcaption><strong>Figure 2. Authority attenuation across delegation</strong>Conceptual attenuation. A downstream grant should not silently exceed the delegable authority, task, policy, and context inherited from upstream.</figcaption>
+        </figure>
+      </section>
+      <section class="afr-section" id="section-protocol-signals">
+        <p class="afr-classification afr-classification-observed-evidence">Observed Evidence</p>
+        <h2>6. Protocol Signals: Useful Components, No Settled Whole</h2>
+        <p>The protocol landscape contains substantial reusable infrastructure. OAuth Token Exchange can exchange a subject token and an actor token and represent an actor acting on behalf of a subject <a class="afr-cite" href="#ref-R14">[R14]</a>. Rich Authorization Requests can carry structured, fine-grained authorization data beyond flat scopes <a class="afr-cite" href="#ref-R15">[R15]</a>. Resource Indicators restrict the intended resource, DPoP binds a token to proof of key possession, and the OAuth Security Best Current Practice consolidates current defenses for OAuth deployments <a class="afr-cite" href="#ref-R16">[R16]</a> <a class="afr-cite" href="#ref-R17">[R17]</a> <a class="afr-cite" href="#ref-R18">[R18]</a>. W3C Verifiable Credentials offers a machine-verifiable credential model that could carry selected delegation or authority assertions <a class="afr-cite" href="#ref-R19">[R19]</a>. These standards are not agent-specific solutions, but they reduce the need to invent incompatible foundations.</p>
+        <p>Agent-focused Internet-Drafts show multiple integration paths. AI Agent Authentication and Authorization composes workload identity and OAuth-family mechanisms rather than proposing one new protocol <a class="afr-cite" href="#ref-R9">[R9]</a>. Agent Operation Authorization proposes a structured operation request and an authorization token for a specific operation <a class="afr-cite" href="#ref-R11">[R11]</a>. The AI Agent Authorization Integration Framework combines cross-domain identity, policy authorization, consent evidence, and multi-hop delegation <a class="afr-cite" href="#ref-R12">[R12]</a>. The expired Agent Authorization Profile proposed structured claims for task context, constraints, delegation, and oversight, but it has no formal standing and is no longer active <a class="afr-cite" href="#ref-R10">[R10]</a>. These drafts are evidence that practitioners are exploring similar requirements. They are not proof of consensus, interoperability, or production safety.</p>
+        <p>A likely near-term architecture is compositional rather than monolithic: an enterprise identity provider establishes the human and agent identities; an authorization service evaluates policy and context; token or credential mechanisms carry bounded claims; resource servers enforce decisions; and evidence services preserve decision and execution records. The unresolved issue is semantic continuity. If one system expresses purpose as a rich authorization detail, another represents it as policy input, and a third logs only a scope string, the chain may be technically authenticated while losing the facts needed to justify the action. The research challenge is to define the minimum authority semantics and evidence fields that must survive translation without requiring every vendor to use the same internal implementation.</p>
+        <p>Interoperability also creates a trust-boundary problem. The issuer that authenticates an agent may not operate the resource server, the downstream agent, or the evidence store. Each party can validate different facts and may use different identifiers, policy languages, clocks, and revocation channels. The Integration Framework draft explicitly combines cross-domain identity with policy, consent evidence, and multi-hop delegation, while Okta&#x27;s documented flow exchanges credentials through authorization servers before reaching a target resource <a class="afr-cite" href="#ref-R6">[R6]</a> <a class="afr-cite" href="#ref-R12">[R12]</a>. These designs indicate that cross-domain composition is possible, but they do not establish common semantics for every authority claim. A robust evaluation must therefore test both cryptographic validity and preservation of meaning across boundaries.</p>
+      </section>
+      <section class="afr-section" id="section-contextual-authority">
+        <p class="afr-classification afr-classification-ace-hypothesis">ACE Hypothesis</p>
+        <h2>7. Authority Must Be Contextual, Temporal, and Revocable</h2>
+        <p>A permission granted yesterday may not justify an action today. The user may have revoked consent; the agent may have changed version; the resource may have moved into a restricted classification; the transaction may exceed a risk threshold; or the workflow may have entered a phase where human approval is required. Microsoft documents conditional access, lifecycle governance, sponsors, permission restrictions, and administrative disable or revoke operations for agent identities <a class="afr-cite" href="#ref-R3">[R3]</a> <a class="afr-cite" href="#ref-R4">[R4]</a>. Okta documents short-lived resource tokens and revocation behavior in its agent token-exchange flow <a class="afr-cite" href="#ref-R6">[R6]</a>. These mechanisms support contextual and temporal governance, although the exact evidence available in a deployment depends on configuration.</p>
+        <p>The ACE hypothesis is that high-consequence agents will require authority re-evaluation at material state transitions, not only at login or token issuance. Relevant triggers could include a new tool, a new sub-agent, a sensitive data class, a monetary threshold, a change from read to write, a model or runtime change, an anomalous risk score, a policy update, or a request to cross an organizational boundary. Re-evaluation need not mean a human approves every step. An automated decision may return ALLOW, DENY, STEP_UP, or HUMAN_REQUIRED according to policy. What matters is that the decision reflects current facts and that the resulting evidence identifies which facts and policy version were evaluated.</p>
+        <p>Operation-level authorization proposals provide one emerging signal for this direction. The active Agent Operation Authorization Internet-Draft defines a structured proposal and a token representing confirmed authorization for a specific operation, with runtime enforcement and traceability as stated goals <a class="afr-cite" href="#ref-R11">[R11]</a>. Cryptographically verifiable authorization research goes further by hypothesizing a proof relation that binds an agent principal, request, context, and policy satisfaction while separating identity, authorization, and execution evidence <a class="afr-cite" href="#ref-R25">[R25]</a>. Both remain bounded proposals. They nevertheless make the same deficiency visible: proving that an agent owns a credential is different from proving that a concrete, context-dependent request satisfied the applicable policy.</p>
+      </section>
+      <section class="afr-section" id="section-trajectory-assurance">
+        <p class="afr-classification afr-classification-emerging-problem">Emerging Problem</p>
+        <h2>8. From Per-Action Authorization to Trajectory Assurance</h2>
+        <p>Autonomous behavior unfolds as a sequence. Each action may be individually permitted while the combined trajectory violates a constraint. A research agent might lawfully read two datasets but produce a synthesis that crosses an information boundary. A financial agent might make several individually allowed adjustments whose aggregate exceeds a daily exposure limit. A support agent might repeatedly disclose small fragments that together reveal a protected record. The trajectory-assurance paper frames this as behavioral containment: system safety can depend on whether the sequence remains within state-dependent invariants, not only whether each action passes a stateless check <a class="afr-cite" href="#ref-R24">[R24]</a>. The paper is a vision-oriented work, so its examples and proposed agenda should not be read as validated deployment results.</p>
+        <p>Authority at trajectory level requires memory of relevant decisions and changes. A verifier may need to know the initial principal and task, every delegation, which data influenced later steps, whether a previous approval remains applicable, how cumulative limits changed, and which policy version governed each transition. Authorization propagation research identifies aggregation inference and workflow-scoped authorization as problems that conventional role and relationship systems do not automatically solve <a class="afr-cite" href="#ref-R23">[R23]</a>. Intelligent AI Delegation similarly treats delegation as more than task decomposition, emphasizing transfer of authority, responsibility, monitoring, and adaptation to failures <a class="afr-cite" href="#ref-R22">[R22]</a>. These papers offer different abstractions, but both suggest that autonomous authority is stateful.</p>
+        <p>A practical research program should compare at least three enforcement levels. Per-request enforcement evaluates each tool or API call independently. Workflow enforcement binds decisions to a task identifier and cumulative state. Trajectory assurance evaluates whether the evolving sequence continues to satisfy explicit invariants. The third level may be unnecessary for low-risk assistants and too expensive for every action. Its value should be tested in scenarios where lawful local actions can compose into an unlawful or unsafe global outcome. The acceptance question is not whether a system stores a long trace; it is whether the trace contains enough authenticated, ordered, policy-linked evidence to detect and explain a trajectory-level violation.</p>
+      </section>
+      <section class="afr-section" id="section-evidence-layer">
+        <p class="afr-classification afr-classification-ace-hypothesis">ACE Hypothesis</p>
+        <h2>9. Evidence Is the Bridge from Policy Claim to Verifiable Action</h2>
+        <p>An authority architecture is incomplete if it returns a decision but cannot support later examination. ACE distinguishes five evidence objects. Identity evidence supports the claim that a known agent or principal participated. Delegation evidence supports the claim that authority moved from one entity to another under stated constraints. Authorization evidence supports the claim that a request was evaluated against a policy and context. Execution evidence supports the claim that a particular action occurred. Outcome evidence records the resulting state or artifact. Cryptographically verifiable authorization research explicitly separates identity, authorization, and execution evidence, while authenticated-delegation research emphasizes auditable chains of accountability <a class="afr-cite" href="#ref-R21">[R21]</a> <a class="afr-cite" href="#ref-R25">[R25]</a>.</p>
+        <p>Evidence completeness does not require storing every prompt, private attribute, or reasoning trace. Excessive collection creates privacy, security, and cost risks. A minimal decision receipt might contain pseudonymous principal and agent identifiers, delegation references, requested action and resource, task or purpose binding, policy identifier and version, relevant context hashes or bounded attributes, timestamp, expiry, decision, reason codes, enforcement point, execution reference, and integrity protection. Sensitive values can remain customer-held or be represented by commitments when appropriate. W3C Verifiable Credentials and proof-of-possession mechanisms demonstrate available patterns for portable and holder-bound evidence, but they do not determine which semantic fields an authority receipt must include <a class="afr-cite" href="#ref-R18">[R18]</a> <a class="afr-cite" href="#ref-R19">[R19]</a>.</p>
+        <p>The acceptance test should therefore be claim-specific. To demonstrate identity attribution, show that the executing agent can be distinguished from the user and service. To demonstrate delegated authority, reconstruct the chain and show that every hop was valid and non-expanding. To demonstrate contextual authorization, reproduce the policy decision from the recorded inputs or verify an equivalent signed receipt. To demonstrate execution alignment, show that the action executed matches the action authorized. A system may demonstrate one claim and have insufficient evidence for another. This prevents a valid token, a generic audit log, or a vendor feature statement from being treated as universal proof.</p>
+      </section>
+      <section class="afr-section" id="section-conceptual-model">
+        <p class="afr-classification afr-classification-ace-hypothesis">ACE Hypothesis</p>
+        <h2>10. ACE Hypothesis: An AI Authority Layer</h2>
+        <p>ACE proposes the following conceptual model: Effective Authority = f(Identity, Principal, Delegation, Intent, Scope, Context, Time, Policy, Risk). This is a conceptual model, not a mathematical model or implementation formula, and the variables are not assumed to be independent. It is a checklist for the information that may affect a runtime authority decision. Identity names the acting agent. Principal identifies the human or organization on whose behalf it acts. Delegation describes the authorized chain. Intent binds the action to a task or purpose. Scope constrains resources and operations. Context captures environment and workflow state. Time establishes validity. Policy defines the governing rule. Risk allows current signals to change the required assurance level.</p>
+        <p>The proposed layer sits between an authenticated agent request and a consequential tool, data, or action boundary. It consumes verified identity and delegation data, evaluates policy with current context, and returns a bounded decision such as ALLOW, DENY, STEP_UP, or HUMAN_REQUIRED. It also emits evidence linked to enforcement and later execution. It should complement, not replace, enterprise identity providers, policy engines, gateways, databases, or audit systems. A vendor could implement the functions inside an existing identity platform, a policy service, a gateway, a customer-hosted runtime, or a composed set of services. The hypothesis concerns required semantics and evidence, not ownership of the product category.</p>
+        <p>The model also creates a falsifiable test. Given a scenario Human → Agent A → Agent B → Tool → Data, can the system produce evidence of the originating principal, each agent identity, the delegation chain, the non-expanded authority at every hop, the task and resource constraints, the policy decision, the denial or approval, and the executed action? Existing protocols provide many inputs to this test, and products are beginning to expose portions of the chain <a class="afr-cite" href="#ref-R6">[R6]</a> <a class="afr-cite" href="#ref-R7">[R7]</a> <a class="afr-cite" href="#ref-R9">[R9]</a> <a class="afr-cite" href="#ref-R12">[R12]</a> <a class="afr-cite" href="#ref-R14">[R14]</a>. If common enterprise configurations can already demonstrate the complete claim without a distinct authority abstraction, the hypothesis weakens. If they repeatedly cannot, the missing evidence becomes measurable rather than rhetorical.</p>
+      </section>
+      <section class="afr-section" id="section-predictions-open-questions">
+        <p class="afr-classification afr-classification-open-questions">Open Questions</p>
+        <h2>11. Falsifiable Predictions and Open Research Questions</h2>
+        <p>AFR-2026-001 records four predictions for review at six, twelve, and twenty-four months. First, major enterprise identity platforms will expose an inspectable evidence object binding agent authorization to principal, task or purpose, resource scope, and bounded validity. Second, at least one multi-vendor specification will define attenuation or re-evaluation across more than one agent delegation hop. Third, enterprise assurance products will distinguish identity, authorization, and execution evidence. Fourth, at least one enterprise deployment pattern will re-evaluate authority after a material change in risk, context, policy, or delegation state. These predictions are grounded in current institutional, product, protocol, and research signals, but each can fail <a class="afr-cite" href="#ref-R1">[R1]</a> <a class="afr-cite" href="#ref-R3">[R3]</a> <a class="afr-cite" href="#ref-R6">[R6]</a> <a class="afr-cite" href="#ref-R9">[R9]</a> <a class="afr-cite" href="#ref-R11">[R11]</a> <a class="afr-cite" href="#ref-R12">[R12]</a> <a class="afr-cite" href="#ref-R23">[R23]</a> <a class="afr-cite" href="#ref-R25">[R25]</a>.</p>
+        <p>The immediate research questions are technical and empirical. What minimum semantics must survive across vendors? How should purpose be represented without exposing sensitive user intent? Which delegation constraints can be compared mechanically across heterogeneous policy systems? When is scope equality safe, and when must every hop attenuate? How quickly must revocation propagate through asynchronous agents? How can a verifier distinguish an approved plan from the action actually executed? Which context attributes can be committed or proven without disclosure? What is the operational cost of trajectory-level checks, and which risk classes justify it? How should authority apply when the principal is an organization, a team, another service, or a coalition rather than one human?</p>
+        <p>Two boundaries require particular caution. First, cryptographic proof can strengthen integrity and selective disclosure, but it cannot prove that an incomplete policy captures the principal&#x27;s true intent. The cryptographically verifiable authorization and biometric-binding papers are early proposals with bounded prototypes, assumptions, and privacy tradeoffs; they should be evaluated rather than adopted as default designs <a class="afr-cite" href="#ref-R25">[R25]</a> <a class="afr-cite" href="#ref-R26">[R26]</a>. Second, hardware-rooted identity and attestation may eventually strengthen local enforcement and execution evidence, but hardware does not define legitimate authority. It can attest which code or key participated while policy, delegation, context, and human governance still determine what should have been allowed.</p>
+        <p>The next ACE research step is not to declare the layer established. It is to turn the conceptual distinctions into acceptance scenarios and compare the evidence produced by real configurations. A useful experiment should include a human principal, two delegating agents, a tool boundary, a sensitive resource, an attempted scope expansion, a context change, a revocation event, and a required reconstruction of the final decision. Results should be reported as demonstrated, not demonstrated, insufficient evidence, or not applicable within the tested configuration. That discipline would allow the authority hypothesis to be strengthened, narrowed, or rejected based on observable proof.</p>
+      </section>
+
+        <section class="afr-ledger" id="prediction-ledger">
+          <p class="afr-classification">Prediction Record</p>
+          <h2>AFR Prediction Ledger</h2>
+          <p>Each statement is permanent, falsifiable, and scheduled for review at six, twelve, and twenty-four months. Publication dates remain unset while this report is a draft.</p>
+        <article class="afr-prediction" id="prediction-AFR-2026-001-P01">
+          <div class="afr-prediction-meta">
+            <span>AFR-2026-001-P01</span>
+            <span>Moderate-High confidence</span>
+            <span>6 / 12 / 24 month review</span>
+          </div>
+          <p>By the 24-month review, at least two major enterprise identity platforms will expose a production mechanism that binds an AI agent authorization decision to a principal, a task or purpose, a constrained resource scope, and a bounded validity period in one inspectable evidence object.</p>
+          <details>
+            <summary>Falsification signals</summary>
+            <ul><li>Major identity platforms retain only static agent identities and conventional OAuth scopes without task or purpose binding.</li><li>Enterprise customers reject task-bound authorization evidence as unnecessary operational overhead.</li></ul>
+          </details>
+        </article>
+        <article class="afr-prediction" id="prediction-AFR-2026-001-P02">
+          <div class="afr-prediction-meta">
+            <span>AFR-2026-001-P02</span>
+            <span>Moderate confidence</span>
+            <span>6 / 12 / 24 month review</span>
+          </div>
+          <p>By the 24-month review, at least one interoperable specification with active multi-vendor participation will define how authority is attenuated or re-evaluated across more than one agent-to-agent delegation hop.</p>
+          <details>
+            <summary>Falsification signals</summary>
+            <ul><li>Interoperability work standardizes only transport authentication and leaves multi-hop authority entirely implementation-specific.</li><li>Production multi-agent deployments converge on single-hop service identities without preserving originating authority.</li></ul>
+          </details>
+        </article>
+        <article class="afr-prediction" id="prediction-AFR-2026-001-P03">
+          <div class="afr-prediction-meta">
+            <span>AFR-2026-001-P03</span>
+            <span>Moderate-High confidence</span>
+            <span>6 / 12 / 24 month review</span>
+          </div>
+          <p>By the 24-month review, enterprise agent assurance products will distinguish identity evidence, authorization evidence, and execution evidence instead of treating an access token or audit log as sufficient proof for all three claims.</p>
+          <details>
+            <summary>Falsification signals</summary>
+            <ul><li>Enterprise assurance practice continues to accept authentication records alone as proof of authorized agent behavior.</li><li>No commercial or standards artifact adopts separate evidence categories for authorization and execution.</li></ul>
+          </details>
+        </article>
+        <article class="afr-prediction" id="prediction-AFR-2026-001-P04">
+          <div class="afr-prediction-meta">
+            <span>AFR-2026-001-P04</span>
+            <span>Moderate confidence</span>
+            <span>6 / 12 / 24 month review</span>
+          </div>
+          <p>By the 24-month review, at least one enterprise deployment pattern will require authority to be re-evaluated during an agent trajectory after a material change in risk, context, policy, or delegation state rather than only when credentials are issued.</p>
+          <details>
+            <summary>Falsification signals</summary>
+            <ul><li>Production systems rely on issuance-time authorization plus static expiration without runtime context re-evaluation.</li><li>Trajectory-level checks fail to demonstrate operational value beyond conventional per-request policy enforcement.</li></ul>
+          </details>
+        </article>
+        </section>
+
+        <section class="afr-references-section" id="references">
+          <p class="afr-classification">Evidence Base</p>
+          <h2>References</h2>
+          <ol class="afr-references">
+        <li id="ref-R1">
+          <span class="afr-ref-id">[R1]</span>
+          <div>
+            <a href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative" rel="noopener">AI Agent Standards Initiative</a>
+            <p class="afr-ref-details">National Institute of Standards and Technology · NIST · 2026-02-17; updated 2026-08-14</p>
+            <a class="afr-ref-url" href="https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative" rel="noopener">https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative</a>
+            <p class="afr-ref-status">official program page · official-initiative</p>
+          </div>
+        </li>
+        <li id="ref-R2">
+          <span class="afr-ref-id">[R2]</span>
+          <div>
+            <a href="https://www.nccoe.nist.gov/projects/software-and-ai-agent-identity-and-authorization" rel="noopener">Accelerating the Adoption of Software and AI Agent Identity and Authorization</a>
+            <p class="afr-ref-details">National Cybersecurity Center of Excellence · NIST NCCoE · 2026-02-05</p>
+            <a class="afr-ref-url" href="https://www.nccoe.nist.gov/projects/software-and-ai-agent-identity-and-authorization" rel="noopener">https://www.nccoe.nist.gov/projects/software-and-ai-agent-identity-and-authorization</a>
+            <p class="afr-ref-status">concept paper · official-concept-paper</p>
+          </div>
+        </li>
+        <li id="ref-R3">
+          <span class="afr-ref-id">[R3]</span>
+          <div>
+            <a href="https://learn.microsoft.com/en-us/entra/agent-id/agent-identities" rel="noopener">Overview of agent identities in Microsoft Entra</a>
+            <p class="afr-ref-details">Microsoft · Microsoft Learn · 2026-03-30</p>
+            <a class="afr-ref-url" href="https://learn.microsoft.com/en-us/entra/agent-id/agent-identities" rel="noopener">https://learn.microsoft.com/en-us/entra/agent-id/agent-identities</a>
+            <p class="afr-ref-status">current documentation · product-documentation</p>
+          </div>
+        </li>
+        <li id="ref-R4">
+          <span class="afr-ref-id">[R4]</span>
+          <div>
+            <a href="https://learn.microsoft.com/en-us/entra/agent-id/authorization-agent-id" rel="noopener">Authorization in Microsoft Entra Agent ID</a>
+            <p class="afr-ref-details">Microsoft · Microsoft Learn · 2026-06-12</p>
+            <a class="afr-ref-url" href="https://learn.microsoft.com/en-us/entra/agent-id/authorization-agent-id" rel="noopener">https://learn.microsoft.com/en-us/entra/agent-id/authorization-agent-id</a>
+            <p class="afr-ref-status">current documentation · product-documentation</p>
+          </div>
+        </li>
+        <li id="ref-R5">
+          <span class="afr-ref-id">[R5]</span>
+          <div>
+            <a href="https://learn.microsoft.com/en-us/entra/agent-id" rel="noopener">Microsoft Entra Agent ID documentation</a>
+            <p class="afr-ref-details">Microsoft · Microsoft Learn · 2026</p>
+            <a class="afr-ref-url" href="https://learn.microsoft.com/en-us/entra/agent-id" rel="noopener">https://learn.microsoft.com/en-us/entra/agent-id</a>
+            <p class="afr-ref-status">current documentation · product-documentation</p>
+          </div>
+        </li>
+        <li id="ref-R6">
+          <span class="afr-ref-id">[R6]</span>
+          <div>
+            <a href="https://developer.okta.com/docs/guides/ai-agent-to-agent-token-exchange/authserver/main" rel="noopener">Set up AI agent-to-agent token exchange</a>
+            <p class="afr-ref-details">Okta · Okta Developer · 2026</p>
+            <a class="afr-ref-url" href="https://developer.okta.com/docs/guides/ai-agent-to-agent-token-exchange/authserver/main" rel="noopener">https://developer.okta.com/docs/guides/ai-agent-to-agent-token-exchange/authserver/main</a>
+            <p class="afr-ref-status">current documentation · product-documentation</p>
+          </div>
+        </li>
+        <li id="ref-R7">
+          <span class="afr-ref-id">[R7]</span>
+          <div>
+            <a href="https://help.okta.com/oie/en-us/content/topics/ai-agents/ai-agent-agent-to-agent.htm" rel="noopener">Agent-to-agent connections</a>
+            <p class="afr-ref-details">Okta · Okta Identity Engine Documentation · 2026</p>
+            <a class="afr-ref-url" href="https://help.okta.com/oie/en-us/content/topics/ai-agents/ai-agent-agent-to-agent.htm" rel="noopener">https://help.okta.com/oie/en-us/content/topics/ai-agents/ai-agent-agent-to-agent.htm</a>
+            <p class="afr-ref-status">current documentation · product-documentation</p>
+          </div>
+        </li>
+        <li id="ref-R8">
+          <span class="afr-ref-id">[R8]</span>
+          <div>
+            <a href="https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf" rel="noopener">Identity Management for Agentic AI</a>
+            <p class="afr-ref-details">OpenID Foundation · OpenID Foundation · 2025-10</p>
+            <a class="afr-ref-url" href="https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf" rel="noopener">https://openid.net/wp-content/uploads/2025/10/Identity-Management-for-Agentic-AI.pdf</a>
+            <p class="afr-ref-status">published whitepaper · industry-whitepaper</p>
+          </div>
+        </li>
+        <li id="ref-R9">
+          <span class="afr-ref-id">[R9]</span>
+          <div>
+            <a href="https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/" rel="noopener">AI Agent Authentication and Authorization</a>
+            <p class="afr-ref-details">Pieter Kasselman et al. · IETF Datatracker · 2026</p>
+            <a class="afr-ref-url" href="https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/" rel="noopener">https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/</a>
+            <p class="afr-ref-status">active individual Internet-Draft; work in progress; no formal IETF standing · internet-draft</p>
+          </div>
+        </li>
+        <li id="ref-R10">
+          <span class="afr-ref-id">[R10]</span>
+          <div>
+            <a href="https://datatracker.ietf.org/doc/draft-aap-oauth-profile/" rel="noopener">Agent Authorization Profile (AAP) for OAuth 2.0</a>
+            <p class="afr-ref-details">Angel Cruz · IETF Datatracker · 2026-02-07</p>
+            <a class="afr-ref-url" href="https://datatracker.ietf.org/doc/draft-aap-oauth-profile/" rel="noopener">https://datatracker.ietf.org/doc/draft-aap-oauth-profile/</a>
+            <p class="afr-ref-status">Expired individual Internet-Draft as of 2026-08-11; historical work in progress; no formal IETF standing · internet-draft</p>
+          </div>
+        </li>
+        <li id="ref-R11">
+          <span class="afr-ref-id">[R11]</span>
+          <div>
+            <a href="https://datatracker.ietf.org/doc/draft-liu-agent-operation-authorization/" rel="noopener">Agent Operation Authorization</a>
+            <p class="afr-ref-details">Dapeng Liu, Judy Zhu, Suresh Krishnan · IETF Datatracker · 2026-03-16</p>
+            <a class="afr-ref-url" href="https://datatracker.ietf.org/doc/draft-liu-agent-operation-authorization/" rel="noopener">https://datatracker.ietf.org/doc/draft-liu-agent-operation-authorization/</a>
+            <p class="afr-ref-status">active individual Internet-Draft -02; work in progress; no formal IETF standing · internet-draft</p>
+          </div>
+        </li>
+        <li id="ref-R12">
+          <span class="afr-ref-id">[R12]</span>
+          <div>
+            <a href="https://datatracker.ietf.org/doc/draft-liu-ai-agent-authorization-integration/" rel="noopener">AI Agent Authorization Integration Framework</a>
+            <p class="afr-ref-details">Dapeng Liu et al. · IETF Datatracker · 2026-07-06</p>
+            <a class="afr-ref-url" href="https://datatracker.ietf.org/doc/draft-liu-ai-agent-authorization-integration/" rel="noopener">https://datatracker.ietf.org/doc/draft-liu-ai-agent-authorization-integration/</a>
+            <p class="afr-ref-status">active individual Internet-Draft -00; work in progress; no formal IETF standing · internet-draft</p>
+          </div>
+        </li>
+        <li id="ref-R13">
+          <span class="afr-ref-id">[R13]</span>
+          <div>
+            <a href="https://datatracker.ietf.org/doc/draft-tonyai-a2a-trust/" rel="noopener">Agent-to-Agent Trust, Identity, and Verifiable Provenance</a>
+            <p class="afr-ref-details">Tony Trujillo · IETF Datatracker · 2026-07</p>
+            <a class="afr-ref-url" href="https://datatracker.ietf.org/doc/draft-tonyai-a2a-trust/" rel="noopener">https://datatracker.ietf.org/doc/draft-tonyai-a2a-trust/</a>
+            <p class="afr-ref-status">active individual Internet-Draft -01; work in progress; no formal IETF standing · internet-draft</p>
+          </div>
+        </li>
+        <li id="ref-R14">
+          <span class="afr-ref-id">[R14]</span>
+          <div>
+            <a href="https://www.rfc-editor.org/rfc/rfc8693" rel="noopener">OAuth 2.0 Token Exchange</a>
+            <p class="afr-ref-details">Michael B. Jones et al. · RFC Editor · 2020-01</p>
+            <a class="afr-ref-url" href="https://www.rfc-editor.org/rfc/rfc8693" rel="noopener">https://www.rfc-editor.org/rfc/rfc8693</a>
+            <p class="afr-ref-status">RFC 8693, Proposed Standard · standard</p>
+          </div>
+        </li>
+        <li id="ref-R15">
+          <span class="afr-ref-id">[R15]</span>
+          <div>
+            <a href="https://www.rfc-editor.org/rfc/rfc9396" rel="noopener">OAuth 2.0 Rich Authorization Requests</a>
+            <p class="afr-ref-details">Torsten Lodderstedt, Justin Richer, Brian Campbell · RFC Editor · 2023-05</p>
+            <a class="afr-ref-url" href="https://www.rfc-editor.org/rfc/rfc9396" rel="noopener">https://www.rfc-editor.org/rfc/rfc9396</a>
+            <p class="afr-ref-status">RFC 9396, Proposed Standard · standard</p>
+          </div>
+        </li>
+        <li id="ref-R16">
+          <span class="afr-ref-id">[R16]</span>
+          <div>
+            <a href="https://www.rfc-editor.org/rfc/rfc9700" rel="noopener">Best Current Practice for OAuth 2.0 Security</a>
+            <p class="afr-ref-details">Torsten Lodderstedt et al. · RFC Editor · 2025-01</p>
+            <a class="afr-ref-url" href="https://www.rfc-editor.org/rfc/rfc9700" rel="noopener">https://www.rfc-editor.org/rfc/rfc9700</a>
+            <p class="afr-ref-status">RFC 9700, Best Current Practice · standard</p>
+          </div>
+        </li>
+        <li id="ref-R17">
+          <span class="afr-ref-id">[R17]</span>
+          <div>
+            <a href="https://www.rfc-editor.org/rfc/rfc8707" rel="noopener">Resource Indicators for OAuth 2.0</a>
+            <p class="afr-ref-details">Brian Campbell, John Bradley, Hannes Tschofenig · RFC Editor · 2020-02</p>
+            <a class="afr-ref-url" href="https://www.rfc-editor.org/rfc/rfc8707" rel="noopener">https://www.rfc-editor.org/rfc/rfc8707</a>
+            <p class="afr-ref-status">RFC 8707, Proposed Standard · standard</p>
+          </div>
+        </li>
+        <li id="ref-R18">
+          <span class="afr-ref-id">[R18]</span>
+          <div>
+            <a href="https://www.rfc-editor.org/rfc/rfc9449" rel="noopener">OAuth 2.0 Demonstrating Proof of Possession</a>
+            <p class="afr-ref-details">Daniel Fett et al. · RFC Editor · 2023-09</p>
+            <a class="afr-ref-url" href="https://www.rfc-editor.org/rfc/rfc9449" rel="noopener">https://www.rfc-editor.org/rfc/rfc9449</a>
+            <p class="afr-ref-status">RFC 9449, Proposed Standard · standard</p>
+          </div>
+        </li>
+        <li id="ref-R19">
+          <span class="afr-ref-id">[R19]</span>
+          <div>
+            <a href="https://www.w3.org/TR/vc-data-model-2.0/" rel="noopener">Verifiable Credentials Data Model v2.0</a>
+            <p class="afr-ref-details">Manu Sporny et al. · World Wide Web Consortium · 2025-05-15</p>
+            <a class="afr-ref-url" href="https://www.w3.org/TR/vc-data-model-2.0/" rel="noopener">https://www.w3.org/TR/vc-data-model-2.0/</a>
+            <p class="afr-ref-status">W3C Recommendation · standard</p>
+          </div>
+        </li>
+        <li id="ref-R20">
+          <span class="afr-ref-id">[R20]</span>
+          <div>
+            <a href="https://doi.org/10.6028/NIST.SP.800-207" rel="noopener">Zero Trust Architecture</a>
+            <p class="afr-ref-details">Scott Rose et al. · National Institute of Standards and Technology · 2020-08</p>
+            <a class="afr-ref-url" href="https://doi.org/10.6028/NIST.SP.800-207" rel="noopener">https://doi.org/10.6028/NIST.SP.800-207</a>
+            <p class="afr-ref-status">NIST Special Publication 800-207 · standard</p>
+          </div>
+        </li>
+        <li id="ref-R21">
+          <span class="afr-ref-id">[R21]</span>
+          <div>
+            <a href="https://openreview.net/forum?id=9skHxuHyM4" rel="noopener">Position: AI Agents Need Authenticated Delegation</a>
+            <p class="afr-ref-details">Tobin South et al. · ICML 2025 Position Paper Track · 2025-05-01</p>
+            <a class="afr-ref-url" href="https://openreview.net/forum?id=9skHxuHyM4" rel="noopener">https://openreview.net/forum?id=9skHxuHyM4</a>
+            <p class="afr-ref-status">peer-reviewed position paper; ICML 2025 oral · original-paper</p>
+          </div>
+        </li>
+        <li id="ref-R22">
+          <span class="afr-ref-id">[R22]</span>
+          <div>
+            <a href="https://arxiv.org/abs/2602.11865" rel="noopener">Intelligent AI Delegation</a>
+            <p class="afr-ref-details">Nenad Tomasev, Matija Franklin, Simon Osindero · arXiv · 2026-02-12</p>
+            <a class="afr-ref-url" href="https://arxiv.org/abs/2602.11865" rel="noopener">https://arxiv.org/abs/2602.11865</a>
+            <p class="afr-ref-status">preprint · original-paper</p>
+          </div>
+        </li>
+        <li id="ref-R23">
+          <span class="afr-ref-id">[R23]</span>
+          <div>
+            <a href="https://arxiv.org/abs/2605.05440" rel="noopener">Authorization Propagation in Multi-Agent AI Systems: Identity Governance as Infrastructure</a>
+            <p class="afr-ref-details">Krti Tallam · arXiv · 2026-05-06</p>
+            <a class="afr-ref-url" href="https://arxiv.org/abs/2605.05440" rel="noopener">https://arxiv.org/abs/2605.05440</a>
+            <p class="afr-ref-status">preprint · original-paper</p>
+          </div>
+        </li>
+        <li id="ref-R24">
+          <span class="afr-ref-id">[R24]</span>
+          <div>
+            <a href="https://arxiv.org/abs/2608.01558" rel="noopener">Securing Agentic AI: From Per-Action Checks to Trajectory Assurance</a>
+            <p class="afr-ref-details">Alireza Lotfi et al. · arXiv · 2026-08</p>
+            <a class="afr-ref-url" href="https://arxiv.org/abs/2608.01558" rel="noopener">https://arxiv.org/abs/2608.01558</a>
+            <p class="afr-ref-status">preprint stating acceptance to the forthcoming ACM AI Leadership Summit 2026 Visionary Track · original-paper</p>
+          </div>
+        </li>
+        <li id="ref-R25">
+          <span class="afr-ref-id">[R25]</span>
+          <div>
+            <a href="https://arxiv.org/abs/2607.21325" rel="noopener">Cryptographically Verifiable Authorization for Autonomous AI Agents: A Falsifiable Hypothesis and Proof-of-Concept</a>
+            <p class="afr-ref-details">M. Llambi-Morillas, D. Fernandez-Fernandez · arXiv · 2026-08-12</p>
+            <a class="afr-ref-url" href="https://arxiv.org/abs/2607.21325" rel="noopener">https://arxiv.org/abs/2607.21325</a>
+            <p class="afr-ref-status">preprint with bounded proof-of-concept · original-paper</p>
+          </div>
+        </li>
+        <li id="ref-R26">
+          <span class="afr-ref-id">[R26]</span>
+          <div>
+            <a href="https://arxiv.org/abs/2608.04292" rel="noopener">Binding Biometrics with AI Agent Identifiers for Delegation of Authority</a>
+            <p class="afr-ref-details">Joseph Geo Benjamin, Anil K. Jain, Karthik Nandakumar · arXiv · 2026-08</p>
+            <a class="afr-ref-url" href="https://arxiv.org/abs/2608.04292" rel="noopener">https://arxiv.org/abs/2608.04292</a>
+            <p class="afr-ref-status">preprint with bounded prototype evaluation · original-paper</p>
+          </div>
+        </li>
+          </ol>
+        </section>
+
+        <section class="afr-publication-record" id="publication-record">
+          <p class="afr-classification">Record</p>
+          <h2>Publication Record</h2>
+          <h3>Recommended citation</h3>
+          <p class="rn-citation-text" tabindex="-1">Ma, Chris. “Beyond Identity: The Emerging Authority Layer for Autonomous AI Systems.” ACE Frontier Research AFR-2026-001, version 1.0, published 20 August 2026. Evidence cutoff 19 August 2026.</p>
+          <h3>Organizational disclosure</h3>
+          <p>ACE is an independent third-party AI evaluation initiative operated by LogionOS, Inc. This report presents a research hypothesis and does not evaluate or promote a LogionOS product.</p>
+          <h3>Evidence boundary</h3>
+          <p>Observed evidence, emerging problems, ACE hypotheses, and open questions are labeled separately. Product documentation describes documented capabilities, not universal deployment outcomes. Internet-Drafts are works in progress. Preprints and bounded prototypes are not treated as industry consensus.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="../logo.svg" alt="LogionACE" width="24" height="24"> LogionACE</div>
+      <p class="footer-col-desc">Independent AI Compliance Evaluation for Enterprise.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="../benchmark">Reports</a>
+      <a href="../evaluation">Evaluation</a>
+      <a href="../methodology">Methodology</a>
+      <a href="../research">Research</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="../company">About</a>
+      <a href="../trust">Trust &amp; Security</a>
+      <a href="../evaluation#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="../privacy">Privacy Policy</a>
+      <a href="../terms">Terms of Service</a>
+      <a href="../methodology#limitations">Limitations</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 LogionOS, Inc. Evaluation methodology, not legal certification.</div>
+</footer>
+  <script src="../research-note.js"></script>
+  <script src="../ace-nav.js"></script>
+</body>
+</html>
